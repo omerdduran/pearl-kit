@@ -119,7 +119,7 @@ QtObject {
 
     // ---- motion
     readonly property QtObject motion: QtObject {
-        readonly property int fast: 120
+        readonly property int fast: 150
         readonly property int base: 180
         readonly property int slow: 260
     }
