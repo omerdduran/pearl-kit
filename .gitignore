@@ -24,6 +24,9 @@ src/pearl_kit/_version.py
 .vscode/
 .idea/
 
+# Claude Code session guide (local-only, not shipped)
+CLAUDE.md
+
 # pytest / coverage
 .pytest_cache/
 .coverage
