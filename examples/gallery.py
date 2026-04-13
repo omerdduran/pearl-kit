@@ -1,4 +1,4 @@
-"""pearl-kit gallery — showcases every Button variant x size combination."""
+"""pearl-kit gallery — showcases Button variants/sizes + Input states."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ import PearlKit 1.0 as P
 
 Window {
     width: 880
-    height: 560
+    height: 780
     visible: true
     title: "pearl-kit gallery"
     color: P.Tokens.background
@@ -62,6 +62,40 @@ Window {
             P.Button { text: "Disabled default"; variant: "default"; enabled: false }
             P.Button { text: "Disabled dest";    variant: "destructive"; enabled: false }
             P.Button { text: "Disabled outline"; variant: "outline"; enabled: false }
+        }
+
+        Text {
+            text: "Input"
+            color: P.Tokens.foreground
+            font.family: P.Tokens.font.ui
+            font.pixelSize: P.Tokens.font.size.xl
+            font.weight: P.Tokens.font.weight.semibold
+        }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.Input {
+                Layout.preferredWidth: 320
+                placeholderText: "you@example.com"
+            }
+            P.Input {
+                Layout.preferredWidth: 320
+                placeholderText: "Search..."
+            }
+            P.Input {
+                Layout.preferredWidth: 320
+                placeholderText: "Invalid email"
+                text: "not-an-email"
+                error: true
+            }
+            P.Input {
+                Layout.preferredWidth: 320
+                placeholderText: "Disabled"
+                text: "read-only value"
+                enabled: false
+            }
         }
 
         Item { Layout.fillHeight: true }

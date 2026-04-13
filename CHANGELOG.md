@@ -10,6 +10,7 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 ### Added
 
 - `PearlKit.Button` — first public component. Six variants (`default`, `destructive`, `outline`, `secondary`, `ghost`, `link`) x five sizes (`default`, `xs`, `sm`, `lg`, `icon`) with `iconLeft` / `iconRight` URL slots. Built on `QtQuick.Templates.Button` with state-reactive background and foreground color transitions, keyboard-only focus ring (3px, 50% ring-color alpha, no offset), and shadcn/ui v4 visual parity.
+- `PearlKit.Input` — second public component. Single 36 px size (shadcn parity — Input has no size variants), `property bool error` for invalid-state visuals (border + ring switch to destructive), `iconLeft` / `iconRight` URL slots (pearl-kit extension over shadcn for Button consistency), theme-aware background (transparent in light mode, `Tokens.input` at 30% alpha in dark modes). Built on `QtQuick.Templates.TextField` with the default `TextInput` contentItem preserved for native caret, IME, selection, and undo/redo support. Focus ring appears on any focus source (mouse or keyboard) rather than `visualFocus`-only as Button — text inputs need caret feedback on click too.
 - `PearlFocusRing` parameterized: new `ringWidth` (default 2) and `ringColor` (default `Tokens.ring`) properties for per-component ring customization. Backward-compatible with existing defaults.
 
 ### Changed
