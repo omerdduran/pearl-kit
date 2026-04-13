@@ -26,6 +26,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install PySide6 Linux system deps
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libegl1 libgl1 libopengl0 libxkbcommon0 libxcb-cursor0 \
+            libdbus-1-3 libfontconfig1
+
       - name: Install uv
         uses: astral-sh/setup-uv@v4
         with:
