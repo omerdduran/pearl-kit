@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+wheels/
+.venv/
+
+# uv
+.uv/
+
+# hatch-vcs (auto-generated)
+src/pearl_kit/_version.py
+
+# macOS
+.DS_Store
+
+# Qt
+*.qmlc
+*.jsc
+
+# Editors
+.vscode/
+.idea/
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mkdocs
+site/
+_site/

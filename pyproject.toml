@@ -1,0 +1,98 @@
+[build-system]
+requires = ["hatchling>=1.27", "hatch-vcs>=0.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pearl-kit"
+dynamic = ["version"]
+description = "Pixel-craft PySide6/QML component kit — macOS first"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Ömer Duran", email = "me@omerduran.dev" }]
+keywords = ["pyside6", "qml", "ui", "components", "design-system", "macos"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: MacOS",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: User Interfaces",
+  "Typing :: Typed",
+]
+dependencies = [
+  "PySide6>=6.8,<7",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+  "pytest-qt>=4.4",
+  "ruff>=0.8",
+  "pyright>=1.1.390",
+]
+docs = [
+  "mkdocs-material>=9.5",
+  "mkdocstrings[python]>=0.27",
+]
+
+[project.urls]
+Homepage = "https://github.com/omerdduran/pearl-kit"
+Documentation = "https://omerdduran.github.io/pearl-kit"
+Repository = "https://github.com/omerdduran/pearl-kit"
+Changelog = "https://github.com/omerdduran/pearl-kit/blob/main/CHANGELOG.md"
+Issues = "https://github.com/omerdduran/pearl-kit/issues"
+
+[tool.hatch.version]
+source = "vcs"
+fallback-version = "0.0.0"
+raw-options = { version_scheme = "no-guess-dev" }
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/pearl_kit/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pearl_kit"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/pearl_kit",
+  "tests",
+  "docs",
+  "examples",
+  "README.md",
+  "LICENSE",
+  "CHANGELOG.md",
+  "mkdocs.yml",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "RUF", "TCH"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pyright]
+include = ["src/pearl_kit", "tests"]
+exclude = ["src/pearl_kit/_version.py"]
+typeCheckingMode = "strict"
+pythonVersion = "3.11"
+venvPath = "."
+venv = ".venv"
+reportMissingTypeStubs = false
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+qt_api = "pyside6"
+addopts = ["-q", "--strict-markers"]

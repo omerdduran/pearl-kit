@@ -1,0 +1,51 @@
+site_name: pearl-kit
+site_description: Pixel-craft PySide6/QML component kit — macOS first
+site_url: https://omerdduran.github.io/pearl-kit
+repo_url: https://github.com/omerdduran/pearl-kit
+repo_name: omerdduran/pearl-kit
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  features:
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Tokens: tokens.md
+  - Components:
+      - Button: components/button.md
+      - Input: components/input.md
+      - Toggle: components/toggle.md
+      - Select: components/select.md
+      - Dialog: components/dialog.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
