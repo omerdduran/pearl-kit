@@ -1,4 +1,4 @@
-"""pearl-kit gallery — showcases Button variants/sizes + Input states."""
+"""pearl-kit gallery — showcases Button, Input, and Toggle."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ import PearlKit 1.0 as P
 
 Window {
     width: 880
-    height: 780
+    height: 900
     visible: true
     title: "pearl-kit gallery"
     color: P.Tokens.background
@@ -96,6 +96,25 @@ Window {
                 text: "read-only value"
                 enabled: false
             }
+        }
+
+        Text {
+            text: "Toggle"
+            color: P.Tokens.foreground
+            font.family: P.Tokens.font.ui
+            font.pixelSize: P.Tokens.font.size.xl
+            font.weight: P.Tokens.font.weight.semibold
+        }
+
+        Flow {
+            Layout.fillWidth: true
+            spacing: 16
+            P.Toggle { }
+            P.Toggle { checked: true }
+            P.Toggle { size: "sm" }
+            P.Toggle { size: "sm"; checked: true }
+            P.Toggle { enabled: false }
+            P.Toggle { enabled: false; checked: true }
         }
 
         Item { Layout.fillHeight: true }
