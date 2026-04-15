@@ -3,3 +3,4 @@ PearlBackground 1.0 PearlBackground.qml
 PearlText       1.0 PearlText.qml
 PearlFocusRing  1.0 PearlFocusRing.qml
 PearlPopup      1.0 PearlPopup.qml
+PearlChevron    1.0 PearlChevron.qml
