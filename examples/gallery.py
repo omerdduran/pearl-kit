@@ -1,4 +1,4 @@
-"""pearl-kit gallery — showcases Button, Input, Toggle, Select, and Dialog."""
+"""pearl-kit gallery — showcases Button, Input, Toggle, Select, CheckBox, and Dialog."""
 
 from __future__ import annotations
 
@@ -165,6 +165,39 @@ ApplicationWindow {
                     ListElement { type: "item";   text: "日本語";      value: "ja" }
                     ListElement { type: "item";   text: "中文";        value: "zh" }
                 }
+            }
+        }
+
+        Text {
+            text: "CheckBox"
+            color: P.Tokens.foreground
+            font.family: P.Tokens.font.ui
+            font.pixelSize: P.Tokens.font.size.xl
+            font.weight: P.Tokens.font.weight.semibold
+        }
+
+        Flow {
+            Layout.fillWidth: true
+            spacing: 16
+            P.CheckBox { }
+            P.CheckBox { checked: true }
+            P.CheckBox { tristate: true; checkState: Qt.PartiallyChecked }
+            P.CheckBox { error: true }
+            P.CheckBox { error: true; checked: true }
+            P.CheckBox { enabled: false }
+            P.CheckBox { enabled: false; checked: true }
+        }
+
+        Row {
+            spacing: 8
+            P.CheckBox { id: cbNotify }
+            Text {
+                text: "Enable notifications"
+                color: P.Tokens.foreground
+                font.family: P.Tokens.font.ui
+                font.pixelSize: P.Tokens.font.size.sm
+                anchors.verticalCenter: parent.verticalCenter
+                MouseArea { anchors.fill: parent; onClicked: cbNotify.toggle() }
             }
         }
 
