@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/pypi/l/pearl-kit.svg)](https://github.com/omerdduran/pearl-kit/blob/main/LICENSE)
 [![CI](https://github.com/omerdduran/pearl-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/omerdduran/pearl-kit/actions/workflows/ci.yml)
 
-> **Status — alpha, infrastructure only.** The design language, QML module, and release pipeline are live. Public components are the next milestone. See [Roadmap](#roadmap).
+A curated set of QML primitives built on `QtQuick.Templates`, sourced from the shadcn/ui design language, with a three-theme token system and no framework abstractions.
 
 ---
 
@@ -19,7 +19,7 @@ It's not trying to be the next big Python UI framework. It's trying to be the mi
 
 ## Why it exists
 
-Python has had the "beautiful desktop app" problem for a decade. PyQt and PySide6 are powerful but default-ugly; the community has largely routed around them with Electron sidecars, webviews, and Flutter bridges. The recurring complaint in every *"Python desktop UI in 2025"* thread is some variant of **"everything looks ten years out of date, and every tailwind-level fix takes 1,000 lines of QSS."**
+Python has had the "beautiful desktop app" problem for a decade. PyQt and PySide6 are powerful but default-ugly; the community has largely routed around them with Electron sidecars, webviews, and Flutter bridges. The recurring complaint in every *"Python desktop UI in 2025"* thread is some variant of **"everything looks ten years out of date, and every Tailwind-level fix takes 1,000 lines of QSS."**
 
 `pearl-kit` is the answer that assumes:
 
@@ -45,7 +45,7 @@ Requirements: Python 3.11+, PySide6 6.8+, macOS or Linux.
 
 ## Quick look
 
-Today, `pearl-kit` exposes the `Tokens` singleton — the design language every future component will compose from. You can use it directly in your own QML:
+A sign-in card with three shipped components — `Button`, `Input`, `Toggle` — and one typography primitive (`Text`):
 
 ```python
 import sys
@@ -61,26 +61,39 @@ pearl_kit.register_qml(engine)
 engine.loadData(b"""
 import QtQuick
 import QtQuick.Window
+import QtQuick.Layouts
 import PearlKit 1.0 as P
 
 Window {
-    width: 480; height: 320
-    visible: true
+    width: 480; height: 360; visible: true
     color: P.Tokens.background
 
-    Rectangle {
+    ColumnLayout {
         anchors.centerIn: parent
-        width: 240; height: 56
-        color: P.Tokens.primary
-        radius: P.Tokens.radius.lg
+        spacing: P.Tokens.space.x4
+        width: 280
 
-        Text {
-            anchors.centerIn: parent
-            text: "Hello, Pearl"
-            color: P.Tokens.primaryForeground
-            font.family: P.Tokens.font.ui
-            font.pixelSize: P.Tokens.font.size.md
-            font.weight: P.Tokens.font.weight.semibold
+        P.Input {
+            Layout.fillWidth: true
+            placeholderText: "you@domain.com"
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: P.Tokens.space.x2
+
+            P.Toggle { checked: true }
+            P.Text {
+                text: "Remember me"
+                variant: "body"
+            }
+            Item { Layout.fillWidth: true }
+        }
+
+        P.Button {
+            Layout.fillWidth: true
+            text: "Sign in"
+            variant: "default"
         }
     }
 }
@@ -90,6 +103,23 @@ app.exec()
 ```
 
 `register_qml()` adds the bundled QML directory to your engine's import path, so `import PearlKit 1.0` resolves from anywhere.
+
+## Components
+
+Eight primitives ship in v0.1.0. Each one is built on `QtQuick.Templates.*` with a full visual override — no reliance on Qt's default widget styling.
+
+| Component | What it does | API surface | Docs |
+|---|---|---|---|
+| `Button`   | Clickable action | 6 variants × 5 sizes, iconLeft/iconRight, loading, checkable | [→](https://omerdduran.github.io/pearl-kit/components/button/) |
+| `Input`    | Single-line text field | error state, iconLeft/iconRight, password mode | [→](https://omerdduran.github.io/pearl-kit/components/input/) |
+| `Toggle`   | On/off switch | 2 sizes, animated thumb, keyboard focus ring | [→](https://omerdduran.github.io/pearl-kit/components/toggle/) |
+| `Select`   | Non-editable dropdown | 2 sizes, error state, model-driven, grouped items | [→](https://omerdduran.github.io/pearl-kit/components/select/) |
+| `Dialog`   | Modal popover | title/description, footer slot, close button, enter/exit transitions | [→](https://omerdduran.github.io/pearl-kit/components/dialog/) |
+| `CheckBox` | Multi-select box | error state, indeterminate (tristate) | [→](https://omerdduran.github.io/pearl-kit/components/checkbox/) |
+| `Stepper`  | Numeric field with ± buttons | int + float modes, suffix, specialValueText, error state | [→](https://omerdduran.github.io/pearl-kit/components/stepper/) |
+| `Text`     | Typography primitive | 7 variants — title, heading, body, muted, label, code, mono | [→](https://omerdduran.github.io/pearl-kit/components/text/) |
+
+Run `python examples/gallery.py` after a `uv sync` to see every variant live.
 
 ## The token system
 
@@ -119,33 +149,37 @@ Scale tokens:
 | Typography | `Tokens.font.size.{xs..xxl}` | `12, 14, 16, 18, 20, 24` |
 | Font | `Tokens.font.ui` / `.mono` | `"SF Pro Display"` / `"SF Mono"` |
 | Shadow | `Tokens.shadow.{sm,md,lg}{1,2}` | Two-layer shadcn-style |
-| Motion | `Tokens.motion.{fast,base,slow}` | `120, 180, 260` ms |
+| Motion | `Tokens.motion.{fast,base,slow}` | `150, 180, 260` ms |
 
 Full reference: **[docs/tokens](https://omerdduran.github.io/pearl-kit/tokens/)**.
 
 ## Roadmap
 
-### v0.0.x — current (infrastructure only)
+### Shipped — v0.1.0
 
-- `Tokens` singleton with three themes
-- Internal helper atoms — `PearlBackground`, `PearlText`, `PearlFocusRing`, `PearlPopup`
-- `pearl_kit.register_qml()` Python API
-- CI matrix: macOS 14 + Ubuntu × Python 3.11 / 3.12 / 3.13
-- PyPI trusted publishing, docs site, release pipeline
+The first component tier, each one built on `QtQuick.Templates` with full visual override:
 
-### v0.1.0 — "the five"
+- **Button** — 6 variants × 5 sizes, icon slots, loading, checkable
+- **Input** — single-line field with error state and icon slots
+- **Toggle** — iOS-style switch, 2 sizes
+- **Select** — non-editable dropdown with grouped items and keyboard navigation
+- **Dialog** — modal popover with overlay, focus trap, and fade + zoom transitions
+- **CheckBox** — indeterminate-capable, error-aware
+- **Stepper** — numeric field with int + float modes and auto-repeat buttons
+- **Text** — typography primitive covering title through mono variants
 
-The initial component set, each one built on `QtQuick.Templates` with full visual override:
+### Next — layout primitives
 
-- **Button** — default / secondary / destructive / ghost / outline / link variants
-- **Input** — single-line text with label, hint, and error states
-- **Toggle** — on/off switch with transition
-- **Select** — dropdown with popover positioning and keyboard navigation
-- **Dialog** — modal with overlay, focus trap, and entry/exit transitions
+- `GroupBox` — titled section with optional collapse
+- `FormLayout` / `FormRow` — label↔input alignment with hint and error slots
+- `ScrollArea` — thin-scrollbar wrapper matching the token set
+- `Splitter` — horizontal + vertical split with persistable sizes
+- `Card` — elevated surface with radius, border, padding
+- `Separator` — thin divider
 
-### v0.2.0 and beyond
+### Later
 
-New primitives as they land: `Card`, `Badge`, `Tooltip`, `Toast`, `Checkbox`, `Radio`, `Slider`, `Tabs`, `Menu`, `Avatar`, `Skeleton`.
+Feedback and navigation primitives — `Slider`, `ProgressBar`, `Tooltip`, `Toast`, `Tabs`, `Menu`, `StatusBar`, `ListView`, `Badge`, `Avatar`, `CodeBlock`, `TextArea`, and `Spinner`.
 
 The scope is deliberately narrow. This is a component kit, not a framework — no reactivity engine, no router, no state management. Those belong in your app or in Qt Quick itself.
 
@@ -164,7 +198,7 @@ git clone https://github.com/omerdduran/pearl-kit
 cd pearl-kit
 uv sync --all-extras
 
-uv run pytest              # 4/4 smoke tests
+uv run pytest              # full suite (55 tests today)
 uv run ruff check .
 uv run pyright              # strict mode
 uv run mkdocs serve         # live docs preview
