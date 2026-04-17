@@ -25,6 +25,7 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 ### Changed
 
 - `Tokens.motion.fast` updated from 120ms to 150ms to match the shadcn / Tailwind transition duration default so future components stay consistent.
+- Default theme flipped from `DarkBlue` to `Light` (`Tokens.mode` initial value). `DarkBlue` remains selectable at runtime via `P.Tokens.mode = P.Tokens.DarkBlue`; no palette or enum order changes.
 
 ### v0.0.0 — Initial infrastructure
 

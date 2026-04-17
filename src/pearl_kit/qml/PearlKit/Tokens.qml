@@ -5,7 +5,7 @@ QtObject {
     id: root
 
     enum Mode { Dark, DarkBlue, Light }
-    property int mode: Tokens.DarkBlue
+    property int mode: Tokens.Light
 
     readonly property bool isLight: mode === Tokens.Light
 

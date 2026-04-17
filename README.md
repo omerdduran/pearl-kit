@@ -123,7 +123,7 @@ Run `python examples/gallery.py` after a `uv sync` to see every variant live.
 
 ## The token system
 
-Three themes ship out of the box: `Dark`, `DarkBlue` (default), `Light`. Switch at runtime — every binding re-evaluates automatically:
+Three themes ship out of the box: `Dark`, `DarkBlue`, `Light` (default). Switch at runtime — every binding re-evaluates automatically:
 
 ```qml
 P.Tokens.mode = P.Tokens.Light

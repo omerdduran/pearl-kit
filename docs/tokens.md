@@ -20,8 +20,8 @@ Three modes ship out of the box:
 | Mode | Enum | Default | Notes |
 |---|---|---|---|
 | `Dark` | `Tokens.Dark` | no | Pure dark, high contrast |
-| `DarkBlue` | `Tokens.DarkBlue` | **yes** | Blue-tinted dark (airontgen's default) |
-| `Light` | `Tokens.Light` | no | Light mode |
+| `DarkBlue` | `Tokens.DarkBlue` | no | Blue-tinted dark (airontgen's production palette) |
+| `Light` | `Tokens.Light` | **yes** | Light mode — shadcn/macOS aesthetic |
 
 Switch at runtime:
 
