@@ -1,4 +1,4 @@
-"""pearl-kit gallery — showcases Button, Input, Toggle, Select, CheckBox, and Dialog."""
+"""pearl-kit gallery — showcases Button, Input, Toggle, Select, CheckBox, Stepper, and Dialog."""
 
 from __future__ import annotations
 
@@ -198,6 +198,50 @@ ApplicationWindow {
                 font.pixelSize: P.Tokens.font.size.sm
                 anchors.verticalCenter: parent.verticalCenter
                 MouseArea { anchors.fill: parent; onClicked: cbNotify.toggle() }
+            }
+        }
+
+        Text {
+            text: "Stepper"
+            color: P.Tokens.foreground
+            font.family: P.Tokens.font.ui
+            font.pixelSize: P.Tokens.font.size.xl
+            font.weight: P.Tokens.font.weight.semibold
+        }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.Stepper {
+                Layout.preferredWidth: 200
+                from: 0; to: 100
+                value: 50
+                suffix: "%"
+            }
+            P.Stepper {
+                Layout.preferredWidth: 200
+                from: 0; to: 10
+                decimals: 2
+                stepSize: 0.1
+                value: 2.5
+                suffix: " mm"
+            }
+            P.Stepper {
+                Layout.preferredWidth: 200
+                from: 0; to: 1000
+                specialValueText: "Auto"
+            }
+            P.Stepper {
+                Layout.preferredWidth: 200
+                error: true
+                value: 42
+            }
+            P.Stepper {
+                Layout.preferredWidth: 200
+                enabled: false
+                value: 12
+                suffix: " px"
             }
         }
 
