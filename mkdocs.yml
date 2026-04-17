@@ -40,6 +40,7 @@ nav:
       - Dialog: components/dialog.md
       - CheckBox: components/checkbox.md
       - Stepper: components/stepper.md
+      - Text: components/text.md
 
 markdown_extensions:
   - admonition

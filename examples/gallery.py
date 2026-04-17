@@ -1,4 +1,4 @@
-"""pearl-kit gallery — showcases Button, Input, Toggle, Select, CheckBox, Stepper, and Dialog."""
+"""pearl-kit gallery — showcases Button, Input, Toggle, Select, CheckBox, Stepper, Text, and Dialog."""
 
 from __future__ import annotations
 
@@ -242,6 +242,32 @@ ApplicationWindow {
                 enabled: false
                 value: 12
                 suffix: " px"
+            }
+        }
+
+        Text {
+            text: "Text"
+            color: P.Tokens.foreground
+            font.family: P.Tokens.font.ui
+            font.pixelSize: P.Tokens.font.size.xl
+            font.weight: P.Tokens.font.weight.semibold
+        }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 8
+
+            P.Text { variant: "title";   text: "Settings" }
+            P.Text { variant: "heading"; text: "Notifications" }
+            P.Text { variant: "body";    text: "Receive updates when your plan completes." }
+            P.Text { variant: "muted";   text: "32 items" }
+            P.Text { variant: "label";   text: "Email" }
+            P.Text { variant: "code";    text: "/usr/local/bin/dali" }
+            P.Text { variant: "mono";    text: "42" }
+            P.Text {
+                text: "A long sentence that elides at the end because its width is constrained"
+                Layout.preferredWidth: 260
+                elide: Text.ElideRight
             }
         }
 
