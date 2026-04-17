@@ -28,6 +28,9 @@ src/pearl_kit/_version.py
 CLAUDE.md
 .claude/
 
+# DALI migration tracker (downstream-specific, not shipped)
+DALI_COMPONENTS.md
+
 # pytest / coverage
 .pytest_cache/
 .coverage
