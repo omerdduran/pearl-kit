@@ -9,6 +9,11 @@
         style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
 <!-- pearl-demo:end -->
 
+!!! warning "Experimental"
+    This component is in the experimental tab — its API and visual design
+    may change without a deprecation cycle. See [Experimental overview](../experimental.md)
+    for the stability caveats.
+
 A compact tonal pill showing a clinical status — a tinted dot plus a short monospace label. Designed for list items, case rows, and any surface that needs a quick "where is this thing" chip.
 
 ## Import

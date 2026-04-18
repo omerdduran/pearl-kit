@@ -9,6 +9,11 @@
         style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
 <!-- pearl-demo:end -->
 
+!!! warning "Experimental"
+    This component is in the experimental tab — its API and visual design
+    may change without a deprecation cycle. See [Experimental overview](../experimental.md)
+    for the stability caveats.
+
 A volumetric-render placeholder — gradient fill, an implant marker, a canal-hint label strip, and three corner metadata labels. Use it as the inline preview tile in case cards until a real 3D render is wired in.
 
 ## Import

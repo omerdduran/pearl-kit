@@ -9,6 +9,11 @@
         style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
 <!-- pearl-demo:end -->
 
+!!! warning "Experimental"
+    This component is in the experimental tab — its API and visual design
+    may change without a deprecation cycle. See [Experimental overview](../experimental.md)
+    for the stability caveats.
+
 A hairline top strip — thin bar with a left label and a right label, separated by a 1 px bottom border. For app-chrome metadata: scan IDs, timestamps, environment tags.
 
 ## Import

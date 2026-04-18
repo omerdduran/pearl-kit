@@ -9,6 +9,11 @@
         style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
 <!-- pearl-demo:end -->
 
+!!! warning "Experimental"
+    This component is in the experimental tab — its API and visual design
+    may change without a deprecation cycle. See [Experimental overview](../experimental.md)
+    for the stability caveats.
+
 A selectable sidebar row with a label, a trailing count pill, and a 2 px left strip that fills in on the active row. Built on `T.AbstractButton` — hover + click + keyboard activation all come from the base template.
 
 ## Import

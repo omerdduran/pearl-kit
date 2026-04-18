@@ -9,6 +9,11 @@
         style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
 <!-- pearl-demo:end -->
 
+!!! warning "Experimental"
+    This component is in the experimental tab — its API and visual design
+    may change without a deprecation cycle. See [Experimental overview](../experimental.md)
+    for the stability caveats.
+
 An animated splash mark — a dashed outer ring, a solid middle ring, a sweeping arc, and a centered white tile with the tooth glyph. Designed for app-start splash screens and long-running scan indicators where a plain spinner feels undersized.
 
 ## Import

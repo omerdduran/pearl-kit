@@ -9,6 +9,11 @@
         style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
 <!-- pearl-demo:end -->
 
+!!! warning "Experimental"
+    This component is in the experimental tab — its API and visual design
+    may change without a deprecation cycle. See [Experimental overview](../experimental.md)
+    for the stability caveats.
+
 A CBCT-slice plane-selector thumbnail — gradient fill, crosshairs, and a kind-labeled footer (axial / coronal / sagittal / pano / 3d). Placeholder graphic for plane pickers and case-library tiles that don't have a real render yet.
 
 ## Import

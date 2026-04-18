@@ -9,6 +9,11 @@
         style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
 <!-- pearl-demo:end -->
 
+!!! warning "Experimental"
+    This component is in the experimental tab — its API and visual design
+    may change without a deprecation cycle. See [Experimental overview](../experimental.md)
+    for the stability caveats.
+
 A text field with a leading search glyph and a trailing `⌘K` shortcut hint pill — the canonical top-of-list filter box. Built on `T.TextField` so everything from caret, selection, placeholder, IME, and `accepted()` comes from the base.
 
 ## Import

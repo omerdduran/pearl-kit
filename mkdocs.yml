@@ -65,7 +65,8 @@ nav:
       - Badge: components/badge.md
       - CodeBlock: components/code-block.md
       - ListView: components/list-view.md
-  - Clinical primitives:
+  - Experimental:
+      - Overview: experimental.md
       - StatusPill: components/status-pill.md
       - SectionLabel: components/section-label.md
       - MetaRow: components/meta-row.md
