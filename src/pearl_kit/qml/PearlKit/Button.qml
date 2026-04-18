@@ -121,7 +121,7 @@ T.Button {
             anchors.verticalCenter: parent.verticalCenter
         }
 
-        PearlText {
+        PearlBaseText {
             text: control.text
             visible: control.text !== ""
             color: (control.down || control.hovered) ? control._v.fgHover : control._v.fg

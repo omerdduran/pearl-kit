@@ -45,7 +45,7 @@ Requirements: Python 3.11+, PySide6 6.8+, macOS or Linux.
 
 ## Quick look
 
-A sign-in card with three shipped components — `Button`, `Input`, `Toggle` — and one typography primitive (`Text`):
+A sign-in card with three shipped components — `Button`, `Input`, `Toggle` — and one typography primitive (`PearlText`):
 
 ```python
 import sys
@@ -83,7 +83,7 @@ Window {
             spacing: P.Tokens.space.x2
 
             P.Toggle { checked: true }
-            P.Text {
+            P.PearlText {
                 text: "Remember me"
                 variant: "body"
             }
@@ -117,7 +117,7 @@ Eight primitives ship in v0.1.0. Each one is built on `QtQuick.Templates.*` with
 | `Dialog`   | Modal popover | title/description, footer slot, close button, enter/exit transitions | [→](https://omerdduran.github.io/pearl-kit/components/dialog/) |
 | `CheckBox` | Multi-select box | error state, indeterminate (tristate) | [→](https://omerdduran.github.io/pearl-kit/components/checkbox/) |
 | `Stepper`  | Numeric field with ± buttons | int + float modes, suffix, specialValueText, error state | [→](https://omerdduran.github.io/pearl-kit/components/stepper/) |
-| `Text`     | Typography primitive | 7 variants — title, heading, body, muted, label, code, mono | [→](https://omerdduran.github.io/pearl-kit/components/text/) |
+| `PearlText` | Typography primitive | 7 variants — title, heading, body, muted, label, code, mono | [→](https://omerdduran.github.io/pearl-kit/components/pearl-text/) |
 
 Run `python examples/gallery.py` after a `uv sync` to see every variant live.
 
@@ -166,7 +166,7 @@ The first component tier, each one built on `QtQuick.Templates` with full visual
 - **Dialog** — modal popover with overlay, focus trap, and fade + zoom transitions
 - **CheckBox** — indeterminate-capable, error-aware
 - **Stepper** — numeric field with int + float modes and auto-repeat buttons
-- **Text** — typography primitive covering title through mono variants
+- **PearlText** — typography primitive covering title through mono variants
 
 ### Next — layout primitives
 

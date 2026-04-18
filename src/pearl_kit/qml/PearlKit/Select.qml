@@ -92,7 +92,7 @@ T.ComboBox {
     }
 
     // ---- contentItem (selected value display)
-    contentItem: PearlText {
+    contentItem: PearlBaseText {
         leftPadding: 0
         rightPadding: 0
         text: control.currentIndex === -1 ? control.placeholderText : control.displayText
@@ -198,7 +198,7 @@ T.ComboBox {
             implicitWidth: _rowLabel.implicitWidth
             implicitHeight: item.height - item.topPadding - item.bottomPadding
 
-            PearlText {
+            PearlBaseText {
                 id: _rowLabel
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left

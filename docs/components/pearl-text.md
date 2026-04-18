@@ -1,6 +1,8 @@
-# Text
+# PearlText
 
 Typography primitive — renders strings with `variant`-based font, size, weight, and color presets. The most common widget in a pearl-kit app: headings, body copy, form labels, muted annotations, inline code.
+
+The name is deliberately prefixed to avoid shadowing `QtQuick.Text`: under an unqualified `import PearlKit 1.0`, the built-in `Text` element stays resolvable, and the pearl-kit primitive is accessed as `PearlText`.
 
 ## Import
 
@@ -21,13 +23,11 @@ Inside QML:
 
 ```qml
 import QtQuick
-import PearlKit 1.0 as P
+import PearlKit 1.0
 
-P.Text { variant: "title"; text: "Settings" }
-P.Text { variant: "body";  text: "Update your account information." }
+PearlText { variant: "title"; text: "Settings" }
+PearlText { variant: "body";  text: "Update your account information." }
 ```
-
-Always namespace `PearlKit 1.0 as P` — `PearlKit.Text` shadows `QtQuick.Text` under an unqualified import, which can surprise readers who expect the built-in.
 
 ## Variants
 
@@ -42,21 +42,21 @@ Always namespace `PearlKit 1.0 as P` — `PearlKit.Text` shadows `QtQuick.Text` 
 | `mono` | 14 px | regular | `foreground` | SF Mono | 1.2 | Monospace, default foreground |
 
 ```qml
-P.Text { variant: "title";   text: "Settings" }
-P.Text { variant: "heading"; text: "Notifications" }
-P.Text { variant: "body";    text: "Receive updates when your plan completes." }
-P.Text { variant: "muted";   text: "32 items" }
-P.Text { variant: "label";   text: "Email" }
-P.Text { variant: "code";    text: "/usr/local/bin/dali" }
-P.Text { variant: "mono";    text: "42" }
+PearlText { variant: "title";   text: "Settings" }
+PearlText { variant: "heading"; text: "Notifications" }
+PearlText { variant: "body";    text: "Receive updates when your plan completes." }
+PearlText { variant: "muted";   text: "32 items" }
+PearlText { variant: "label";   text: "Email" }
+PearlText { variant: "code";    text: "/usr/local/bin/dali" }
+PearlText { variant: "mono";    text: "42" }
 ```
 
 ## Eliding
 
-`Text` inherits from `QtQuick.Text`, so every elide and wrap property is available. Set an explicit `width` to trigger eliding.
+`PearlText` inherits from `QtQuick.Text`, so every elide and wrap property is available. Set an explicit `width` to trigger eliding.
 
 ```qml
-P.Text {
+PearlText {
     text: "a very long title that will elide at the end"
     width: 160
     elide: Text.ElideRight
@@ -83,23 +83,23 @@ Every other property on `QtQuick.Text` — `horizontalAlignment`, `maximumLineCo
 
 ## Under the hood
 
-`Text` is a pure `QtQuick.Text` Item — no `Rectangle` wrapper, no `QtQuick.Templates` base. This keeps it cheap (`~100+ call sites` means it shows up everywhere) and makes every native Text property available without re-plumbing.
+`PearlText` is a pure `QtQuick.Text` Item — no `Rectangle` wrapper, no `QtQuick.Templates` base. This keeps it cheap (`~100+ call sites` means it shows up everywhere) and makes every native Text property available without re-plumbing.
 
 The variant-driven properties (`font.family`, `font.pixelSize`, `font.weight`, `color`, `lineHeight`) are computed by private `_pxSize`, `_weight`, `_color`, `_family` resolvers that switch on `variant`. Every value comes from `Tokens.font.*` or `Tokens.foreground` / `Tokens.mutedForeground` — no hardcoded hex or magic numbers.
 
-`renderType: Text.NativeRendering` matches the pearl-kit `internal/PearlText.qml` atom for crisp rendering on Retina displays. `antialiasing: true` explicit — Qt's default flips between versions.
+`renderType: Text.NativeRendering` matches the pearl-kit `internal/PearlBaseText.qml` atom for crisp rendering on Retina displays. `antialiasing: true` explicit — Qt's default flips between versions.
 
 ## Deliberate differences from shadcn
 
-shadcn has `Label` as a separate form-label primitive and documents typography via Tailwind classes rather than a component. Pearl-kit unifies both concerns into a single `Text` with variants:
+shadcn has `Label` as a separate form-label primitive and documents typography via Tailwind classes rather than a component. Pearl-kit unifies both concerns into a single `PearlText` with variants:
 
 1. **Single component, not Label + typography classes.** shadcn exports `<Label>` (`text-sm leading-none font-medium`) as its own React component. In pearl-kit, that's `variant: "label"`.
-2. **`code` variant has no background chip.** shadcn's `<code>` pattern in typography docs uses `bg-muted px-[0.3rem] py-[0.2rem]`. A pure `Text` Item can't render a background. If you need a visible chip, wrap the `Text` in a `Rectangle { color: Tokens.muted; radius: 4; ... }`.
+2. **`code` variant has no background chip.** shadcn's `<code>` pattern in typography docs uses `bg-muted px-[0.3rem] py-[0.2rem]`. A pure `Text` Item can't render a background. If you need a visible chip, wrap the `PearlText` in a `Rectangle { color: Tokens.muted; radius: 4; ... }`.
 3. **`mono` variant is pearl-kit-specific.** shadcn doesn't distinguish "mono" from "code" — both are rendered the same. Pearl-kit splits: `code` is mono + muted (documentation flavor), `mono` is mono + foreground (data display flavor).
-4. **No shadcn typography `h1..h4` / `lead` / `large` / `small` variants.** Not shipped — rewritable via `font.pixelSize` and `font.weight` on any `Text` instance. Revisit if DALI demand surfaces.
+4. **No shadcn typography `h1..h4` / `lead` / `large` / `small` variants.** Not shipped — rewritable via `font.pixelSize` and `font.weight` on any `PearlText` instance. Revisit if DALI demand surfaces.
 
 ## Related
 
-- [Input](input.md) — pair `Text { variant: "label" }` with an Input for form fields
+- [Input](input.md) — pair `PearlText { variant: "label" }` with an Input for form fields
 - [Button](button.md) — Button's label is already internally styled; pass `text:`
-- [CheckBox](checkbox.md) — pair with `Text` label via `Row` + `MouseArea`
+- [CheckBox](checkbox.md) — pair with `PearlText` label via `Row` + `MouseArea`

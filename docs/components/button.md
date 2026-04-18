@@ -150,7 +150,7 @@ Button is a `QtQuick.Templates.Button` (not `QtQuick.Controls.Basic.Button`). `Q
 
 Internally Button composes three helper atoms from `PearlKit.internal`:
 
-- `PearlText` for the label (14px / medium / `SF Pro Display`)
+- `PearlBaseText` for the label (14px / medium / `SF Pro Display`)
 - `PearlFocusRing` for the keyboard focus indicator
 - A bare `Rectangle` for the background (variant-specific color + border logic lives inline rather than in a generic `PearlBackground` helper)
 

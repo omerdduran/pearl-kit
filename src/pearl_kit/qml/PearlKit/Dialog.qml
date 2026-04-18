@@ -81,7 +81,7 @@ T.Popup {
                 spacing: 8
                 visible: control.title !== "" || control.description !== ""
 
-                PearlText {
+                PearlBaseText {
                     visible: control.title !== ""
                     text: control.title
                     width: parent.width - (control.showCloseButton ? 24 : 0)
@@ -93,7 +93,7 @@ T.Popup {
                     wrapMode: Text.WordWrap
                 }
 
-                PearlText {
+                PearlBaseText {
                     visible: control.description !== ""
                     text: control.description
                     width: parent.width

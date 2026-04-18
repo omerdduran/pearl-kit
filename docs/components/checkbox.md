@@ -47,11 +47,9 @@ shadcn and pearl-kit both leave label composition to the consumer — wire a `Mo
 Row {
     spacing: 8
     P.CheckBox { id: cb }
-    Text {
+    P.PearlText {
         text: "Accept terms"
-        color: P.Tokens.foreground
-        font.family: P.Tokens.font.ui
-        font.pixelSize: P.Tokens.font.size.sm
+        variant: "body"
         anchors.verticalCenter: parent.verticalCenter
         MouseArea { anchors.fill: parent; onClicked: cb.toggle() }
     }
@@ -116,7 +114,7 @@ Everything else is whatever `QtQuick.Templates.CheckBox` exposes — `toggle()`,
 ## Deliberate differences from shadcn
 
 1. **Indeterminate (tristate) state** — shadcn stylizes only checked / unchecked, but the Radix primitive supports `indeterminate`, and pearl-kit implements it as a dash glyph. Useful for "select all" group headers.
-2. **No label slot** — shadcn composes labels externally via `<Label>`. Pearl-kit mirrors this; `T.CheckBox.text` is not rendered. Compose with a `MouseArea`-wrapped `Text` sibling.
+2. **No label slot** — shadcn composes labels externally via `<Label>`. Pearl-kit mirrors this; `T.CheckBox.text` is not rendered. Compose with a `MouseArea`-wrapped `PearlText` sibling.
 3. **No color transition** — shadcn's indicator has `transition-none`. Pearl-kit does not add `Behavior on color` to the indicator, even though `Input` and `Select` do. The state change is discrete; animation would feel laggy.
 4. **Focus ring trigger** — `visualFocus` (keyboard-only), matching shadcn's `focus-visible:`. Mouse clicks don't show a visible ring.
 

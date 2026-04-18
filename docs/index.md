@@ -32,7 +32,7 @@ QtObject { property color c: P.Tokens.background }
 ## What's in the box today
 
 - `Tokens` QML singleton — shadcn taxonomy, three themes (Dark / DarkBlue / Light), radius/spacing/typography/shadow/motion scales.
-- `PearlKit.internal` helper atoms (`PearlBackground`, `PearlText`, `PearlFocusRing`, `PearlPopup`) — the substrate every future component composes from.
+- `PearlKit.internal` helper atoms (`PearlBackground`, `PearlBaseText`, `PearlFocusRing`, `PearlPopup`) — the substrate every future component composes from.
 - `pearl_kit.register_qml(engine)` — one-line QML module registration.
 
 ## What's coming next

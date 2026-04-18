@@ -158,7 +158,7 @@ Item {
 
             Behavior on color { ColorAnimation { duration: Tokens.motion.fast; easing.type: Easing.OutCubic } }
 
-            PearlText {
+            PearlBaseText {
                 anchors.centerIn: parent
                 text: "+"
                 color: Tokens.foreground
@@ -184,7 +184,7 @@ Item {
 
             Behavior on color { ColorAnimation { duration: Tokens.motion.fast; easing.type: Easing.OutCubic } }
 
-            PearlText {
+            PearlBaseText {
                 anchors.centerIn: parent
                 text: "\u2212"   // minus sign (U+2212), visually heavier than hyphen
                 color: Tokens.foreground

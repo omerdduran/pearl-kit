@@ -134,7 +134,7 @@ The focus ring is keyboard-only (matches shadcn's `focus-visible:`). Clicking th
 `Select` overrides every `T.ComboBox` slot:
 
 - `background` — Input-style rectangle with theme-aware color, border, and `Behavior on border.color` for focus / error transitions
-- `contentItem` — a `PearlText` showing `displayText` or `placeholderText` with disabled-aware color ternaries
+- `contentItem` — a `PearlBaseText` showing `displayText` or `placeholderText` with disabled-aware color ternaries
 - `indicator` — a `PearlChevron` (Canvas-based stroked chevron), positioned absolutely at `x = control.width - 28`
 - `popup` — an inline `T.Popup` parented to `T.Overlay.overlay`, containing a `ListView` bound to `control.delegateModel` and `control.highlightedIndex`; enter transition fades + scales (`Tokens.motion.fast`)
 - `delegate` — a `T.ItemDelegate` that branches on a `_type` property derived from `model.type` or `modelData.type`, producing three visual forms

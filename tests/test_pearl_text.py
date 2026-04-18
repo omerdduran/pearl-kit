@@ -14,68 +14,68 @@ def _load(qml: bytes) -> QQmlApplicationEngine:
     return engine
 
 
-def test_text_default_loads() -> None:
+def test_pearl_text_default_loads() -> None:
     engine = _load(
-        b'import QtQuick\nimport PearlKit 1.0\nText { text: "hello" }\n',
+        b'import QtQuick\nimport PearlKit 1.0\nPearlText { text: "hello" }\n',
     )
     roots = engine.rootObjects()
-    assert roots, "default Text failed to load"
+    assert roots, "default PearlText failed to load"
     obj = roots[0]
     assert obj.property("text") == "hello"
     assert obj.property("variant") == "body"
 
 
-def test_text_all_variants_load() -> None:
+def test_pearl_text_all_variants_load() -> None:
     for v in ("title", "heading", "body", "muted", "label", "code", "mono"):
         engine = _load(
             b"import QtQuick\nimport PearlKit 1.0\n"
-            + f'Text {{ variant: "{v}"; text: "sample" }}\n'.encode(),
+            + f'PearlText {{ variant: "{v}"; text: "sample" }}\n'.encode(),
         )
         roots = engine.rootObjects()
         assert roots, f"variant={v} failed to load"
         assert roots[0].property("variant") == v
 
 
-def test_text_title_is_xxl_semibold() -> None:
+def test_pearl_text_title_is_xxl_semibold() -> None:
     engine = _load(
-        b'import QtQuick\nimport PearlKit 1.0\nText { variant: "title"; text: "t" }\n',
+        b'import QtQuick\nimport PearlKit 1.0\nPearlText { variant: "title"; text: "t" }\n',
     )
     obj = engine.rootObjects()[0]
     font = obj.property("font")
     assert font.pixelSize() == 24
 
 
-def test_text_heading_is_lg() -> None:
+def test_pearl_text_heading_is_lg() -> None:
     engine = _load(
-        b'import QtQuick\nimport PearlKit 1.0\nText { variant: "heading"; text: "h" }\n',
+        b'import QtQuick\nimport PearlKit 1.0\nPearlText { variant: "heading"; text: "h" }\n',
     )
     obj = engine.rootObjects()[0]
     assert obj.property("font").pixelSize() == 18
 
 
-def test_text_body_is_sm() -> None:
+def test_pearl_text_body_is_sm() -> None:
     engine = _load(
-        b'import QtQuick\nimport PearlKit 1.0\nText { variant: "body"; text: "b" }\n',
+        b'import QtQuick\nimport PearlKit 1.0\nPearlText { variant: "body"; text: "b" }\n',
     )
     obj = engine.rootObjects()[0]
     assert obj.property("font").pixelSize() == 14
 
 
-def test_text_elide_passthrough() -> None:
+def test_pearl_text_elide_passthrough() -> None:
     # elide is a QQuickText enum — cannot be round-tripped via .property();
     # smoke-load only to confirm the binding parses.
     engine = _load(
         b"import QtQuick\nimport PearlKit 1.0\n"
-        b'Text { text: "very long text that elides"; width: 80; elide: Text.ElideRight }\n',
+        b'PearlText { text: "very long text that elides"; width: 80; elide: Text.ElideRight }\n',
     )
     roots = engine.rootObjects()
     assert roots
     assert roots[0].property("text") == "very long text that elides"
 
 
-def test_text_disabled_state() -> None:
+def test_pearl_text_disabled_state() -> None:
     engine = _load(
-        b'import QtQuick\nimport PearlKit 1.0\nText { text: "x"; enabled: false }\n',
+        b'import QtQuick\nimport PearlKit 1.0\nPearlText { text: "x"; enabled: false }\n',
     )
     roots = engine.rootObjects()
     assert roots
