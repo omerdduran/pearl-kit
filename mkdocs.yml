@@ -38,6 +38,7 @@ nav:
       - Toggle: components/toggle.md
       - Select: components/select.md
       - Dialog: components/dialog.md
+      - MessageBox: components/message-box.md
       - CheckBox: components/checkbox.md
       - Stepper: components/stepper.md
       - PearlText: components/pearl-text.md
@@ -47,6 +48,12 @@ nav:
       - FormRow: components/form-row.md
       - Splitter: components/splitter.md
       - ScrollArea: components/scroll-area.md
+      - ProgressBar: components/progress-bar.md
+      - Spinner: components/spinner.md
+      - StatusBar: components/statusbar.md
+      - Tooltip: components/tooltip.md
+      - Toast: components/toast.md
+      - Slider: components/slider.md
 
 markdown_extensions:
   - admonition

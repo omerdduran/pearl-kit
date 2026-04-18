@@ -1,4 +1,4 @@
-"""pearl-kit gallery — showcases Button, Input, Toggle, Select, CheckBox, Stepper, Text, Dialog, GroupBox, Separator, Card, FormRow, Splitter, and ScrollArea."""
+"""pearl-kit gallery — showcases Button, Input, Toggle, Select, CheckBox, Stepper, Text, Dialog, MessageBox, GroupBox, Separator, Card, FormRow, Splitter, ScrollArea, ProgressBar, Spinner, StatusBar, Toast, Tooltip, and Slider."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ import PearlKit 1.0 as P
 
 ApplicationWindow {
     width: 880
-    height: 820
+    height: 1200
     visible: true
     title: "pearl-kit gallery"
     color: P.Tokens.background
@@ -244,6 +244,78 @@ ApplicationWindow {
             P.Button { text: "Simple dialog"; onClicked: simpleDialog.open() }
             P.Button { text: "Confirm destructive"; variant: "outline"; onClicked: confirmDialog.open() }
             P.Button { text: "No close button"; variant: "ghost"; onClicked: noCloseDialog.open() }
+        }
+
+        P.PearlText { variant: "title"; text: "MessageBox" }
+
+        Flow {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.Button { text: "Info";    onClicked: mbInfo.open() }
+            P.Button { text: "Warning"; variant: "secondary";   onClicked: mbWarning.open() }
+            P.Button { text: "Error";   variant: "destructive"; onClicked: mbError.open() }
+            P.Button { text: "Confirm"; variant: "outline";     onClicked: mbConfirm.open() }
+        }
+
+        P.PearlText { variant: "title"; text: "Toast" }
+
+        Flow {
+            Layout.fillWidth: true
+            spacing: 8
+
+            P.Button {
+                text: "Default"
+                size: "sm"
+                onClicked: P.Toaster.show({title: "Heads up", description: "Something happened."})
+            }
+            P.Button {
+                text: "Success"
+                size: "sm"
+                variant: "secondary"
+                onClicked: P.Toaster.show({type: "success", title: "Saved", description: "Your changes are live."})
+            }
+            P.Button {
+                text: "Info"
+                size: "sm"
+                variant: "secondary"
+                onClicked: P.Toaster.show({type: "info", title: "Tip", description: "Press Cmd+K to search."})
+            }
+            P.Button {
+                text: "Warning"
+                size: "sm"
+                variant: "outline"
+                onClicked: P.Toaster.show({type: "warning", title: "Low disk space", description: "Under 10% remaining."})
+            }
+            P.Button {
+                text: "Error"
+                size: "sm"
+                variant: "destructive"
+                onClicked: P.Toaster.show({type: "error", title: "Upload failed", description: "Check your connection."})
+            }
+            P.Button {
+                text: "Loading"
+                size: "sm"
+                variant: "ghost"
+                onClicked: {
+                    var id = P.Toaster.show({type: "loading", title: "Processing", description: "This may take a moment."})
+                    loadingDismissTimer.pendingId = id
+                    loadingDismissTimer.restart()
+                }
+            }
+            P.Button {
+                text: "Dismiss all"
+                size: "sm"
+                variant: "ghost"
+                onClicked: P.Toaster.dismissAll()
+            }
+        }
+
+        Timer {
+            id: loadingDismissTimer
+            interval: 1800
+            property int pendingId: -1
+            onTriggered: if (pendingId !== -1) P.Toaster.dismiss(pendingId)
         }
 
         P.PearlText { variant: "title"; text: "GroupBox" }
@@ -661,6 +733,327 @@ ApplicationWindow {
             }
         }
 
+        P.PearlText { variant: "title"; text: "ProgressBar" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.PearlText { variant: "muted"; text: "Determinate — 0 / 25 / 50 / 75 / 100" }
+
+            P.ProgressBar {
+                Layout.preferredWidth: 360
+                value: 0
+            }
+            P.ProgressBar {
+                Layout.preferredWidth: 360
+                value: 25
+            }
+            P.ProgressBar {
+                Layout.preferredWidth: 360
+                value: 50
+            }
+            P.ProgressBar {
+                Layout.preferredWidth: 360
+                value: 75
+            }
+            P.ProgressBar {
+                Layout.preferredWidth: 360
+                value: 100
+            }
+
+            P.PearlText { variant: "muted"; text: "Custom range — bytes 0..1024, value 640" }
+            P.ProgressBar {
+                Layout.preferredWidth: 360
+                from: 0; to: 1024
+                value: 640
+            }
+
+            P.PearlText { variant: "muted"; text: "Indeterminate — sliding bar" }
+            P.ProgressBar {
+                Layout.preferredWidth: 360
+                indeterminate: true
+            }
+
+            P.PearlText { variant: "muted"; text: "Disabled" }
+            P.ProgressBar {
+                Layout.preferredWidth: 360
+                value: 60
+                enabled: false
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Spinner" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            P.PearlText { variant: "muted"; text: "Default 16 px, alongside a label." }
+            Row {
+                spacing: 8
+                P.Spinner {
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                P.PearlText {
+                    text: "Loading..."
+                    variant: "muted"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+
+            P.PearlText { variant: "muted"; text: "Size overrides via width / height." }
+            Row {
+                spacing: 16
+                P.Spinner { width: 12; height: 12; anchors.verticalCenter: parent.verticalCenter }
+                P.Spinner { anchors.verticalCenter: parent.verticalCenter }
+                P.Spinner { width: 20; height: 20; anchors.verticalCenter: parent.verticalCenter }
+                P.Spinner { width: 24; height: 24; anchors.verticalCenter: parent.verticalCenter }
+                P.Spinner { width: 32; height: 32; strokeWidth: 3; anchors.verticalCenter: parent.verticalCenter }
+            }
+
+            P.PearlText { variant: "muted"; text: "Color overrides." }
+            Row {
+                spacing: 16
+                P.Spinner { width: 24; height: 24; color: P.Tokens.primary }
+                P.Spinner { width: 24; height: 24; color: P.Tokens.destructive }
+                P.Spinner { width: 24; height: 24; color: P.Tokens.success }
+                P.Spinner { width: 24; height: 24; color: P.Tokens.foreground }
+            }
+
+            P.PearlText { variant: "muted"; text: "Paused spinner (running: false)." }
+            P.Spinner { running: false; width: 24; height: 24 }
+
+            P.PearlText { variant: "muted"; text: "Inside a Button, replacing an icon." }
+            Row {
+                spacing: 12
+                P.Button {
+                    text: "Saving..."
+                    variant: "default"
+                    enabled: false
+                    leftPadding: 32
+                    P.Spinner {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 12
+                        color: P.Tokens.primaryForeground
+                    }
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "StatusBar" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.PearlText {
+                variant: "muted"
+                text: "Main-window footer — left hint, centered measurement, right status."
+            }
+
+            P.StatusBar {
+                id: defaultBar
+                Layout.fillWidth: true
+                leftContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "12 implants placed" }
+                centerContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "14.2 x 8.3 mm @ 200%" }
+                rightContent: P.PearlText {
+                    font.family: P.Tokens.font.ui
+                    font.pixelSize: P.Tokens.font.size.xs
+                    text: "Idle"
+                    color: defaultBar.statusColor
+                }
+            }
+
+            P.StatusBar {
+                id: successBar
+                Layout.fillWidth: true
+                statusKind: "success"
+                leftContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "Press S to save" }
+                centerContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "Auto-aligned 4 / 4" }
+                rightContent: P.PearlText {
+                    font.family: P.Tokens.font.ui
+                    font.pixelSize: P.Tokens.font.size.xs
+                    text: "Saved"
+                    color: successBar.statusColor
+                }
+            }
+
+            P.StatusBar {
+                id: warningBar
+                Layout.fillWidth: true
+                statusKind: "warning"
+                leftContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "Low bone density" }
+                centerContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "HU 248" }
+                rightContent: P.PearlText {
+                    font.family: P.Tokens.font.ui
+                    font.pixelSize: P.Tokens.font.size.xs
+                    text: "Review"
+                    color: warningBar.statusColor
+                }
+            }
+
+            P.StatusBar {
+                id: errorBar
+                Layout.fillWidth: true
+                statusKind: "error"
+                leftContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "Nerve canal collision" }
+                centerContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "Implant #3 overlap 1.2 mm" }
+                rightContent: P.PearlText {
+                    font.family: P.Tokens.font.ui
+                    font.pixelSize: P.Tokens.font.size.xs
+                    text: "Blocked"
+                    color: errorBar.statusColor
+                }
+            }
+
+            P.StatusBar {
+                Layout.fillWidth: true
+                enabled: false
+                leftContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "Disabled footer" }
+                centerContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "\u2014" }
+                rightContent: P.PearlText { variant: "muted"; font.pixelSize: P.Tokens.font.size.xs; text: "Inactive" }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Tooltip" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            Flow {
+                Layout.fillWidth: true
+                spacing: 16
+
+                P.Button {
+                    id: ttBtn1
+                    text: "Hover me (top)"
+                    P.Tooltip {
+                        parent: ttBtn1
+                        text: "Appears above the trigger"
+                        placement: "top"
+                        visible: ttBtn1.hovered
+                    }
+                }
+
+                P.Button {
+                    id: ttBtn2
+                    text: "Hover me (bottom)"
+                    variant: "outline"
+                    P.Tooltip {
+                        parent: ttBtn2
+                        text: "Appears below"
+                        placement: "bottom"
+                        visible: ttBtn2.hovered
+                    }
+                }
+
+                P.Button {
+                    id: ttBtn3
+                    text: "Delayed 500 ms"
+                    variant: "secondary"
+                    P.Tooltip {
+                        parent: ttBtn3
+                        text: "Apple-HIG-style delay"
+                        delay: 500
+                        visible: ttBtn3.hovered
+                    }
+                }
+
+                P.Button {
+                    id: ttBtn4
+                    text: "Disabled (no tooltip)"
+                    enabled: false
+                    P.Tooltip {
+                        parent: ttBtn4
+                        text: "You should not see this"
+                        visible: ttBtn4.hovered && ttBtn4.enabled
+                    }
+                }
+            }
+
+            Flow {
+                Layout.fillWidth: true
+                spacing: 16
+
+                P.Input {
+                    id: ttInput
+                    placeholderText: "Hover for hint"
+                    Layout.preferredWidth: 240
+                    P.Tooltip {
+                        parent: ttInput
+                        text: "This field accepts any non-empty string up to 80 characters and trims whitespace on save."
+                        placement: "bottom"
+                        maxWidth: 280
+                        visible: ttInput.hovered
+                    }
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Slider" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            RowLayout {
+                spacing: 16
+                P.PearlText { variant: "muted"; text: "Horizontal"; Layout.preferredWidth: 110 }
+                P.Slider {
+                    Layout.preferredWidth: 240
+                    from: 0; to: 100; value: 50
+                }
+            }
+
+            RowLayout {
+                spacing: 16
+                P.PearlText { variant: "muted"; text: "Ticks"; Layout.preferredWidth: 110 }
+                P.Slider {
+                    Layout.preferredWidth: 240
+                    from: 0; to: 100; value: 60
+                    stepSize: 10; showTicks: true
+                }
+            }
+
+            RowLayout {
+                spacing: 16
+                P.PearlText { variant: "muted"; text: "Window/Level"; Layout.preferredWidth: 110 }
+                P.Slider {
+                    Layout.preferredWidth: 240
+                    from: 0; to: 6000; value: 2048; stepSize: 50
+                }
+            }
+
+            RowLayout {
+                spacing: 16
+                P.PearlText { variant: "muted"; text: "Disabled"; Layout.preferredWidth: 110 }
+                P.Slider {
+                    Layout.preferredWidth: 240
+                    from: 0; to: 100; value: 35
+                    enabled: false
+                }
+            }
+
+            RowLayout {
+                spacing: 32
+                P.PearlText { variant: "muted"; text: "Vertical"; Layout.preferredWidth: 110 }
+                P.Slider {
+                    orientation: Qt.Vertical
+                    Layout.preferredHeight: 160
+                    from: 0; to: 100; value: 40
+                }
+                P.Slider {
+                    orientation: Qt.Vertical
+                    Layout.preferredHeight: 160
+                    from: 0; to: 100; value: 70
+                    stepSize: 10; showTicks: true
+                }
+            }
+        }
+
         }
     }
 
@@ -702,6 +1095,39 @@ ApplicationWindow {
             P.Button { text: "Decline"; variant: "outline"; onClicked: noCloseDialog.close() }
         }
     }
+
+    P.MessageBox {
+        id: mbInfo
+        variant: "info"
+        heading: "Saved successfully"
+        message: "Your changes have been written to the project file."
+    }
+
+    P.MessageBox {
+        id: mbWarning
+        variant: "warning"
+        heading: "Unsaved changes"
+        message: "You have unsaved work. Switching projects will discard these edits."
+    }
+
+    P.MessageBox {
+        id: mbError
+        variant: "error"
+        heading: "Failed to load file"
+        message: "The file is corrupted or uses an unsupported format."
+    }
+
+    P.MessageBox {
+        id: mbConfirm
+        variant: "confirm"
+        heading: "Delete annotation?"
+        message: "This will permanently remove the implant placement from the current case."
+        okText: "Delete"
+        okVariant: "destructive"
+        cancelText: "Keep"
+    }
+
+    P.ToasterHost { }
 }
 """
 

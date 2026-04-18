@@ -6,3 +6,5 @@ PearlPopup      1.0 PearlPopup.qml
 PearlChevron    1.0 PearlChevron.qml
 PearlXIcon      1.0 PearlXIcon.qml
 PearlCheckIcon  1.0 PearlCheckIcon.qml
+PearlAlertIcon  1.0 PearlAlertIcon.qml
+PearlToastIcon  1.0 PearlToastIcon.qml

@@ -14,3 +14,12 @@ Card           1.0 Card.qml
 FormRow        1.0 FormRow.qml
 Splitter       1.0 Splitter.qml
 ScrollArea     1.0 ScrollArea.qml
+ProgressBar    1.0 ProgressBar.qml
+Spinner        1.0 Spinner.qml
+StatusBar      1.0 StatusBar.qml
+MessageBox     1.0 MessageBox.qml
+Tooltip        1.0 Tooltip.qml
+singleton Toaster 1.0 Toaster.qml
+ToasterHost    1.0 ToasterHost.qml
+Toast          1.0 Toast.qml
+Slider         1.0 Slider.qml
