@@ -39,3 +39,12 @@ htmlcov/
 # mkdocs
 site/
 _site/
+
+# WASM gallery — bundle is built by CI or fetched locally, never committed
+build-wasm/
+docs/wasm/
+wasm/fonts/*.ttf
+wasm/fonts/*.otf
+wasm/qml.qrc
+aqtinstall.log
+docs/hooks/__pycache__/

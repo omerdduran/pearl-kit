@@ -1,5 +1,14 @@
 # StatusBar
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=statusbar"
+        title="Live StatusBar demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 Main-window footer primitive — a single bar at the bottom of an application window with three regions: a left-aligned hint slot, an absolutely centered measurement slot, and a right-aligned status slot. Follows the macOS footer convention (Xcode, Finder, VS Code) rather than any shadcn/ui component — shadcn does not ship a status bar, since it targets web-first layouts where a persistent footer is rare.
 
 Use `StatusBar` whenever a desktop application needs a persistent footer for navigation hints, live measurements, or process state. The centered region is absolutely positioned within the bar (not flexbox-spaced) so the measurement stays visually centered even when the left or right content grows or shrinks.

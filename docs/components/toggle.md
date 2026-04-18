@@ -1,5 +1,14 @@
 # Toggle
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=toggle"
+        title="Live Toggle demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 An iOS-style switch — animated rounded-full track with a thumb that slides between on and off states. Ports [shadcn/ui v4 Switch](https://ui.shadcn.com/docs/components/switch) with shadcn-accurate geometry, named `Toggle` for pearl-kit roadmap and DALI migration consistency.
 
 ## Import

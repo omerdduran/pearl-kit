@@ -54,6 +54,23 @@ if __name__ == "__main__":
 
 `register_qml()` adds the bundled QML directory to the engine's import path, so `import PearlKit 1.0` resolves correctly.
 
+## Preview the docs locally
+
+The docs site embeds a live WebAssembly gallery inside every component page.
+The bundle is not committed — grab the prebuilt version from the deployed
+site (no toolchain required) and serve the docs:
+
+```bash
+uv sync --all-extras
+./scripts/fetch-wasm.sh         # ~15 MB download, ~10 seconds
+uv run mkdocs serve
+```
+
+If `docs/wasm/` is empty mkdocs still builds, but the iframe previews will 404.
+Only developers modifying files inside `wasm/` need the full Qt for WebAssembly
+toolchain — see [`wasm/README.md`](https://github.com/omerdduran/pearl-kit/blob/main/wasm/README.md)
+for the rebuild path.
+
 ## Switch themes
 
 ```qml

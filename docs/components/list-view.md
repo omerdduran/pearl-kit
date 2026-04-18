@@ -1,5 +1,14 @@
 # ListView
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=list-view"
+        title="Live ListView demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A generic vertical list primitive with shadcn-styled chrome. Use it for implant lists, measurements, recent files, log entries, and any other single-column interactive row display. Renders plain string arrays out of the box; swap in a custom delegate when rows need richer structure.
 
 shadcn/ui does not ship a pure ListView primitive — design values are blended from `Command.Item` (selected/hover accent), `Table.Row` (optional row separators), and `Command` root (rounded card container).

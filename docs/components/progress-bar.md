@@ -1,5 +1,14 @@
 # ProgressBar
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=progress-bar"
+        title="Live ProgressBar demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A thin, pill-shaped horizontal progress indicator. Ports [shadcn/ui v4 Progress](https://ui.shadcn.com/docs/components/progress) with an added `indeterminate` mode for operations of unknown duration.
 
 ## Import

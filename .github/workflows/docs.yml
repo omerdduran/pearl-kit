@@ -6,6 +6,8 @@ on:
     paths:
       - "docs/**"
       - "mkdocs.yml"
+      - "wasm/**"
+      - "src/pearl_kit/qml/**"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
@@ -21,6 +23,12 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Qt 6.6.3 is the last freely-downloadable WASM build from Qt's public
+      # online repo — Qt 6.7+ WASM moved behind Qt Account. emsdk 3.1.37 is
+      # the Emscripten that Qt 6.6 documents; do not bump either in isolation.
+      QT_WASM_VERSION: "6.6.3"
+      EMSDK_VERSION: "3.1.37"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,6 +42,71 @@ jobs:
 
       - name: Sync
         run: uv sync --all-extras --frozen
+
+      # --- WASM gallery build pipeline ---
+      - name: Install Linux build deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ninja-build
+
+      - name: Cache Qt for WebAssembly
+        id: cache-qt
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/Qt
+          key: qt-${{ env.QT_WASM_VERSION }}-linux-wasm-singlethread-v1
+
+      - name: Install Qt for WebAssembly (host + wasm)
+        if: steps.cache-qt.outputs.cache-hit != 'true'
+        run: |
+          pip install aqtinstall==3.3.*
+          # icu archive must be included — Qt 6.6 host tools link libicui18n.so.56
+          # and Ubuntu runners ship libicu70+ which is incompatible.
+          aqt install-qt linux desktop ${QT_WASM_VERSION} \
+            --outputdir ${{ github.workspace }}/Qt \
+            --archives qtbase qtdeclarative qtsvg qtimageformats qtshadertools icu
+          aqt install-qt linux desktop ${QT_WASM_VERSION} wasm_singlethread \
+            --outputdir ${{ github.workspace }}/Qt \
+            --archives qtbase qtdeclarative qtsvg qtimageformats
+
+      - name: Set up emsdk
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: ${{ env.EMSDK_VERSION }}
+          actions-cache-folder: emsdk-cache
+
+      - name: Fetch fonts
+        run: |
+          mkdir -p wasm/fonts
+          curl -fsSL -o wasm/fonts/Inter-Variable.ttf \
+            https://cdn.jsdelivr.net/gh/rsms/inter@v4.0/docs/font-files/InterVariable.ttf
+          curl -fsSL -o wasm/fonts/JetBrainsMono-Regular.ttf \
+            https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@master/fonts/ttf/JetBrainsMono-Regular.ttf
+
+      - name: Build WASM gallery
+        run: |
+          QT_HOST="${{ github.workspace }}/Qt/${QT_WASM_VERSION}/gcc_64"
+          QT_WASM="${{ github.workspace }}/Qt/${QT_WASM_VERSION}/wasm_singlethread"
+          export PATH="${QT_HOST}/bin:${PATH}"
+          # aqtinstall ships qt-cmake without +x; restore it.
+          chmod +x "${QT_HOST}/bin/qt-cmake" "${QT_WASM}/bin/qt-cmake"
+          # qt-cmake wraps emcmake + sets Qt-aware find_package paths.
+          "${QT_WASM}/bin/qt-cmake" -S wasm -B build-wasm -G Ninja \
+            -DQT_HOST_PATH="${QT_HOST}" \
+            -DCMAKE_BUILD_TYPE=Release
+          cmake --build build-wasm
+
+      - name: Stage WASM bundle into docs/
+        run: |
+          mkdir -p docs/wasm
+          for f in pearl_kit_gallery.wasm pearl_kit_gallery.js qtloader.js; do
+            if [ -f "build-wasm/$f" ]; then
+              cp "build-wasm/$f" "docs/wasm/$f"
+            fi
+          done
+          cp wasm/shell.html docs/wasm/pearl_kit_gallery.html
+          echo "--- docs/wasm/ contents ---"
+          ls -lh docs/wasm/
 
       - name: Build docs
         run: uv run mkdocs build --strict --site-dir _site

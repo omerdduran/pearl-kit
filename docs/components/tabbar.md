@@ -1,5 +1,14 @@
 # TabBar
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=tabbar"
+        title="Live TabBar demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A pixel-accurate port of [shadcn/ui](https://ui.shadcn.com/docs/components/tabs)'s Tabs — ships as two public components (`TabBar` + `TabButton`) with pearl-kit extensions for document-mode styling, closable tabs, and content-sized tab strips.
 
 `TabBar` styles shadcn's `TabsList`, `TabButton` styles shadcn's `TabsTrigger`. Content-panel switching is left to the consumer via `StackLayout { currentIndex: tabBar.currentIndex }` — the Qt idiom, no equivalent to React's `TabsContent` is needed.

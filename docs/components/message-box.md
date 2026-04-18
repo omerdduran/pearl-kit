@@ -1,5 +1,14 @@
 # MessageBox
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=message-box"
+        title="Live MessageBox demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 An opinionated modal-message primitive built on top of [Dialog](dialog.md) — four variants (`info`, `warning`, `error`, `confirm`), a tinted badge icon, and auto-generated footer buttons. The pearl-kit equivalent of PyQt6 `QMessageBox`, approximating shadcn/ui's `AlertDialog` composition with a single component call.
 
 ## Import

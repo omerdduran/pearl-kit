@@ -1,5 +1,14 @@
 # Dialog
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=dialog"
+        title="Live Dialog demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A modal popover for focused user interactions — confirmations, forms, notices. Ports [shadcn/ui v4 Dialog](https://ui.shadcn.com/docs/components/dialog) with shadcn-accurate geometry, animations, and overlay semantics.
 
 ## Import

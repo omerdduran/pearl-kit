@@ -1,5 +1,14 @@
 # TextArea
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=textarea"
+        title="Live TextArea demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A pixel-accurate port of [shadcn/ui](https://ui.shadcn.com/docs/components/textarea)'s Textarea. Auto-growing multiline text input with `property bool error`, `property bool mono` for monospace variants, and full keyboard / IME support via `QtQuick.Templates.TextArea`.
 
 ## Import

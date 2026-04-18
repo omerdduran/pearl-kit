@@ -1,5 +1,14 @@
 # StackedView
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=stacked-view"
+        title="Live StackedView demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A layout primitive that shows exactly one of its children at a time — the "content host" half of the classic Sidebar / Tabs + pane pattern. Children stay alive across switches, so their local state (scroll position, input focus, form data) survives every navigation.
 
 `StackedView` is pearl-kit-specific — shadcn/ui has no direct equivalent (its React `Tabs` primitive couples the trigger UI and the pane host into a single tree). pearl-kit splits them so any trigger shape — a Sidebar, a TabBar, a command palette, a programmatic state machine — can drive the same pane host.

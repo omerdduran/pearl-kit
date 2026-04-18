@@ -1,5 +1,14 @@
 # GroupBox
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=group-box"
+        title="Live GroupBox demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A titled section container for grouping related form rows under a heading. Optionally collapsible, with built-in support for an "advanced settings" visibility gate.
 
 shadcn/ui has no direct `GroupBox` primitive — `GroupBox` is a pearl-kit-original composition derived from shadcn `Card` (visual container) and `Accordion` (collapse semantics).

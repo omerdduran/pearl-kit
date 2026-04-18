@@ -1,5 +1,14 @@
 # PearlText
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=pearl-text"
+        title="Live PearlText demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 Typography primitive — renders strings with `variant`-based font, size, weight, and color presets. The most common widget in a pearl-kit app: headings, body copy, form labels, muted annotations, inline code.
 
 The name is deliberately prefixed to avoid shadowing `QtQuick.Text`: under an unqualified `import PearlKit 1.0`, the built-in `Text` element stays resolvable, and the pearl-kit primitive is accessed as `PearlText`.

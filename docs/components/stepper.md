@@ -1,5 +1,14 @@
 # Stepper
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=stepper"
+        title="Live Stepper demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A numeric input with dedicated decrement / increment buttons — `[−]  value  [+]`. Supports integer and floating-point values, custom suffixes (`%`, `px`, `mm`), and a `specialValueText` shown when the value is at its minimum.
 
 Pearl-kit's first deliberate derivative — shadcn/ui does not ship a stepper primitive. The visual language is composed from pearl-kit's `Input` (36 px track, rounded-md, 1 px border) and ghost `Button` (hover accent tint). Behavior mirrors the DALI desktop app's `DaliStepper` / `DaliDoubleStepper`: auto-repeat on hold, clamped at edges, special "Auto" text at the minimum.

@@ -1,5 +1,14 @@
 # DetachableTabView
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=detachable-tabs"
+        title="Live DetachableTabView demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A tab view whose tabs can pop out into floating windows with a custom titlebar and re-dock on close. Pearl-kit-specific — shadcn/ui has no equivalent primitive. Built as a thin orchestrator over `TabBar` + a dynamic `FloatingWindow` dict, preserving each tab's content state across detach / re-dock cycles through a single-parent reparenting strategy.
 
 Ships as three public components: `DetachableTabView` (the orchestrator), `DetachableTab` (declarative tab container), `FloatingWindow` (the frameless floating panel primitive). `FloatingWindow` is reusable standalone for any "pop out an Item into its own window" use case.

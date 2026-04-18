@@ -201,8 +201,16 @@ uv sync --all-extras
 uv run pytest              # full suite (55 tests today)
 uv run ruff check .
 uv run pyright              # strict mode
-uv run mkdocs serve         # live docs preview
+
+./scripts/fetch-wasm.sh    # optional: grab prebuilt live-demo bundle
+uv run mkdocs serve         # live docs preview (with or without the WASM bundle)
 ```
+
+The docs site embeds live component previews compiled to WebAssembly via Qt
+for WebAssembly. `scripts/fetch-wasm.sh` downloads the latest prebuilt bundle
+from the deployed site; if you are editing `wasm/` sources run
+`scripts/build-wasm.sh` instead (requires Qt 6.8 WebAssembly + emsdk 3.1.56 —
+see [`wasm/README.md`](./wasm/README.md)).
 
 Releases are fully automated. Pushing a `v*` tag triggers a GitHub Actions workflow that builds, publishes to PyPI via trusted publishing, and creates a GitHub Release with wheel + sdist + sigstore attestations.
 

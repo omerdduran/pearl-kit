@@ -1,5 +1,14 @@
 # Card
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=card"
+        title="Live Card demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 Elevated surface primitive for grouping related content — a bordered, padded container with an optional left-border accent stripe for status signaling. Use `Card` when you want a neutral container for mixed content; use [`GroupBox`](group-box.md) when you need a built-in title, description, or collapsible header.
 
 ## Import

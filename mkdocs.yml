@@ -76,3 +76,10 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.tabbed:
       alternate_style: true
+
+hooks:
+  - docs/hooks/ensure_wasm.py
+
+exclude_docs: |
+  hooks/
+

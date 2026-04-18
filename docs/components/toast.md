@@ -1,5 +1,14 @@
 # Toast
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=toast"
+        title="Live Toast demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 Sonner-style in-app notifications with an optional `QSystemTrayIcon` bridge for background notifications. Three cooperating pieces: `Toaster` (singleton API), `ToasterHost` (renderer placed inside your `ApplicationWindow`), and `Toast` (the delegate surface used internally — usable standalone if you need to build your own host).
 
 ## Import

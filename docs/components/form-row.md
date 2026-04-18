@@ -1,5 +1,14 @@
 # FormRow
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=form-row"
+        title="Live FormRow demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A horizontal label-and-input primitive with optional hint and error slots per row. Stack several `FormRow`s inside a `ColumnLayout` to build classic desktop settings forms.
 
 shadcn/ui ships `Label`, `Form`, and a set of related form primitives — but shadcn forms always stack vertically (label above input). `FormRow` is a pearl-kit-original layout primitive that lays label and input **side by side** to match desktop form conventions, using shadcn label typography and message colors throughout.

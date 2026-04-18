@@ -1,5 +1,14 @@
 # Slider
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=slider"
+        title="Live Slider demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A port of [shadcn/ui](https://ui.shadcn.com/docs/components/slider)'s Slider — single-thumb continuous value selection with horizontal + vertical orientation and optional tick marks.
 
 ## Import

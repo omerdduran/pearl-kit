@@ -1,5 +1,14 @@
 # Avatar
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=avatar"
+        title="Live Avatar demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A compact circular identity chip for chat UIs, contact lists, and user menus — displays an image, an icon, or initials inside a themed circle. Priority-resolves between the three content sources so a single `Avatar` gracefully falls back from image → icon → initials.
 
 The API is a pixel-accurate port of shadcn/ui's [Avatar](https://ui.shadcn.com/docs/components/avatar) (new-york style, v4 registry), extended with a `variant` property for role-based tinting (assistant vs user in chat) since shadcn's fallback is uniformly `bg-muted`.

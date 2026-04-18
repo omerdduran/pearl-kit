@@ -1,5 +1,14 @@
 # IconStrip
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=icon-strip"
+        title="Live IconStrip demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A 48 px vertical sidebar nav rail with top-anchored main items and bottom-pinned footer items, driven by a JavaScript-array model and a single controlled `activeKey`. Pearl-kit-original — shadcn/ui ships no direct equivalent.
 
 ## Import

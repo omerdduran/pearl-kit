@@ -1,5 +1,14 @@
 # CheckBox
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=checkbox"
+        title="Live CheckBox demo"
+        loading="lazy"
+        width="100%" height="460"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 A two- or three-state checkbox — 16×16 rounded square with an animated check or dash glyph. Ports [shadcn/ui v4 Checkbox](https://ui.shadcn.com/docs/components/checkbox) with a pearl-kit extension for the `tristate` / indeterminate state.
 
 ## Import
