@@ -7,6 +7,12 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-04-18
+
+### Changed
+
+- **Breaking**: `PearlKit.Text` renamed to `PearlKit.PearlText`. The previous `Text` identifier shadowed `QtQuick.Text` under an unqualified `import PearlKit 1.0`, forcing consumers into `import PearlKit 1.0 as P` even for typography-only use. `PearlText` avoids the shadow so pearl-kit typography can be mixed with raw `Text` elements without namespace ceremony. Consumers upgrading from `0.1.0`: replace `P.Text { ... }` with `P.PearlText { ... }` (or use the unqualified `PearlText { ... }` if you only import pearl-kit once). The internal atom `PearlKit.internal.PearlText` was renamed to `PearlKit.internal.PearlBaseText` to free the name; this atom is not part of the public API.
+
 ### Added
 
 - `PearlKit.ScrollArea` — twelfth public component. Scrollable viewport with thin, rounded auto-hiding scrollbars matching shadcn/ui v4 (`w-2.5` track, `p-px` padding, `rounded-full bg-border` thumb). Built on `QtQuick.Templates.ScrollView` with both `ScrollBar.vertical` and `ScrollBar.horizontal` attached properties replaced by custom `T.ScrollBar` instances (inline `contentItem` Rectangle as the thumb, transparent `Item` background, `minimumSize: 0.1` so the thumb stays grabbable on very long content). Single `autoHide: bool` (default `true`) drives Radix-style fade: scrollbar opacity = 0 when `!control.hovered && !bar.active && !bar.hovered`, else 1, transitioned at `Tokens.motion.base` (180 ms) with `Easing.OutCubic`. Thumb color states — idle `Tokens.border`, hover `Tokens.mutedForeground @ 80 %`, pressed `Tokens.mutedForeground` — transition at `Tokens.motion.fast` (150 ms). Requires `QtQuick.Controls` import alongside `QtQuick.Templates` because the `ScrollBar.*` attached property comes from Controls, not Templates. Deliberate divergences from shadcn: no focus-visible ring on the viewport — `T.ScrollView` silently reparents direct children into its internal `Flickable.contentItem`, which would cause `PearlFocusRing` to scroll with content instead of wrapping the viewport; introducing an Item wrapper to hoist the ring would break `Layout.fillWidth` / attached-property ergonomics, so the ring is dropped (keyboard scrolling feedback is carried by the thumbs themselves); hover / pressed thumb tint is pearl-kit-specific (shadcn ships only `bg-border`) because macOS / Windows desktop cursors expect thumb feedback; `minimumSize: 0.1` is a usability addition not present in shadcn / Radix.
