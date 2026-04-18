@@ -8,3 +8,9 @@ Dialog         1.0 Dialog.qml
 CheckBox       1.0 CheckBox.qml
 Stepper        1.0 Stepper.qml
 PearlText      1.0 PearlText.qml
+GroupBox       1.0 GroupBox.qml
+Separator      1.0 Separator.qml
+Card           1.0 Card.qml
+FormRow        1.0 FormRow.qml
+Splitter       1.0 Splitter.qml
+ScrollArea     1.0 ScrollArea.qml

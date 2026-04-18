@@ -41,6 +41,12 @@ nav:
       - CheckBox: components/checkbox.md
       - Stepper: components/stepper.md
       - PearlText: components/pearl-text.md
+      - GroupBox: components/group-box.md
+      - Separator: components/separator.md
+      - Card: components/card.md
+      - FormRow: components/form-row.md
+      - Splitter: components/splitter.md
+      - ScrollArea: components/scroll-area.md
 
 markdown_extensions:
   - admonition

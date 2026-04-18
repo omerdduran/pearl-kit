@@ -1,4 +1,4 @@
-"""pearl-kit gallery — showcases Button, Input, Toggle, Select, CheckBox, Stepper, Text, and Dialog."""
+"""pearl-kit gallery — showcases Button, Input, Toggle, Select, CheckBox, Stepper, Text, Dialog, GroupBox, Separator, Card, FormRow, Splitter, and ScrollArea."""
 
 from __future__ import annotations
 
@@ -18,23 +18,23 @@ import PearlKit 1.0 as P
 
 ApplicationWindow {
     width: 880
-    height: 1280
+    height: 820
     visible: true
     title: "pearl-kit gallery"
     color: P.Tokens.background
 
-    ColumnLayout {
+    ScrollView {
+        id: scrollView
         anchors.fill: parent
-        anchors.margins: 32
-        spacing: 24
+        clip: true
+        padding: 32
+        contentWidth: availableWidth
 
-        Text {
-            text: "Button"
-            color: P.Tokens.foreground
-            font.family: P.Tokens.font.ui
-            font.pixelSize: P.Tokens.font.size.xl
-            font.weight: P.Tokens.font.weight.semibold
-        }
+        ColumnLayout {
+            width: scrollView.availableWidth
+            spacing: 24
+
+        P.PearlText { variant: "title"; text: "Button" }
 
         Flow {
             Layout.fillWidth: true
@@ -65,13 +65,7 @@ ApplicationWindow {
             P.Button { text: "Disabled outline"; variant: "outline"; enabled: false }
         }
 
-        Text {
-            text: "Input"
-            color: P.Tokens.foreground
-            font.family: P.Tokens.font.ui
-            font.pixelSize: P.Tokens.font.size.xl
-            font.weight: P.Tokens.font.weight.semibold
-        }
+        P.PearlText { variant: "title"; text: "Input" }
 
         ColumnLayout {
             Layout.fillWidth: true
@@ -99,13 +93,7 @@ ApplicationWindow {
             }
         }
 
-        Text {
-            text: "Toggle"
-            color: P.Tokens.foreground
-            font.family: P.Tokens.font.ui
-            font.pixelSize: P.Tokens.font.size.xl
-            font.weight: P.Tokens.font.weight.semibold
-        }
+        P.PearlText { variant: "title"; text: "Toggle" }
 
         Flow {
             Layout.fillWidth: true
@@ -118,13 +106,7 @@ ApplicationWindow {
             P.Toggle { enabled: false; checked: true }
         }
 
-        Text {
-            text: "Select"
-            color: P.Tokens.foreground
-            font.family: P.Tokens.font.ui
-            font.pixelSize: P.Tokens.font.size.xl
-            font.weight: P.Tokens.font.weight.semibold
-        }
+        P.PearlText { variant: "title"; text: "Select" }
 
         ColumnLayout {
             Layout.fillWidth: true
@@ -168,13 +150,7 @@ ApplicationWindow {
             }
         }
 
-        Text {
-            text: "CheckBox"
-            color: P.Tokens.foreground
-            font.family: P.Tokens.font.ui
-            font.pixelSize: P.Tokens.font.size.xl
-            font.weight: P.Tokens.font.weight.semibold
-        }
+        P.PearlText { variant: "title"; text: "CheckBox" }
 
         Flow {
             Layout.fillWidth: true
@@ -201,13 +177,7 @@ ApplicationWindow {
             }
         }
 
-        Text {
-            text: "Stepper"
-            color: P.Tokens.foreground
-            font.family: P.Tokens.font.ui
-            font.pixelSize: P.Tokens.font.size.xl
-            font.weight: P.Tokens.font.weight.semibold
-        }
+        P.PearlText { variant: "title"; text: "Stepper" }
 
         ColumnLayout {
             Layout.fillWidth: true
@@ -245,13 +215,7 @@ ApplicationWindow {
             }
         }
 
-        Text {
-            text: "Text"
-            color: P.Tokens.foreground
-            font.family: P.Tokens.font.ui
-            font.pixelSize: P.Tokens.font.size.xl
-            font.weight: P.Tokens.font.weight.semibold
-        }
+        P.PearlText { variant: "title"; text: "Text" }
 
         ColumnLayout {
             Layout.fillWidth: true
@@ -271,13 +235,7 @@ ApplicationWindow {
             }
         }
 
-        Text {
-            text: "Dialog"
-            color: P.Tokens.foreground
-            font.family: P.Tokens.font.ui
-            font.pixelSize: P.Tokens.font.size.xl
-            font.weight: P.Tokens.font.weight.semibold
-        }
+        P.PearlText { variant: "title"; text: "Dialog" }
 
         Flow {
             Layout.fillWidth: true
@@ -288,7 +246,422 @@ ApplicationWindow {
             P.Button { text: "No close button"; variant: "ghost"; onClicked: noCloseDialog.open() }
         }
 
-        Item { Layout.fillHeight: true }
+        P.PearlText { variant: "title"; text: "GroupBox" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            P.GroupBox {
+                Layout.fillWidth: true
+                title: "Notifications"
+                description: "Choose how you'd like to be notified about plan progress."
+
+                P.CheckBox { id: cbEmail; checked: true }
+                Row {
+                    spacing: 8
+                    P.CheckBox { id: cbSms }
+                    P.PearlText {
+                        text: "Text messages"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+            }
+
+            P.GroupBox {
+                id: collapsibleSection
+                Layout.fillWidth: true
+                title: "Appearance"
+                description: "Theme and density preferences."
+                collapsible: true
+                expanded: true
+
+                Row {
+                    spacing: 12
+                    P.PearlText {
+                        text: "Compact density"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    P.Toggle { }
+                }
+                P.Select {
+                    width: 220
+                    model: ["Light", "Dark", "DarkBlue"]
+                }
+            }
+
+            Row {
+                spacing: 12
+                P.PearlText {
+                    text: "Show advanced settings"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                P.Toggle { id: advancedToggle; checked: false }
+            }
+
+            P.GroupBox {
+                Layout.fillWidth: true
+                title: "Advanced — diagnostics"
+                description: "Power-user options. Hidden unless 'Show advanced settings' is enabled."
+                collapsible: true
+                expanded: false
+                advanced: true
+                advancedVisible: advancedToggle.checked
+
+                P.Stepper {
+                    width: 200
+                    from: 0
+                    to: 1000
+                    value: 250
+                    suffix: " ms"
+                }
+                P.CheckBox { id: cbVerbose }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Separator" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.PearlText { variant: "body"; text: "Rows split by horizontal separators" }
+            P.Separator { Layout.fillWidth: true }
+            P.PearlText { variant: "muted"; text: "Second row — note the 1 px divider above." }
+            P.Separator { Layout.fillWidth: true }
+            P.PearlText { variant: "muted"; text: "Third row." }
+
+            Row {
+                spacing: 12
+                height: 24
+                P.PearlText {
+                    text: "File"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                P.Separator {
+                    orientation: "vertical"
+                    height: parent.height
+                }
+                P.PearlText {
+                    text: "Edit"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                P.Separator {
+                    orientation: "vertical"
+                    height: parent.height
+                }
+                P.PearlText {
+                    text: "View"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Card" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            P.Card {
+                Layout.preferredWidth: 420
+                P.PearlText { variant: "heading"; text: "Plan summary" }
+                P.PearlText { variant: "muted"; text: "Default card — border + card background, no accent." }
+            }
+
+            P.Card {
+                Layout.preferredWidth: 420
+                variant: "destructive"
+                P.PearlText { variant: "heading"; text: "Collision detected" }
+                P.PearlText {
+                    variant: "muted"
+                    width: 372
+                    wrapMode: Text.WordWrap
+                    text: "Implant #3 overlaps the mandibular nerve canal. Reposition before export."
+                }
+            }
+
+            P.Card {
+                Layout.preferredWidth: 420
+                variant: "warning"
+                P.PearlText { variant: "heading"; text: "Low bone density" }
+                P.PearlText { variant: "muted"; text: "Region shows HU < 300. Consider alternate drilling protocol." }
+            }
+
+            P.Card {
+                Layout.preferredWidth: 420
+                variant: "success"
+                P.PearlText { variant: "heading"; text: "Export complete" }
+                P.PearlText { variant: "muted"; text: "All 4 implants saved to plan.json." }
+            }
+
+            P.Card {
+                Layout.preferredWidth: 420
+                variant: "info"
+                P.PearlText { variant: "heading"; text: "Beta feature" }
+                P.PearlText { variant: "muted"; text: "Auto-alignment is experimental. Review results before approving." }
+            }
+
+            P.Card {
+                Layout.preferredWidth: 420
+                padding: 16
+                spacing: 8
+                P.PearlText { variant: "label"; text: "Compact" }
+                P.PearlText { variant: "muted"; text: "padding=16, spacing=8 — useful for dense lists." }
+            }
+
+            P.Card {
+                Layout.preferredWidth: 420
+                enabled: false
+                P.PearlText { variant: "heading"; text: "Disabled card" }
+                P.PearlText { variant: "muted"; text: "Fades background and content at 50 % alpha." }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "FormRow" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.maximumWidth: 520
+            spacing: 8
+
+            P.FormRow {
+                Layout.fillWidth: true
+                label: "First name"
+                P.Input { placeholderText: "Jane" }
+            }
+            P.FormRow {
+                Layout.fillWidth: true
+                label: "Email"
+                hint: "We'll never share your address."
+                P.Input { placeholderText: "you@example.com" }
+            }
+            P.FormRow {
+                Layout.fillWidth: true
+                label: "Password"
+                error: "Password is required."
+                P.Input {
+                    placeholderText: "••••••••"
+                    echoMode: TextInput.Password
+                    error: true
+                }
+            }
+            P.FormRow {
+                Layout.fillWidth: true
+                label: "Language"
+                hint: "Interface language for menus and tooltips."
+                P.Select { model: ["English", "Türkçe", "Deutsch"] }
+            }
+            P.FormRow {
+                Layout.fillWidth: true
+                label: "Notifications"
+                P.Toggle { }
+            }
+            P.FormRow {
+                Layout.fillWidth: true
+                label: "Opacity"
+                labelWidth: 100
+                P.Stepper {
+                    from: 0; to: 100; value: 75
+                    suffix: "%"
+                }
+            }
+            P.FormRow {
+                Layout.fillWidth: true
+                label: "API key"
+                enabled: false
+                P.Input { text: "sk-••••••" }
+            }
+            P.FormRow {
+                Layout.fillWidth: true
+                label: "Server endpoint URL"
+                hint: "Label wraps when it exceeds labelWidth."
+                labelWidth: 140
+                P.Input { placeholderText: "https://api.example.com" }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Splitter" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            P.Splitter {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 160
+
+                Rectangle {
+                    SplitView.preferredWidth: 180
+                    SplitView.minimumWidth: 80
+                    color: P.Tokens.muted
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        text: "Sidebar"
+                        variant: "muted"
+                    }
+                }
+                Rectangle {
+                    SplitView.fillWidth: true
+                    color: P.Tokens.card
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        text: "Editor (fill)"
+                        variant: "body"
+                    }
+                }
+                Rectangle {
+                    SplitView.preferredWidth: 140
+                    color: P.Tokens.muted
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        text: "Outline"
+                        variant: "muted"
+                    }
+                }
+            }
+
+            P.Splitter {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 220
+                orientation: Qt.Vertical
+                withHandle: true
+
+                Rectangle {
+                    SplitView.preferredHeight: 120
+                    color: P.Tokens.card
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        text: "Top pane (withHandle)"
+                        variant: "body"
+                    }
+                }
+                Rectangle {
+                    SplitView.fillHeight: true
+                    color: P.Tokens.muted
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        text: "Bottom pane (fill)"
+                        variant: "muted"
+                    }
+                }
+            }
+
+            P.Splitter {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 220
+
+                Rectangle {
+                    SplitView.preferredWidth: 140
+                    color: P.Tokens.muted
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        text: "Files"
+                        variant: "muted"
+                    }
+                }
+
+                P.Splitter {
+                    orientation: Qt.Vertical
+                    SplitView.fillWidth: true
+
+                    Rectangle {
+                        SplitView.fillHeight: true
+                        color: P.Tokens.card
+                        P.PearlText {
+                            anchors.centerIn: parent
+                            text: "Nested — editor"
+                            variant: "body"
+                        }
+                    }
+                    Rectangle {
+                        SplitView.preferredHeight: 80
+                        color: P.Tokens.muted
+                        P.PearlText {
+                            anchors.centerIn: parent
+                            text: "Nested — terminal"
+                            variant: "muted"
+                        }
+                    }
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "ScrollArea" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            P.PearlText {
+                variant: "muted"
+                text: "Auto-hide vertical scroll (hover to reveal thumb)."
+            }
+            P.ScrollArea {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 160
+                Rectangle {
+                    width: 380
+                    height: 520
+                    color: P.Tokens.card
+                    border.color: P.Tokens.border
+                    border.width: 1
+                    radius: P.Tokens.radius.md
+                    Column {
+                        anchors.fill: parent
+                        anchors.margins: 16
+                        spacing: 8
+                        Repeater {
+                            model: 16
+                            P.PearlText { text: "Scrollable row #" + (index + 1) }
+                        }
+                    }
+                }
+            }
+
+            P.PearlText {
+                variant: "muted"
+                text: "Always-visible scrollbars (autoHide: false)."
+            }
+            P.ScrollArea {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 140
+                autoHide: false
+                Rectangle {
+                    width: 900
+                    height: 300
+                    color: P.Tokens.muted
+                    Column {
+                        anchors.centerIn: parent
+                        spacing: 4
+                        P.PearlText { variant: "heading"; text: "Wide + tall content" }
+                        P.PearlText { variant: "muted"; text: "Both scrollbars are persistent." }
+                    }
+                }
+            }
+
+            P.PearlText {
+                variant: "muted"
+                text: "Disabled ScrollArea."
+            }
+            P.ScrollArea {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 100
+                enabled: false
+                Rectangle {
+                    width: 500
+                    height: 300
+                    color: P.Tokens.card
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        variant: "muted"
+                        text: "Disabled — no interaction."
+                    }
+                }
+            }
+        }
+
+        }
     }
 
     P.Dialog {
