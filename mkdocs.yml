@@ -65,6 +65,20 @@ nav:
       - Badge: components/badge.md
       - CodeBlock: components/code-block.md
       - ListView: components/list-view.md
+  - Clinical primitives:
+      - StatusPill: components/status-pill.md
+      - SectionLabel: components/section-label.md
+      - MetaRow: components/meta-row.md
+      - FilterRow: components/filter-row.md
+      - InfoCard: components/info-card.md
+      - SystemInfoGrid: components/system-info-grid.md
+      - TopMetaStrip: components/top-meta-strip.md
+      - BrandTile: components/brand-tile.md
+      - ScannerMark: components/scanner-mark.md
+      - Thumb: components/thumb.md
+      - Render3D: components/render-3d.md
+      - ProgressLine: components/progress-line.md
+      - SearchField: components/search-field.md
 
 markdown_extensions:
   - admonition

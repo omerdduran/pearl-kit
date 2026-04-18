@@ -40,3 +40,16 @@ TextArea       1.0 TextArea.qml
 Badge          1.0 Badge.qml
 CodeBlock      1.0 CodeBlock.qml
 ListView       1.0 ListView.qml
+StatusPill     1.0 StatusPill.qml
+SectionLabel   1.0 SectionLabel.qml
+MetaRow        1.0 MetaRow.qml
+FilterRow      1.0 FilterRow.qml
+InfoCard       1.0 InfoCard.qml
+SystemInfoGrid 1.0 SystemInfoGrid.qml
+TopMetaStrip   1.0 TopMetaStrip.qml
+BrandTile      1.0 BrandTile.qml
+ScannerMark    1.0 ScannerMark.qml
+Thumb          1.0 Thumb.qml
+Render3D       1.0 Render3D.qml
+ProgressLine   1.0 ProgressLine.qml
+SearchField    1.0 SearchField.qml
