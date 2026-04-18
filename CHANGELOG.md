@@ -9,6 +9,14 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- feat: `MetaRow` — new `elideMode: int` (defaults to `Text.ElideNone`) and `valueGap: int` (defaults to `12`) properties. The value `Text` is now anchored between the label and the right edge (previously right-anchored only), so `Text.ElideRight` / `Text.ElideMiddle` properly truncate long values (file paths, procedure names) inside a fixed-width row instead of overflowing the parent. Call sites that do not set `elideMode` keep the previous right-anchored, non-eliding layout. Used by DALI's Case Library `SELECTED STUDY` panel to elide long vendor DICOM paths with a hover tooltip revealing the full value.
+
+### Changed
+
+- `Render3D` — the `bottomLeftLabel` `Text` node is now hidden when `bottomLeftLabel` is set to the empty string. The default value (`"◉ canal detected"`) and all existing behavior are preserved; this just lets consumers opt out of the decorative canal-hint label without editing the component. Used by DALI's Case Library sidebar once a real CBCT render replaces the decorative mockup.
+
+### Added
+
 - feat: `Thumb` and `Render3D` gain an `imageSource: url` property — when set, an `Image { fillMode: PreserveAspectCrop; asynchronous: true; cache: false }` replaces the decorative radial-gradient placeholders (and, on `Render3D`, the faux implant-marker + canal-hint). Labels and borders stay visible so real CBCT thumbnails match the chrome of the Figma placeholder. Empty `imageSource` → legacy mockup look unchanged. Used by DALI to bind VTK-offscreen-rendered CBCT slice / volume thumbnails into the Case Library's SELECTED STUDY panel.
 
 ### Added — Experimental: DALI planning workspace (tranche 1)
@@ -52,6 +60,34 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 - feat: `ChatComposer` — compound `Input` + mono uppercase dark send button. <kbd>Enter</kbd> submits; empty text is ignored; input is cleared on submit. Emits `submitted(text: string)`.
 - feat: `SubjectCard` — balanced-variant compound spec card: mono identifier / tooth meta + serif 18 px brand + mono status chip + 4-column parameter grid + safety strip with tone-colored metrics.
 - feat: `ApproveBar` — footer: mono count label + flex progress bar + outline export button + primary sign button. Sign button disabled until `acknowledged >= total`; flips to green with a signed-sent label when `signed: true`. Emits `exportRequested()` / `signRequested()`.
+
+### Added — Experimental: DALI settings (tranche A — form primitives)
+
+- feat: `SettingsRow` — 2-column settings form row with 200 px label column + optional hint + single control slot + bottom hairline. Stacks label above control when `inline: false`. Taller and more opinionated than stable `FormRow`.
+- feat: `SuffixInput` — `T.TextField` variant with an optional mono right-edge suffix (`MM`, `HU`, `NCM`, `WL HU`, `WW HU`) and a `mono: bool` switch for identifier-style fields (DICOM node, AE title, license number).
+- feat: `StatusToggle` — 34×18 pill toggle with a 14×14 white thumb + mono uppercase status label (default `ON` / `OFF`; security section uses `Enabled` / `Disabled`).
+- feat: `ReadoutSlider` — slider with a 72 px right-aligned mono readout column showing `value unit`. Precision auto: 1 decimal when `stepSize < 1`, integer otherwise. Used for safety thresholds, torque, cache, timeout, font scale.
+
+### Added — Experimental: DALI settings (tranche B — visual atoms)
+
+- feat: `ColorDot` — 22×22 circular color swatch with 2 px white inner border and 1 px outer ring. Emits `clicked()`.
+- feat: `ThemeTile` — 120 px theme picker tile with a 70 px preview rendering a serif `Aa` glyph on the theme's background + mono label below. Active state adds 2 px blue border + 3 px outer glow.
+- feat: `StorageBar` — 3-row disk usage meter: mono label + right-aligned percentage on top, 6 px progress bar in the middle, mono muted caption on the bottom. Auto-computes percentage from `used / total`.
+- feat: `ConnectionStatus` — 8 px glowing dot + mono bold uppercase state label + mono muted caption. States: `online` / `offline` / `error`. Heavier than `SaveIndicator`.
+
+### Added — Experimental: DALI settings (tranche C — layout primitives)
+
+- feat: `SettingsHeader` — page-level section header: mono eyebrow + 28 px serif title + 13 px muted description capped at 640 px. Smaller sibling of `EditorialHero`.
+- feat: `Group` — sub-section container: mono uppercase title + 1 px bottom border + default-property content slot + 32 px outer bottom margin.
+- feat: `NumberedNavItem` — 2-column sidebar nav row: 28 px mono index column + title + subtitle. Active state tints the tile blue (`#EFF6FF` / `#BFDBFE`).
+
+### Added — Experimental: DALI settings (tranche D — compound shells)
+
+- feat: `AvatarStack` — horizontal row of overlapping 34×34 initials avatars with an optional trailing `+` add button. Accepts an array of `{ initials, background, foreground }`.
+- feat: `PlanCard` — tinted horizontal billing card: mono eyebrow + serif title + vertical divider + mono price (with `/ mo` suffix) + outline `UPGRADE` chip. Hardcoded `#EFF6FF` / `#BFDBFE` surface.
+- feat: `SignaturePreview` — 180×54 framed cursive signature preview + outline mono `REDRAW` button. Emits `redrawRequested()` on redraw click.
+- feat: `AuditLogRow` — 3-column audit log entry: mono time (80 px) + mono muted date (90 px) + severity dot (`ok` / `info` / `warn`) + event text. 1 px bottom hairline.
+- feat: `ProfileHeader` — compound: 96×96 gradient avatar with serif initials + corner `+` overlay + vertical block of serif name, muted title, mono 3-slot stats strip (`LICENSE / SINCE / PLANS`).
 
 ### Added
 

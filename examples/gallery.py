@@ -18,7 +18,7 @@ import PearlKit 1.0 as P
 
 ApplicationWindow {
     width: 880
-    height: 2000
+    height: 1200
     visible: true
     title: "pearl-kit gallery"
     color: P.Tokens.background
@@ -1897,6 +1897,561 @@ ApplicationWindow {
                         enabled: false
                         model: ["Read only", "No hover", "No selection"]
                     }
+                }
+            }
+        }
+
+        // ════════════════════════════════════════════════════════
+        // EXPERIMENTAL · DALI planning workspace primitives
+        // ════════════════════════════════════════════════════════
+
+        P.PearlText { variant: "title"; text: "Experimental · Planning — navigation & meta" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.Breadcrumb {
+                segments: [
+                    { label: "Library" },
+                    { label: "2041-04" },
+                    { label: "Planning", current: true }
+                ]
+            }
+
+            Flow {
+                Layout.fillWidth: true
+                spacing: 12
+                P.SegmentedControl {
+                    variant: "pill"
+                    current: "plan"
+                    options: [
+                        { key: "plan", label: "Plan" },
+                        { key: "guide", label: "Guide" },
+                        { key: "review", label: "Review" },
+                        { key: "report", label: "Report" }
+                    ]
+                }
+                P.SegmentedControl {
+                    variant: "bordered"
+                    current: "balanced"
+                    options: [
+                        { key: "dense", label: "DENSE" },
+                        { key: "balanced", label: "BALANCED" },
+                        { key: "editorial", label: "EDITORIAL" }
+                    ]
+                }
+                P.SegmentedControl {
+                    variant: "solid"
+                    columns: 6
+                    current: "10"
+                    options: [
+                        { key: "6",  label: "6" },
+                        { key: "8",  label: "8" },
+                        { key: "10", label: "10" },
+                        { key: "11.5", label: "11.5" },
+                        { key: "13", label: "13" },
+                        { key: "14", label: "14" }
+                    ]
+                }
+            }
+
+            Row {
+                spacing: 24
+                P.SaveIndicator { state: "saved";   text: "Saved \u00b7 14:32" }
+                P.SaveIndicator { state: "saving";  text: "Saving…" }
+                P.SaveIndicator { state: "error";   text: "Sync failed" }
+                P.SaveIndicator { state: "offline"; text: "Offline" }
+            }
+
+            P.PatientStrip {
+                Layout.preferredWidth: 600
+                segments: [
+                    { label: "Library" },
+                    { label: "2041-04" },
+                    { label: "Planning", current: true }
+                ]
+                name: "Y\u0131lmaz, Ay\u015fe"
+                meta: "F 54 \u00b7 #22 Single implant \u00b7 17.04.2026"
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Experimental · Planning — data display" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            Row {
+                spacing: 28
+                P.StatTile { size: "sm"; eyebrow: "IMPLANTS"; value: "2"; subtitle: "#22, #23" }
+                P.StatTile { size: "md"; eyebrow: "STABILITY"; value: "55"; subtitle: "avg. Ncm" }
+                P.StatTile { size: "md"; tone: "warn"; eyebrow: "RISKS"; value: "1"; subtitle: "canal proximity" }
+                P.StatTile { size: "lg"; eyebrow: "GUIDE"; value: "READY"; subtitle: "SLA · 4h queue" }
+            }
+
+            P.DataTable {
+                Layout.preferredWidth: 640
+                columns: [
+                    { key: "id",    label: "ID",     width: 48 },
+                    { key: "tooth", label: "TOOTH",  width: 60 },
+                    { key: "brand", label: "BRAND",  mono: false },
+                    { key: "dia",   label: "Ø MM",   align: "right", width: 56 },
+                    { key: "ian",   label: "IAN",    align: "right", width: 56 }
+                ]
+                rows: [
+                    { id: "I1", tooth: "#22", brand: "Straumann BLT",
+                      dia: "4.1", ian: "3.2", ianColor: "#047857" },
+                    { id: "I2", tooth: "#23", brand: "Straumann BLT",
+                      dia: "3.3", ian: "2.1", ianColor: "#B45309" }
+                ]
+            }
+
+            Flow {
+                Layout.fillWidth: true
+                spacing: 6
+                P.Chip { text: "Compare similar cases" }
+                P.Chip { text: "Risk summary" }
+                P.Chip { text: "Alternative angulation" }
+                P.Chip { variant: "outline"; text: "APPLY TO PLAN \u2192" }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Experimental · Planning — clinical imaging" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            Row {
+                spacing: 2
+                P.ToolButton { label: "Pan";       hotkey: "V" }
+                P.ToolButton { label: "Zoom";      hotkey: "Z" }
+                P.ToolButton { label: "Crosshair"; hotkey: "X"; checked: true }
+                P.ToolButton { label: "Measure";   hotkey: "M" }
+                P.ToolButton { label: "Angle";     hotkey: "A" }
+            }
+
+            Row {
+                spacing: 12
+                P.Viewport2D {
+                    width: 220; height: 220
+                    kind: "axial"
+                    title: "AXIAL"
+                    slice: 142
+                    total: 512
+                }
+                P.Viewport2D {
+                    width: 220; height: 220
+                    kind: "coronal"
+                    title: "CORONAL"
+                    slice: 87
+                    total: 256
+                }
+                P.Viewport2D {
+                    width: 220; height: 220
+                    kind: "sagittal"
+                    title: "SAGITTAL"
+                    slice: 203
+                    total: 512
+                }
+                P.OrientationCube { }
+            }
+
+            ColumnLayout {
+                Layout.preferredWidth: 320
+                spacing: 10
+                P.DensityBar { Layout.preferredWidth: 280; value: 820; from: -200; to: 1600 }
+                P.SafetyRow {
+                    Layout.preferredWidth: 320
+                    label: "Inferior alveolar canal"; value: 3.2; min: 2.0
+                }
+                P.SafetyRow {
+                    Layout.preferredWidth: 320
+                    label: "Maxillary sinus floor"; value: 1.2; min: 1.5
+                }
+                P.BipolarSlider { Layout.preferredWidth: 280; value: 4; range: 15 }
+            }
+
+            ColumnLayout {
+                Layout.preferredWidth: 320
+                spacing: 4
+                P.SubjectRow {
+                    Layout.preferredWidth: 320
+                    identifier: "I1"
+                    title: "#22 \u00b7 Straumann BLT"
+                    caption: "\u00d8 4.1 x 10 mm \u00b7 4\u00b0"
+                    status: "ok"
+                    selected: true
+                }
+                P.SubjectRow {
+                    Layout.preferredWidth: 320
+                    identifier: "I2"
+                    title: "#23 \u00b7 Straumann BLT"
+                    caption: "\u00d8 3.3 x 10 mm \u00b7 6\u00b0"
+                    status: "warn"
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Experimental · Planning — report & checklist" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            Row {
+                spacing: 10
+                P.IconBadge { tone: "info" }
+                P.IconBadge { tone: "warn";    gradient: false }
+                P.IconBadge { tone: "success"; gradient: false }
+                P.IconBadge { tone: "primary"; size: 28; iconSize: 14 }
+            }
+
+            ColumnLayout {
+                Layout.preferredWidth: 540
+                spacing: 0
+                P.ChecklistItem {
+                    Layout.preferredWidth: 540
+                    severity: "warn"
+                    text: "Implant #23 \u00b7 IAN proximity 2.1 mm"
+                    body: "Below 2.5 mm institutional threshold. Recommend \u22122\u00b0 lingual rotation."
+                }
+                P.ChecklistItem {
+                    Layout.preferredWidth: 540
+                    severity: "info"
+                    text: "Implant #22 \u00b7 D2 bone, no concerns"
+                    body: "Primary stability projected 58 Ncm."
+                    checked: true
+                }
+                P.ChecklistItem {
+                    Layout.preferredWidth: 540
+                    severity: "note"
+                    text: "Restorative access \u00b7 #22, #23"
+                    body: "Screw-retained crowns feasible at current angulation."
+                }
+            }
+
+            P.AISuggestionCard {
+                Layout.preferredWidth: 320
+                title: "AI suggests"
+                modelTag: "dali-seg-v3.2"
+                body: "Rotate \u22122\u00b0 lingual to gain 0.6 mm canal clearance while preserving emergence."
+                actionLabel: "Apply suggestion"
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Experimental · Planning — editorial" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            P.EditorialHero {
+                Layout.preferredWidth: 760
+                eyebrow: "REPORT \u00b7 2041-04 \u00b7 17 APRIL 2026"
+                headline: "A dual-implant plan for the upper left quadrant."
+                subLine: "Y\u0131lmaz, Ay\u015fe \u00b7 54 \u00b7 Dr. Kaya, DDS referring \u00b7 MRN 77481-2025."
+            }
+
+            P.SectionNumeral { numeral: "I"; label: "ANATOMY & PLACEMENT" }
+            P.SectionNumeral { numeral: "II"; label: "IMPLANT DETAIL" }
+            P.SectionNumeral { numeral: "III"; label: "ACKNOWLEDGEMENT" }
+
+            P.PullQuote {
+                Layout.preferredWidth: 640
+                text: "Both fixtures seat in D2 bone. Implant #22 holds a comfortable 3.2 mm canal clearance; #23 is tighter at 2.1 mm."
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Experimental · Planning — chat & compounds" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            ColumnLayout {
+                Layout.preferredWidth: 320
+                spacing: 14
+                P.ChatMessage {
+                    Layout.preferredWidth: 320
+                    role: "ai"
+                    author: "DALI"
+                    text: "Plan #2041-04 ready for review. Ask me about bone, safety, alternatives."
+                }
+                P.ChatMessage {
+                    Layout.preferredWidth: 320
+                    role: "user"
+                    author: "DR. KAYA"
+                    text: "What is the bone density around implant #23?"
+                }
+                P.ChatMessage {
+                    Layout.preferredWidth: 320
+                    role: "ai"
+                    author: "DALI"
+                    text: "Yes. \u22122\u00b0 lingual rotation gains 0.6 mm clearance."
+                    actionLabel: "APPLY TO PLAN \u2192"
+                }
+                P.ChatComposer {
+                    Layout.preferredWidth: 320
+                    placeholder: "Ask about bone, safety, alternatives…"
+                }
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 16
+
+                P.SubjectCard {
+                    Layout.preferredWidth: 320
+                    identifier: "I1"
+                    tooth: "#22"
+                    brand: "Straumann BLT"
+                    status: "ok"
+                    parameters: [
+                        { key: "\u00d8 mm",   value: "4.1" },
+                        { key: "Length", value: "10" },
+                        { key: "Angle",  value: "4\u00b0" },
+                        { key: "Bone",   value: "D2" }
+                    ]
+                    metrics: [
+                        { key: "IAN",    value: "3.2 mm", tone: "ok" },
+                        { key: "Sinus",  value: "4.8 mm", tone: "ok" },
+                        { key: "Torque", value: "58 Ncm", tone: "neutral" }
+                    ]
+                }
+
+                P.SubjectCard {
+                    Layout.preferredWidth: 320
+                    identifier: "I2"
+                    tooth: "#23"
+                    brand: "Straumann BLT"
+                    status: "warn"
+                    parameters: [
+                        { key: "\u00d8 mm",   value: "3.3" },
+                        { key: "Length", value: "10" },
+                        { key: "Angle",  value: "6\u00b0" },
+                        { key: "Bone",   value: "D2" }
+                    ]
+                    metrics: [
+                        { key: "IAN",    value: "2.1 mm", tone: "warn" },
+                        { key: "Sinus",  value: "4.4 mm", tone: "ok" },
+                        { key: "Torque", value: "52 Ncm", tone: "neutral" }
+                    ]
+                }
+            }
+
+            P.ApproveBar {
+                Layout.preferredWidth: 720
+                acknowledged: 3
+                total: 5
+            }
+        }
+
+        // ════════════════════════════════════════════════════════
+        // EXPERIMENTAL · DALI settings primitives
+        // ════════════════════════════════════════════════════════
+
+        P.PearlText { variant: "title"; text: "Experimental · Settings — form primitives" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 0
+
+            P.SettingsRow {
+                Layout.preferredWidth: 640
+                label: "Full name"
+                hint: "Shown on reports and the audit trail."
+                P.Input { placeholderText: "Dr. Mehmet Kaya"; width: 320 }
+            }
+            P.SettingsRow {
+                Layout.preferredWidth: 640
+                label: "License number"
+                P.SuffixInput { mono: true; text: "TR-DDS-21487"; width: 240 }
+            }
+            P.SettingsRow {
+                Layout.preferredWidth: 640
+                label: "Bone preset \u00b7 WL/WW"
+                Row {
+                    spacing: 14
+                    P.SuffixInput { mono: true; width: 110; suffix: "WL HU"; text: "400" }
+                    P.SuffixInput { mono: true; width: 110; suffix: "WW HU"; text: "2000" }
+                }
+            }
+            P.SettingsRow {
+                Layout.preferredWidth: 640
+                label: "Auto-segment on case open"
+                P.StatusToggle { checked: true }
+            }
+            P.SettingsRow {
+                Layout.preferredWidth: 640
+                label: "Two-factor authentication"
+                P.StatusToggle { checked: true; labelOn: "Enabled"; labelOff: "Disabled" }
+            }
+            P.SettingsRow {
+                Layout.preferredWidth: 640
+                label: "Canal minimum clearance"
+                P.ReadoutSlider { value: 2.5; from: 1.0; to: 4.0; stepSize: 0.1; unit: "mm" }
+            }
+            P.SettingsRow {
+                Layout.preferredWidth: 640
+                label: "Volume cache"
+                P.ReadoutSlider { value: 64; from: 8; to: 128; stepSize: 8; unit: "GB" }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Experimental · Settings — visual atoms" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            Row {
+                spacing: 10
+                P.ColorDot { color: "#3B82F6" }
+                P.ColorDot { color: "#F87171" }
+                P.ColorDot { color: "#34D399" }
+                P.ColorDot { color: "#F59E0B"; size: 28 }
+            }
+
+            Row {
+                spacing: 10
+                P.ThemeTile {
+                    label: "Light"
+                    previewBackground: "#FFFFFF"
+                    inkColor: "#1A202C"
+                    checked: true
+                }
+                P.ThemeTile {
+                    label: "Dark"
+                    previewBackground: "#0B1120"
+                    inkColor: "#F1F5F9"
+                }
+                P.ThemeTile {
+                    label: "Match system"
+                    previewBackground: "#EEF2F6"
+                    inkColor: "#2563EB"
+                }
+            }
+
+            P.StorageBar {
+                Layout.preferredWidth: 340
+                used: 412
+                total: 1247
+                topLabel: "412 GB used \u00b7 1,247 cases"
+                bottomLabel: "876 GB available \u00b7 1.2 TB total"
+            }
+
+            ColumnLayout {
+                spacing: 8
+                P.ConnectionStatus { state: "online";  caption: "\u00b7 last echo 2s ago" }
+                P.ConnectionStatus { state: "offline"; caption: "\u00b7 reconnecting" }
+                P.ConnectionStatus { state: "error";   caption: "\u00b7 check DICOM node" }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Experimental · Settings — layout primitives" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 20
+
+            P.SettingsHeader {
+                Layout.preferredWidth: 640
+                eyebrow: "02 \u00b7 CLINICAL"
+                title: "Clinical preferences"
+                description: "Defaults applied to every new case. Individual plans can override any value."
+            }
+
+            P.Group {
+                Layout.preferredWidth: 640
+                title: "IMPLANT BRANDS"
+                Text {
+                    text: "(group content slot — place SettingsRow children here)"
+                    color: P.Tokens.mutedForeground
+                    font.family: P.Tokens.font.ui
+                    font.pixelSize: P.Tokens.font.size.sm
+                    anchors.top: parent.top
+                    anchors.topMargin: 40
+                }
+            }
+
+            ColumnLayout {
+                Layout.preferredWidth: 240
+                spacing: 1
+                P.NumberedNavItem {
+                    Layout.preferredWidth: 240
+                    index: "01"; label: "Profile"; subtitle: "Name \u00b7 signature"
+                }
+                P.NumberedNavItem {
+                    Layout.preferredWidth: 240
+                    index: "02"; label: "Clinical preferences"; subtitle: "Brands \u00b7 safety"
+                    checked: true
+                }
+                P.NumberedNavItem {
+                    Layout.preferredWidth: 240
+                    index: "03"; label: "Viewer"; subtitle: "Layout \u00b7 tools"
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Experimental · Settings — compound shells" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 18
+
+            P.ProfileHeader {
+                Layout.preferredWidth: 540
+                initials: "MK"
+                name: "Dr. Mehmet Kaya"
+                title: "Oral & Maxillofacial Surgeon"
+                stats: [
+                    { key: "LICENSE", value: "TR-DDS-21487" },
+                    { key: "SINCE",   value: "MAR 2024" },
+                    { key: "PLANS",   value: "1,247" }
+                ]
+            }
+
+            P.AvatarStack {
+                avatars: [
+                    { initials: "MK", background: "#DBEAFE", foreground: "#1E3A8A" },
+                    { initials: "AS", background: "#FEF3C7", foreground: "#92400E" },
+                    { initials: "EK", background: "#D1FAE5", foreground: "#065F46" }
+                ]
+            }
+
+            P.PlanCard {
+                title: "Solo Clinician"
+                price: "\u20ac180"
+            }
+
+            P.SignaturePreview {
+                text: "M.Kaya"
+                fontFamilyCursive: "Dancing Script"
+            }
+
+            ColumnLayout {
+                Layout.preferredWidth: 520
+                spacing: 0
+                P.AuditLogRow {
+                    Layout.preferredWidth: 520
+                    time: "14:32"; date: "Today"
+                    event: "Signed plan #2041-04 \u00b7 5/5 risks acknowledged"
+                    severity: "ok"
+                }
+                P.AuditLogRow {
+                    Layout.preferredWidth: 520
+                    time: "14:18"; date: "Today"
+                    event: "Applied AI suggestion \u00b7 implant I2 rotated \u22122\u00b0"
+                    severity: "info"
+                }
+                P.AuditLogRow {
+                    Layout.preferredWidth: 520
+                    time: "11:04"; date: "Today"
+                    event: "Logged in \u00b7 biometric \u00b7 macOS"
+                    severity: "info"
+                    showBottomHairline: false
                 }
             }
         }

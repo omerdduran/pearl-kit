@@ -55,6 +55,22 @@ stable Components tab.
 | [ChatComposer](components/chat-composer.md) | Input + mono send button; Enter submits; emits `submitted(text)`. |
 | [SubjectCard](components/subject-card.md) | Compound spec card: header + 4-col param grid + tone-colored safety strip. |
 | [ApproveBar](components/approve-bar.md) | Footer with checklist progress + outline export + primary approve button. |
+| [SettingsRow](components/settings-row.md) | 2-column settings form row with label + hint + control slot + bottom hairline. |
+| [SuffixInput](components/suffix-input.md) | Text input with mono right-edge suffix and optional mono input font. |
+| [StatusToggle](components/status-toggle.md) | 34×18 toggle with mono uppercase status label (ON/OFF, Enabled/Disabled). |
+| [ReadoutSlider](components/readout-slider.md) | One-sided slider with a 72 px mono readout column showing value + unit. |
+| [ColorDot](components/color-dot.md) | 22×22 circular color swatch with inner white border + outer ring. |
+| [ThemeTile](components/theme-tile.md) | 120 px theme picker tile with serif `Aa` preview + mono label. |
+| [StorageBar](components/storage-bar.md) | 3-row disk usage meter (label + %, 6 px bar, muted caption). |
+| [ConnectionStatus](components/connection-status.md) | Glowing status dot + bold uppercase label + caption (ONLINE / OFFLINE / ERROR). |
+| [SettingsHeader](components/settings-header.md) | Page-level mono eyebrow + 28 px serif title + muted description. |
+| [Group](components/group.md) | Mono uppercase sub-section title with 1 px bottom border + content slot. |
+| [NumberedNavItem](components/numbered-nav-item.md) | Sidebar nav row: 2-digit mono index + title + subtitle with active tint. |
+| [AvatarStack](components/avatar-stack.md) | Overlapping initials avatars with optional `+` add affordance. |
+| [PlanCard](components/plan-card.md) | Tinted billing / plan card: eyebrow + serif title + price + outline chip. |
+| [SignaturePreview](components/signature-preview.md) | 180×54 cursive signature frame + outline REDRAW button. |
+| [AuditLogRow](components/audit-log-row.md) | 3-column audit row: time + date + severity dot + event text. |
+| [ProfileHeader](components/profile-header.md) | Compound profile header: gradient avatar + name + title + mono stats strip. |
 
 ## Why these are experimental
 

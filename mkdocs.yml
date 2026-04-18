@@ -104,6 +104,22 @@ nav:
       - ChatComposer: components/chat-composer.md
       - SubjectCard: components/subject-card.md
       - ApproveBar: components/approve-bar.md
+      - SettingsRow: components/settings-row.md
+      - SuffixInput: components/suffix-input.md
+      - StatusToggle: components/status-toggle.md
+      - ReadoutSlider: components/readout-slider.md
+      - ColorDot: components/color-dot.md
+      - ThemeTile: components/theme-tile.md
+      - StorageBar: components/storage-bar.md
+      - ConnectionStatus: components/connection-status.md
+      - SettingsHeader: components/settings-header.md
+      - Group: components/group.md
+      - NumberedNavItem: components/numbered-nav-item.md
+      - AvatarStack: components/avatar-stack.md
+      - PlanCard: components/plan-card.md
+      - SignaturePreview: components/signature-preview.md
+      - AuditLogRow: components/audit-log-row.md
+      - ProfileHeader: components/profile-header.md
 
 markdown_extensions:
   - admonition
