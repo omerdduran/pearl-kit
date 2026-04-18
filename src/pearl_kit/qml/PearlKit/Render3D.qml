@@ -10,6 +10,9 @@ Item {
     property string monoFontFamily: Tokens.font.mono
     property bool showImplantMarker: true
     property bool showCanalHint: true
+    property url imageSource: ""
+
+    readonly property bool _hasImage: imageSource.toString() !== ""
 
     implicitWidth: 300
     implicitHeight: 200
@@ -23,7 +26,18 @@ Item {
         border.width: 1
         clip: true
 
+        Image {
+            anchors.fill: parent
+            source: control.imageSource
+            visible: control._hasImage
+            fillMode: Image.PreserveAspectCrop
+            cache: false
+            asynchronous: true
+            smooth: true
+        }
+
         Rectangle {
+            visible: !control._hasImage
             anchors.centerIn: parent
             width: parent.width * 1.1
             height: parent.height * 1.1
@@ -37,6 +51,7 @@ Item {
         }
 
         Rectangle {
+            visible: !control._hasImage
             x: parent.width * 0.15
             y: parent.height * 0.25
             width: parent.width * 0.7
@@ -52,6 +67,7 @@ Item {
         }
 
         Rectangle {
+            visible: !control._hasImage
             x: parent.width * 0.28
             y: parent.height * 0.38
             width: parent.width * 0.44
@@ -66,7 +82,7 @@ Item {
         }
 
         Rectangle {
-            visible: control.showImplantMarker
+            visible: !control._hasImage && control.showImplantMarker
             width: 4; height: 46; radius: 2
             x: parent.width * 0.42
             y: parent.height * 0.48
@@ -78,7 +94,7 @@ Item {
         }
 
         Rectangle {
-            visible: control.showImplantMarker
+            visible: !control._hasImage && control.showImplantMarker
             width: 8; height: 50; radius: 4
             x: parent.width * 0.42 - 2
             y: parent.height * 0.48 - 2
@@ -87,7 +103,7 @@ Item {
         }
 
         Rectangle {
-            visible: control.showCanalHint
+            visible: !control._hasImage && control.showCanalHint
             x: parent.width * 0.22
             y: parent.height * 0.62
             width: parent.width * 0.54

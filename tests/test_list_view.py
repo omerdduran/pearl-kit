@@ -14,18 +14,12 @@ def _load(qml: bytes) -> QQmlApplicationEngine:
     return engine
 
 
-_DEFAULT = (
-    b"import QtQuick\n"
-    b"import PearlKit 1.0\n"
-    b"ListView {\n"
-    b"    width: 240; height: 240\n"
-    b"}\n"
-)
+_DEFAULT = b"import QtQuick\nimport PearlKit 1.0\nListView {\n    width: 240; height: 240\n}\n"
 
 _STRING_MODEL = (
     b"import QtQuick\n"
     b"import PearlKit 1.0\n"
-    b'ListView {\n'
+    b"ListView {\n"
     b"    width: 240; height: 240\n"
     b'    model: ["Alpha", "Bravo", "Charlie"]\n'
     b"}\n"
@@ -46,7 +40,7 @@ _OBJECT_MODEL = (
 _WITH_INDEX = (
     b"import QtQuick\n"
     b"import PearlKit 1.0\n"
-    b'ListView {\n'
+    b"ListView {\n"
     b"    width: 240; height: 240\n"
     b'    model: ["a", "b", "c"]\n'
     b"    currentIndex: 2\n"

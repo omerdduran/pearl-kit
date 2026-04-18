@@ -8,9 +8,11 @@
 
 This tab collects primitives that were built for the [DALI](https://github.com/omerdduran) clinical-imaging
 launch flow — splash screen, case library, volumetric placeholders, CBCT
-plane pickers — and extracted into pearl-kit so other apps can reuse them.
-They are useful enough to ship, but have not gone through the same shadcn-
-parity review as the stable Components tab.
+plane pickers — plus a second batch extracted from the DALI planning
+workspace (top-bar breadcrumb, tool palette, CBCT viewport surfaces, plan
+rail, risk checklist, approve bar, AI chat panel). They are useful enough
+to ship, but have not gone through the same shadcn-parity review as the
+stable Components tab.
 
 ## What's in here
 
@@ -29,6 +31,30 @@ parity review as the stable Components tab.
 | [Render3D](components/render-3d.md) | Volumetric-render placeholder with implant + canal cues. |
 | [ProgressLine](components/progress-line.md) | 3 px gradient progress strip. |
 | [SearchField](components/search-field.md) | Search field with leading glyph and ⌘K hint pill. |
+| [Breadcrumb](components/breadcrumb.md) | Mono path trail with per-segment color for past / penultimate / current. |
+| [SegmentedControl](components/segmented-control.md) | Pill / bordered / solid grouped picker for mode tabs, variant switches, and compact option grids. |
+| [SaveIndicator](components/save-indicator.md) | Colored dot + mono timestamp for autosave / connection status. |
+| [PatientStrip](components/patient-strip.md) | Compound: back affordance + Breadcrumb + divider + serif name + mono meta. |
+| [StatTile](components/stat-tile.md) | Mono eyebrow + serif numeral + mono subtitle; sm/md/lg sizes, warn/success tones. |
+| [DataTable](components/data-table.md) | Dense PACS-style table with per-cell color / weight overrides. |
+| [Chip](components/chip.md) | Clickable mono pill — soft (tinted) and outline (ink border) variants. |
+| [ToolButton](components/tool-button.md) | 32×32 icon-only palette button with active state and native tooltip. |
+| [Viewport2D](components/viewport-2d.md) | CBCT slice surface — crosshairs, header chip, slice counter, scroll track. |
+| [OrientationCube](components/orientation-cube.md) | 52×52 R/L/S/I anatomical orientation marker. |
+| [DensityBar](components/density-bar.md) | Red→yellow→green→blue gradient bar with a value needle (bone HU, etc). |
+| [SafetyRow](components/safety-row.md) | Per-structure safety-distance row with threshold bar and min caption. |
+| [SubjectRow](components/subject-row.md) | Selectable list row — colored ID square + title + caption + warn dot. |
+| [BipolarSlider](components/bipolar-slider.md) | Symmetric ±range slider with a visible center tick at 0. |
+| [ChecklistItem](components/checklist-item.md) | Tap-to-ack row with checkbox, severity label, title, multi-line body. |
+| [IconBadge](components/icon-badge.md) | 20×20 gradient / solid tinted square holding a small icon. |
+| [AISuggestionCard](components/ai-suggestion-card.md) | Tinted info card with IconBadge + model tag + body + primary button. |
+| [PullQuote](components/pull-quote.md) | Editorial pull-quote — large serif " glyph + italic text. |
+| [EditorialHero](components/editorial-hero.md) | Full-bleed section header with 56 px serif headline + eyebrow + sub-line. |
+| [SectionNumeral](components/section-numeral.md) | Mono uppercase section header with optional roman / arabic prefix. |
+| [ChatMessage](components/chat-message.md) | Chat turn with user / ai styling and optional action chip. |
+| [ChatComposer](components/chat-composer.md) | Input + mono send button; Enter submits; emits `submitted(text)`. |
+| [SubjectCard](components/subject-card.md) | Compound spec card: header + 4-col param grid + tone-colored safety strip. |
+| [ApproveBar](components/approve-bar.md) | Footer with checklist progress + outline export + primary approve button. |
 
 ## Why these are experimental
 

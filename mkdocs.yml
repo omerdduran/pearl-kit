@@ -80,6 +80,30 @@ nav:
       - Render3D: components/render-3d.md
       - ProgressLine: components/progress-line.md
       - SearchField: components/search-field.md
+      - Breadcrumb: components/breadcrumb.md
+      - SegmentedControl: components/segmented-control.md
+      - SaveIndicator: components/save-indicator.md
+      - PatientStrip: components/patient-strip.md
+      - StatTile: components/stat-tile.md
+      - DataTable: components/data-table.md
+      - Chip: components/chip.md
+      - ToolButton: components/tool-button.md
+      - Viewport2D: components/viewport-2d.md
+      - OrientationCube: components/orientation-cube.md
+      - DensityBar: components/density-bar.md
+      - SafetyRow: components/safety-row.md
+      - SubjectRow: components/subject-row.md
+      - BipolarSlider: components/bipolar-slider.md
+      - ChecklistItem: components/checklist-item.md
+      - IconBadge: components/icon-badge.md
+      - AISuggestionCard: components/ai-suggestion-card.md
+      - PullQuote: components/pull-quote.md
+      - EditorialHero: components/editorial-hero.md
+      - SectionNumeral: components/section-numeral.md
+      - ChatMessage: components/chat-message.md
+      - ChatComposer: components/chat-composer.md
+      - SubjectCard: components/subject-card.md
+      - ApproveBar: components/approve-bar.md
 
 markdown_extensions:
   - admonition

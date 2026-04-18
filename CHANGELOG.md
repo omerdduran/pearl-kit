@@ -9,6 +9,52 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- feat: `Thumb` and `Render3D` gain an `imageSource: url` property — when set, an `Image { fillMode: PreserveAspectCrop; asynchronous: true; cache: false }` replaces the decorative radial-gradient placeholders (and, on `Render3D`, the faux implant-marker + canal-hint). Labels and borders stay visible so real CBCT thumbnails match the chrome of the Figma placeholder. Empty `imageSource` → legacy mockup look unchanged. Used by DALI to bind VTK-offscreen-rendered CBCT slice / volume thumbnails into the Case Library's SELECTED STUDY panel.
+
+### Added — Experimental: DALI planning workspace (tranche 1)
+
+- feat: `Breadcrumb` — mono path trail with per-segment color (past / penultimate / current), configurable separator glyph. Extracted from the DALI top-bar breadcrumb.
+- feat: `SegmentedControl` — three-variant grouped picker (`pill` for mode tabs, `bordered` for dense variant switchers, `solid` for compact option grids). Supports `columns: int` for N-column grid layout.
+- feat: `SaveIndicator` — colored dot + mono timestamp for autosave / connection states (`saved` / `saving` / `error` / `offline`).
+- feat: `PatientStrip` — compound: optional back affordance + `Breadcrumb` + vertical divider + serif name + mono meta. 48 px fixed height.
+
+### Added — Experimental: DALI planning workspace (tranche 2)
+
+- feat: `StatTile` — mono eyebrow + serif numeral + mono subtitle summary tile. Three sizes (`sm` / `md` / `lg`) and three tones (`neutral` / `warn` / `success`) for stat strips and editorial spreads.
+- feat: `DataTable` — PACS-style dense table with configurable column schema, fixed or flex-width columns, per-cell color / weight overrides via `<key>Color` / `<key>Weight` row keys.
+- feat: `Chip` — small clickable mono pill with `soft` (tinted) and `outline` (ink-bordered) variants. Interactive `AbstractButton` — emits `clicked`.
+
+### Added — Experimental: DALI planning workspace (tranche 3)
+
+- feat: `ToolButton` — 32×32 icon-only palette button with active (blue-tinted) state and native tooltip (`Label (Hotkey)`). Wraps `T.Button`; toggles `checked` on click and emits `toggled()`.
+- feat: `Viewport2D` — CBCT slice imaging surface (axial / coronal / sagittal) with radial atmospheric gradient, axis-colored crosshairs (`#3B82F6` / `#F87171` / `#34D399`), header chip, slice counter, voxel caption, and optional right-edge slice scroll track. Default-property slot accepts absolute-positioned overlays.
+- feat: `OrientationCube` — 52×52 R/L/S/I anatomical orientation marker with configurable labels and center dot glyph.
+- feat: `DensityBar` — horizontal red→yellow→green→blue gradient bar with a 1 px value needle. Accepts arbitrary `[from, to]` range and unit label (defaults to `HU`).
+- feat: `SafetyRow` — per-structure safety-distance row: label + mono value + 3 px threshold bar with a 50 % min-safety tick + mono caption. Green / amber tone driven by `value >= min`.
+- feat: `SubjectRow` — selectable list row with a colored ID square (28×28), title, mono caption, and optional warn status dot with glow. `AbstractButton` — emits `clicked`.
+- feat: `BipolarSlider` — symmetric ±range slider built on `T.Slider` with a visible center tick and mono `−max · 0 · +max` labels.
+
+### Added — Experimental: DALI planning workspace (tranche 4)
+
+- feat: `ChecklistItem` — tap-to-ack checklist row with 16×16 checkbox (green fill on ack), severity dot + mono label (`ACTION` / `CONFIRM` / `NOTE`), title, wrapped body. Fades row to 60 % opacity when acknowledged; emits `toggled()` on click.
+- feat: `IconBadge` — 20×20 rounded square with gradient or solid tinted fill (`info` / `warn` / `success` / `primary`) and a centered icon. Standalone atom plus building block for `AISuggestionCard`.
+- feat: `AISuggestionCard` — compound tinted card with `IconBadge` header + bold title + mono model tag + wrapped body + primary `Button` action. Hardcoded `#EFF6FF` / `#DBEAFE` to mirror the DALI plan rail exactly.
+
+### Added — Experimental: DALI planning workspace (tranche 5)
+
+- feat: `PullQuote` — editorial pull-quote: large serif `"` glyph + italic wrapped text with a 720 px max-width. Configurable glyph / colors.
+- feat: `EditorialHero` — full-bleed section header with mono uppercase eyebrow + 56 px serif headline (max 720 px) + 15 px UI sub-line (max 680 px) + top-right default-property slot for action affordances.
+- feat: `SectionNumeral` — sibling of `SectionLabel` that preformats a numeral prefix (`I`, `II`, …) joined to the label by ` · ` — mono uppercase 10 px, letter-spacing 1.5.
+
+### Added — Experimental: DALI planning workspace (tranche 6)
+
+- feat: `ChatMessage` — single chat turn with user / ai styling: user = blue mono author label + muted `#F7F8FA` panel bubble; ai = grey label + 2 px left-border text block. Optional outline `Chip` action rendered below the body; emits `action()` on click.
+- feat: `ChatComposer` — compound `Input` + mono uppercase dark send button. <kbd>Enter</kbd> submits; empty text is ignored; input is cleared on submit. Emits `submitted(text: string)`.
+- feat: `SubjectCard` — balanced-variant compound spec card: mono identifier / tooth meta + serif 18 px brand + mono status chip + 4-column parameter grid + safety strip with tone-colored metrics.
+- feat: `ApproveBar` — footer: mono count label + flex progress bar + outline export button + primary sign button. Sign button disabled until `acknowledged >= total`; flips to green with a signed-sent label when `signed: true`. Emits `exportRequested()` / `signRequested()`.
+
+### Added
+
 - feat: clinical primitives for DALI launch flow — `StatusPill` (ready/processing/reviewed/neutral tonal pill with dot), `SectionLabel` (mono uppercase label), `MetaRow` (horizontal key/value display row), `ProgressLine` (3px linear-gradient progress with 55ms tick), `SearchField` (T.TextField with built-in search glyph + ⌘K hint pill).
 - feat: clinical composites — `BrandTile` (gradient tile with tooth glyph), `FilterRow` (selectable list row with 2px state strip + count pill), `InfoCard` (tinted info/warning/success/neutral card), `SystemInfoGrid` (4-col label+value footer with optional status dot), `TopMetaStrip` (hairline meta strip with left/right slots), `ScannerMark` (animated splash mark: rotating dashed ring + solid ring + sweeping arc + white center tile with tooth glyph), `Thumb` (CBCT slice placeholder tile — axial/coronal/sagittal/pano/3d with crosshair), `Render3D` (volumetric placeholder with implant marker + canal hint).
 - feat: `internal/PearlToothIcon` — dental tooth glyph atom used by BrandTile and ScannerMark.

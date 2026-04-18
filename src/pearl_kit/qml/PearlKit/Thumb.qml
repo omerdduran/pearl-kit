@@ -8,7 +8,9 @@ Item {
     // kind: "axial" | "coronal" | "sagittal" | "pano" | "3d"
     property bool accent: false
     property string monoFontFamily: Tokens.font.mono
+    property url imageSource: ""
 
+    readonly property bool _hasImage: imageSource.toString() !== ""
     readonly property string _label: {
         switch (kind) {
             case "coronal":  return "CO"
@@ -25,7 +27,7 @@ Item {
             default:         return "#3B82F6"
         }
     }
-    readonly property bool _showCross: kind !== "3d" && kind !== "pano"
+    readonly property bool _showCross: !_hasImage && kind !== "3d" && kind !== "pano"
 
     implicitWidth: 56
     implicitHeight: 40
@@ -39,7 +41,18 @@ Item {
         border.width: 1
         clip: true
 
+        Image {
+            anchors.fill: parent
+            source: control.imageSource
+            visible: control._hasImage
+            fillMode: Image.PreserveAspectCrop
+            cache: false
+            asynchronous: true
+            smooth: true
+        }
+
         Rectangle {
+            visible: !control._hasImage
             anchors.centerIn: parent
             width: parent.width * 1.3
             height: parent.height * 1.3
@@ -53,6 +66,7 @@ Item {
         }
 
         Rectangle {
+            visible: !control._hasImage
             anchors.centerIn: parent
             width: parent.width * 0.55
             height: parent.height * 0.6
