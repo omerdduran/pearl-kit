@@ -35,6 +35,7 @@ nav:
   - Components:
       - Button: components/button.md
       - Input: components/input.md
+      - TextArea: components/textarea.md
       - Toggle: components/toggle.md
       - Select: components/select.md
       - Dialog: components/dialog.md
@@ -54,6 +55,16 @@ nav:
       - Tooltip: components/tooltip.md
       - Toast: components/toast.md
       - Slider: components/slider.md
+      - StackedView: components/stacked-view.md
+      - TabBar: components/tabbar.md
+      - NavItem: components/nav-item.md
+      - IconStrip: components/icon-strip.md
+      - Menu: components/menu.md
+      - Avatar: components/avatar.md
+      - DetachableTabView: components/detachable-tabs.md
+      - Badge: components/badge.md
+      - CodeBlock: components/code-block.md
+      - ListView: components/list-view.md
 
 markdown_extensions:
   - admonition

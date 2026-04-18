@@ -1,4 +1,4 @@
-"""pearl-kit gallery — showcases Button, Input, Toggle, Select, CheckBox, Stepper, Text, Dialog, MessageBox, GroupBox, Separator, Card, FormRow, Splitter, ScrollArea, ProgressBar, Spinner, StatusBar, Toast, Tooltip, and Slider."""
+"""pearl-kit gallery — showcases Button, Input, TextArea, Toggle, Select, CheckBox, Stepper, Text, Dialog, MessageBox, GroupBox, Separator, Card, FormRow, Splitter, ScrollArea, ProgressBar, Spinner, StatusBar, Toast, Tooltip, Slider, StackedView, NavItem, TabBar, IconStrip, Avatar, Badge, CodeBlock, and the Menu family (MenuBar / Menu / MenuItem / MenuSeparator)."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ import PearlKit 1.0 as P
 
 ApplicationWindow {
     width: 880
-    height: 1200
+    height: 2000
     visible: true
     title: "pearl-kit gallery"
     color: P.Tokens.background
@@ -89,6 +89,53 @@ ApplicationWindow {
                 Layout.preferredWidth: 320
                 placeholderText: "Disabled"
                 text: "read-only value"
+                enabled: false
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "TextArea" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.PearlText { variant: "muted"; text: "Plain — multiline notes" }
+            P.TextArea {
+                Layout.preferredWidth: 420
+                placeholderText: "Clinical notes..."
+            }
+
+            P.PearlText { variant: "muted"; text: "Error state" }
+            P.TextArea {
+                Layout.preferredWidth: 420
+                placeholderText: "Required"
+                text: "too short"
+                error: true
+            }
+
+            P.PearlText { variant: "muted"; text: "Mono — license keys / log viewer" }
+            P.TextArea {
+                Layout.preferredWidth: 420
+                mono: true
+                placeholderText: "XXXX-XXXX-XXXX-XXXX"
+            }
+
+            P.TextArea {
+                Layout.preferredWidth: 420
+                Layout.preferredHeight: 120
+                mono: true
+                readOnly: true
+                text: "[2026-04-18 10:00:01] INFO  boot: app started\n"
+                      + "[2026-04-18 10:00:02] INFO  engine: register_qml ok\n"
+                      + "[2026-04-18 10:00:03] WARN  plan: low density region\n"
+                      + "[2026-04-18 10:00:04] ERROR export: nerve canal collision\n"
+                      + "[2026-04-18 10:00:05] INFO  auto-save: plan.json"
+            }
+
+            P.PearlText { variant: "muted"; text: "Disabled" }
+            P.TextArea {
+                Layout.preferredWidth: 420
+                text: "read-only contents"
                 enabled: false
             }
         }
@@ -1050,6 +1097,806 @@ ApplicationWindow {
                     Layout.preferredHeight: 160
                     from: 0; to: 100; value: 70
                     stepSize: 10; showTicks: true
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "StackedView" }
+
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            ColumnLayout {
+                Layout.alignment: Qt.AlignTop
+                spacing: 4
+                Repeater {
+                    model: ["Home", "Settings", "About"]
+                    delegate: P.Button {
+                        Layout.preferredWidth: 120
+                        text: modelData
+                        variant: stackIndex.currentIndex === index ? "secondary" : "ghost"
+                        onClicked: stackIndex.currentIndex = index
+                    }
+                }
+            }
+
+            P.StackedView {
+                id: stackIndex
+                animated: true
+                Layout.fillWidth: true
+                Layout.preferredHeight: 140
+
+                Rectangle {
+                    radius: P.Tokens.radius.lg
+                    color: P.Tokens.card
+                    border.color: P.Tokens.border
+                    border.width: 1
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        variant: "heading"
+                        text: "Home pane"
+                    }
+                }
+                Rectangle {
+                    radius: P.Tokens.radius.lg
+                    color: P.Tokens.card
+                    border.color: P.Tokens.border
+                    border.width: 1
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        variant: "heading"
+                        text: "Settings pane"
+                    }
+                }
+                Rectangle {
+                    radius: P.Tokens.radius.lg
+                    color: P.Tokens.card
+                    border.color: P.Tokens.border
+                    border.width: 1
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        variant: "heading"
+                        text: "About pane"
+                    }
+                }
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            ColumnLayout {
+                Layout.alignment: Qt.AlignTop
+                spacing: 4
+                Repeater {
+                    model: [
+                        { label: "Inbox",    key: "inbox" },
+                        { label: "Drafts",   key: "drafts" },
+                        { label: "Archive",  key: "archive" }
+                    ]
+                    delegate: P.Button {
+                        Layout.preferredWidth: 120
+                        text: modelData.label
+                        variant: stackKeyed.currentKey === modelData.key ? "secondary" : "ghost"
+                        onClicked: stackKeyed.currentKey = modelData.key
+                    }
+                }
+            }
+
+            P.StackedView {
+                id: stackKeyed
+                animated: true
+                currentKey: "drafts"
+                Layout.fillWidth: true
+                Layout.preferredHeight: 140
+
+                Rectangle {
+                    property string stackKey: "inbox"
+                    radius: P.Tokens.radius.lg
+                    color: P.Tokens.card
+                    border.color: P.Tokens.border
+                    border.width: 1
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        variant: "heading"
+                        text: "Inbox — keyed"
+                    }
+                }
+                Rectangle {
+                    property string stackKey: "drafts"
+                    radius: P.Tokens.radius.lg
+                    color: P.Tokens.card
+                    border.color: P.Tokens.border
+                    border.width: 1
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        variant: "heading"
+                        text: "Drafts — keyed"
+                    }
+                }
+                Rectangle {
+                    property string stackKey: "archive"
+                    radius: P.Tokens.radius.lg
+                    color: P.Tokens.card
+                    border.color: P.Tokens.border
+                    border.width: 1
+                    P.PearlText {
+                        anchors.centerIn: parent
+                        variant: "heading"
+                        text: "Archive — keyed"
+                    }
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "TabBar" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            RowLayout {
+                spacing: 12
+                P.PearlText { variant: "muted"; text: "Default"; Layout.preferredWidth: 110 }
+                P.TabBar {
+                    Layout.preferredWidth: 360
+                    P.TabButton { text: "Overview" }
+                    P.TabButton { text: "Analytics" }
+                    P.TabButton { text: "Reports" }
+                    P.TabButton { text: "Notifications" }
+                }
+            }
+
+            RowLayout {
+                spacing: 12
+                P.PearlText { variant: "muted"; text: "Line"; Layout.preferredWidth: 110 }
+                P.TabBar {
+                    variant: "line"
+                    Layout.preferredWidth: 360
+                    P.TabButton { text: "Code" }
+                    P.TabButton { text: "Issues" }
+                    P.TabButton { text: "Pull requests" }
+                    P.TabButton { text: "Wiki" }
+                }
+            }
+
+            RowLayout {
+                spacing: 12
+                P.PearlText { variant: "muted"; text: "Non-expanding"; Layout.preferredWidth: 110 }
+                P.TabBar {
+                    variant: "line"
+                    expanding: false
+                    Layout.preferredWidth: 500
+                    P.TabButton { text: "report.pdf"; closable: true }
+                    P.TabButton { text: "untitled-1.txt"; closable: true }
+                    P.TabButton { text: "implant-plan.dali"; closable: true }
+                }
+            }
+
+            RowLayout {
+                spacing: 12
+                P.PearlText { variant: "muted"; text: "Disabled"; Layout.preferredWidth: 110 }
+                P.TabBar {
+                    enabled: false
+                    Layout.preferredWidth: 360
+                    P.TabButton { text: "One" }
+                    P.TabButton { text: "Two" }
+                    P.TabButton { text: "Three" }
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "NavItem" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            // 13-tab sidebar example mirroring settings_dialog.py usage
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 24
+
+                Rectangle {
+                    Layout.preferredWidth: 220
+                    Layout.preferredHeight: 13 * 32 + 12 * 4 + 24
+                    color: P.Tokens.muted
+                    radius: P.Tokens.radius.lg
+                    border.color: P.Tokens.border
+                    border.width: 1
+
+                    ColumnLayout {
+                        id: settingsNav
+                        anchors.fill: parent
+                        anchors.margins: 12
+                        spacing: 4
+
+                        property int currentTab: 0
+                        property var labels: [
+                            "General", "Appearance", "Editor", "Files",
+                            "Network", "Privacy", "Updates", "Accounts",
+                            "Shortcuts", "Extensions", "Integrations", "Telemetry",
+                            "About"
+                        ]
+
+                        Repeater {
+                            model: settingsNav.labels
+                            delegate: P.NavItem {
+                                Layout.fillWidth: true
+                                text: modelData
+                                active: index === settingsNav.currentTab
+                                onClicked: settingsNav.currentTab = index
+                            }
+                        }
+                    }
+                }
+
+                P.PearlText {
+                    Layout.alignment: Qt.AlignTop
+                    variant: "muted"
+                    text: "Tab: " + settingsNav.labels[settingsNav.currentTab]
+                }
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 24
+
+                ColumnLayout {
+                    Layout.preferredWidth: 200
+                    spacing: 4
+                    P.PearlText { variant: "muted"; text: "sm" }
+                    P.NavItem { Layout.fillWidth: true; size: "sm"; text: "Compact row" }
+                    P.NavItem { Layout.fillWidth: true; size: "sm"; text: "Active"; active: true }
+                }
+                ColumnLayout {
+                    Layout.preferredWidth: 200
+                    spacing: 4
+                    P.PearlText { variant: "muted"; text: "default" }
+                    P.NavItem { Layout.fillWidth: true; text: "Standard row" }
+                    P.NavItem { Layout.fillWidth: true; text: "Active"; active: true }
+                }
+                ColumnLayout {
+                    Layout.preferredWidth: 200
+                    spacing: 4
+                    P.PearlText { variant: "muted"; text: "lg" }
+                    P.NavItem { Layout.fillWidth: true; size: "lg"; text: "Roomy row" }
+                    P.NavItem { Layout.fillWidth: true; size: "lg"; text: "Active"; active: true }
+                }
+            }
+
+            ColumnLayout {
+                Layout.preferredWidth: 220
+                spacing: 4
+                P.PearlText { variant: "muted"; text: "disabled" }
+                P.NavItem { Layout.fillWidth: true; text: "Inactive disabled"; enabled: false }
+                P.NavItem { Layout.fillWidth: true; text: "Active disabled"; enabled: false; active: true }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "IconStrip" }
+
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 24
+
+            P.IconStrip {
+                Layout.preferredHeight: 360
+                activeKey: stripDemo.activeKey
+                items: [
+                    { key: "viewer",       iconSource: "", label: "View" },
+                    { key: "segmentation", iconSource: "", label: "Segment" },
+                    { key: "implant",      iconSource: "", label: "Implant" },
+                    { key: "analysis",     iconSource: "", label: "Analysis" }
+                ]
+                footerItems: [
+                    { key: "ai",       iconSource: "", label: "AI" },
+                    { key: "settings", iconSource: "", label: "Settings" }
+                ]
+                onItemClicked: function(key) { stripDemo.activeKey = key }
+            }
+
+            QtObject {
+                id: stripDemo
+                property string activeKey: "viewer"
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 8
+                P.PearlText { variant: "heading"; text: "Mode switcher" }
+                P.PearlText { variant: "muted"; text: "Active: " + stripDemo.activeKey }
+                P.PearlText {
+                    variant: "muted"
+                    wrapMode: Text.WordWrap
+                    Layout.preferredWidth: 360
+                    text: "Generic 48 px sidebar nav. items drives the top section, footerItems pins to the bottom, activeKey is controlled by the consumer. Click any tile to re-bind activeKey via the itemClicked(key) signal."
+                }
+            }
+
+            P.IconStrip {
+                Layout.preferredHeight: 280
+                showLabels: false
+                activeKey: "implant"
+                items: [
+                    { key: "viewer",       iconSource: "", label: "View" },
+                    { key: "segmentation", iconSource: "", label: "Segment" },
+                    { key: "implant",      iconSource: "", label: "Implant" }
+                ]
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Avatar" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.PearlText {
+                variant: "muted"
+                text: "Sizes (sm 24 / default 32 / lg 40)"
+            }
+            RowLayout {
+                spacing: 12
+                P.Avatar { size: "sm";      initials: "OD" }
+                P.Avatar { size: "default"; initials: "OD" }
+                P.Avatar { size: "lg";      initials: "OD" }
+            }
+
+            P.PearlText {
+                variant: "muted"
+                text: "Role variants (default / primary / secondary)"
+            }
+            RowLayout {
+                spacing: 12
+                P.Avatar { variant: "default";   initials: "?" }
+                P.Avatar { variant: "primary";   initials: "AI" }
+                P.Avatar { variant: "secondary"; initials: "OD" }
+            }
+
+            P.PearlText {
+                variant: "muted"
+                text: "Chat layout — assistant (primary) vs user (secondary)"
+            }
+            ColumnLayout {
+                spacing: 8
+                RowLayout {
+                    spacing: 8
+                    P.Avatar { variant: "primary"; initials: "AI" }
+                    P.PearlText {
+                        Layout.preferredWidth: 420
+                        wrapMode: Text.WordWrap
+                        text: "Sure — here's how you can wire an Avatar into your chat UI. Pair it with PearlText on the right for the message body."
+                    }
+                }
+                RowLayout {
+                    spacing: 8
+                    P.Avatar { variant: "secondary"; initials: "OD" }
+                    P.PearlText {
+                        Layout.preferredWidth: 420
+                        wrapMode: Text.WordWrap
+                        text: "How do I build a chat view with a role indicator on each row?"
+                    }
+                }
+            }
+
+            P.PearlText {
+                variant: "muted"
+                text: "Disabled (50% opacity)"
+            }
+            RowLayout {
+                spacing: 12
+                P.Avatar { enabled: false; initials: "OD" }
+                P.Avatar { enabled: false; variant: "primary"; initials: "AI" }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Menu" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            P.PearlText {
+                variant: "muted"
+                text: "Inline MenuBar — for real apps, assign to ApplicationWindow.menuBar."
+            }
+
+            P.MenuBar {
+                Layout.fillWidth: true
+                P.Menu {
+                    title: "&File"
+                    P.MenuItem { text: "&New File"; shortcut: "Cmd+N" }
+                    P.MenuItem { text: "&Open...";  shortcut: "Cmd+O" }
+                    P.MenuSeparator {}
+                    P.MenuItem { text: "&Close";    shortcut: "Cmd+W" }
+                    P.MenuItem { text: "&Quit";     shortcut: "Cmd+Q"; variant: "destructive" }
+                }
+                P.Menu {
+                    title: "&View"
+                    P.MenuItem { text: "Show &Toolbar";  checkable: true; checked: true }
+                    P.MenuItem { text: "Show &Sidebar";  checkable: true }
+                    P.MenuSeparator {}
+                    P.MenuItem { text: "&List";    checkable: true; checked: true; radio: true }
+                    P.MenuItem { text: "&Grid";    checkable: true; radio: true }
+                    P.MenuItem { text: "&Gallery"; checkable: true; radio: true }
+                }
+                P.Menu {
+                    title: "&Tools"
+                    P.MenuItem { text: "&Preferences"; shortcut: "Cmd+," }
+                    P.MenuSeparator {}
+                    P.Menu {
+                        title: "&Export"
+                        P.MenuItem { text: "PDF" }
+                        P.MenuItem { text: "PNG" }
+                        P.MenuItem { text: "SVG" }
+                    }
+                }
+                P.Menu {
+                    title: "&Help"
+                    P.MenuItem { text: "&Documentation"; shortcut: "F1" }
+                    P.MenuItem { text: "&About pearl-kit" }
+                }
+            }
+
+            P.PearlText {
+                variant: "muted"
+                text: "Right-click any of the cards below for a context menu."
+            }
+
+            Flow {
+                Layout.fillWidth: true
+                spacing: 12
+
+                Repeater {
+                    model: [
+                        { label: "Document",   hint: "report.pdf" },
+                        { label: "Image",      hint: "scan.png" },
+                        { label: "Archive",    hint: "backup.zip" },
+                        { label: "Annotation", hint: "notes.md" },
+                        { label: "Plan",       hint: "implant.dali" }
+                    ]
+                    delegate: Rectangle {
+                        id: cardRoot
+                        width: 160
+                        height: 72
+                        radius: P.Tokens.radius.md
+                        color: P.Tokens.muted
+                        border.color: P.Tokens.border
+                        border.width: 1
+
+                        ColumnLayout {
+                            anchors.centerIn: parent
+                            spacing: 2
+                            P.PearlText {
+                                Layout.alignment: Qt.AlignHCenter
+                                variant: "label"
+                                text: modelData.label
+                            }
+                            P.PearlText {
+                                Layout.alignment: Qt.AlignHCenter
+                                variant: "muted"
+                                text: modelData.hint
+                            }
+                        }
+
+                        P.Menu {
+                            id: cardMenu
+                            P.MenuItem { text: "&Open"; shortcut: "Enter" }
+                            P.MenuItem { text: "Open in &New Window"; shortcut: "Cmd+Return" }
+                            P.MenuSeparator {}
+                            P.MenuItem { text: "&Copy"; shortcut: "Cmd+C" }
+                            P.MenuItem { text: "C&ut";  shortcut: "Cmd+X" }
+                            P.MenuItem { text: "&Paste"; shortcut: "Cmd+V" }
+                            P.MenuSeparator {}
+                            P.MenuItem { text: "Select &All"; shortcut: "Cmd+A" }
+                            P.MenuSeparator {}
+                            P.MenuItem { text: "&Delete"; shortcut: "Del"; variant: "destructive" }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            acceptedButtons: Qt.RightButton
+                            onClicked: function(mouse) { cardMenu.popup(mouse.x, mouse.y) }
+                        }
+                    }
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Badge" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            Flow {
+                Layout.fillWidth: true
+                spacing: 8
+                P.Badge { text: "Default";     variant: "default" }
+                P.Badge { text: "Secondary";   variant: "secondary" }
+                P.Badge { text: "Destructive"; variant: "destructive" }
+                P.Badge { text: "Outline";     variant: "outline" }
+                P.Badge { text: "Ghost";       variant: "ghost" }
+                P.Badge { text: "Link";        variant: "link" }
+            }
+
+            Flow {
+                Layout.fillWidth: true
+                spacing: 8
+                P.Badge { text: "3 new" }
+                P.Badge { text: "beta";      variant: "outline" }
+                P.Badge { text: "v2.4.0";    variant: "secondary" }
+                P.Badge { text: "failed";    variant: "destructive" }
+                P.Badge { text: "streaming"; variant: "ghost" }
+            }
+
+            Flow {
+                Layout.fillWidth: true
+                spacing: 8
+                P.Badge { text: "Disabled";         enabled: false }
+                P.Badge { text: "Disabled outline"; variant: "outline"; enabled: false }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "CodeBlock" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.CodeBlock {
+                Layout.fillWidth: true
+                Layout.preferredWidth: 520
+                filename: "greet.ts"
+                language: "typescript"
+                code: "const greet = (name: string) => `Hello, ${name}!`\\nconsole.log(greet(\\"world\\"))\\n"
+            }
+
+            P.CodeBlock {
+                Layout.fillWidth: true
+                Layout.preferredWidth: 520
+                filename: "install.sh"
+                language: "bash"
+                code: "$ pip install pearl-kit\\n$ uv run python examples/gallery.py\\n"
+            }
+
+            P.CodeBlock {
+                Layout.fillWidth: true
+                Layout.preferredWidth: 520
+                code: "// no header, no copy button — read-only display\\nreturn 42;\\n"
+                showCopyButton: false
+            }
+
+            P.CodeBlock {
+                Layout.fillWidth: true
+                Layout.preferredWidth: 520
+                filename: "server.py"
+                language: "python"
+                maxBodyHeight: 160
+                code: "from fastapi import FastAPI\\n\\napp = FastAPI()\\n\\n@app.get(\\"/\\")\\ndef read_root():\\n    return {\\"hello\\": \\"world\\"}\\n\\n@app.get(\\"/items/{item_id}\\")\\ndef read_item(item_id: int, q: str | None = None):\\n    return {\\"item_id\\": item_id, \\"q\\": q}\\n\\n# wide line:  this_is_a_very_long_comment_that_should_cause_the_horizontal_scrollbar_to_appear_when_the_content_exceeds_the_viewport_width\\n"
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "DetachableTabView" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 12
+
+            P.PearlText {
+                variant: "muted"
+                text: "Double-click a tab to pop it out to a floating window. Close or dock the window to re-dock."
+            }
+
+            P.DetachableTabView {
+                id: dtv
+                Layout.fillWidth: true
+                Layout.preferredHeight: 220
+                variant: "line"
+
+                P.DetachableTab {
+                    title: "Home"
+                    stackKey: "home"
+                    permanent: true
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: P.Tokens.card
+                        border.color: P.Tokens.border
+                        border.width: 1
+                        radius: P.Tokens.radius.md
+
+                        P.PearlText {
+                            anchors.centerIn: parent
+                            text: "Home — permanent, cannot detach"
+                            variant: "label"
+                        }
+                    }
+                }
+
+                P.DetachableTab {
+                    title: "Viewer"
+                    stackKey: "viewer"
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: P.Tokens.card
+                        border.color: P.Tokens.border
+                        border.width: 1
+                        radius: P.Tokens.radius.md
+
+                        P.PearlText {
+                            anchors.centerIn: parent
+                            text: "Viewer — double-click the tab to detach"
+                            variant: "label"
+                        }
+                    }
+                }
+
+                P.DetachableTab {
+                    title: "Editor"
+                    stackKey: "editor"
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: P.Tokens.card
+                        border.color: P.Tokens.border
+                        border.width: 1
+                        radius: P.Tokens.radius.md
+
+                        P.PearlText {
+                            anchors.centerIn: parent
+                            text: "Editor — also detachable"
+                            variant: "label"
+                        }
+                    }
+                }
+
+                P.DetachableTab {
+                    title: "Settings"
+                    stackKey: "settings"
+                    nonDetachable: true
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: P.Tokens.card
+                        border.color: P.Tokens.border
+                        border.width: 1
+                        radius: P.Tokens.radius.md
+
+                        P.PearlText {
+                            anchors.centerIn: parent
+                            text: "Settings — non-detachable"
+                            variant: "label"
+                        }
+                    }
+                }
+            }
+
+            Row {
+                spacing: 8
+                P.Button {
+                    text: "Detach Viewer"
+                    variant: "outline"
+                    onClicked: dtv.detachTabByKey("viewer")
+                }
+                P.Button {
+                    text: "Close all floating"
+                    variant: "ghost"
+                    onClicked: dtv.closeAllFloating()
+                }
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "ListView" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 16
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 16
+
+                ColumnLayout {
+                    Layout.preferredWidth: 240
+                    spacing: 6
+                    P.PearlText { variant: "muted"; text: "String model (recent files)" }
+                    P.ListView {
+                        Layout.preferredWidth: 240
+                        Layout.preferredHeight: 220
+                        currentIndex: 0
+                        model: [
+                            "plan-2026-04-18.dali",
+                            "scan-left.dcm",
+                            "scan-right.dcm",
+                            "notes.md",
+                            "export.pdf",
+                            "archive.zip"
+                        ]
+                    }
+                }
+
+                ColumnLayout {
+                    Layout.preferredWidth: 300
+                    spacing: 6
+                    P.PearlText { variant: "muted"; text: "Object model with trailing" }
+                    P.ListView {
+                        Layout.preferredWidth: 300
+                        Layout.preferredHeight: 220
+                        model: [
+                            { label: "Implant #1", trailing: "4.2 x 11 mm" },
+                            { label: "Implant #2", trailing: "3.8 x 10 mm" },
+                            { label: "Implant #3", trailing: "5.0 x 13 mm" },
+                            { label: "Implant #4 (locked)", trailing: "—", enabled: false },
+                            { label: "Implant #5", trailing: "4.2 x 12 mm" }
+                        ]
+                    }
+                }
+
+                ColumnLayout {
+                    Layout.preferredWidth: 260
+                    spacing: 6
+                    P.PearlText { variant: "muted"; text: "Separators (log entries)" }
+                    P.ListView {
+                        Layout.preferredWidth: 260
+                        Layout.preferredHeight: 220
+                        showSeparators: true
+                        model: [
+                            "10:00:01 boot: app started",
+                            "10:00:02 engine: ok",
+                            "10:00:03 plan: low density",
+                            "10:00:04 export: collision",
+                            "10:00:05 auto-save: plan.json"
+                        ]
+                    }
+                }
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 16
+
+                ColumnLayout {
+                    Layout.preferredWidth: 280
+                    spacing: 6
+                    P.PearlText { variant: "muted"; text: "Flush inside Card" }
+                    P.Card {
+                        Layout.preferredWidth: 280
+                        padding: 8
+                        P.ListView {
+                            Layout.preferredWidth: 264
+                            Layout.preferredHeight: 180
+                            variant: "flush"
+                            model: ["Apple", "Banana", "Cherry", "Date", "Elderberry"]
+                        }
+                    }
+                }
+
+                ColumnLayout {
+                    Layout.preferredWidth: 240
+                    spacing: 6
+                    P.PearlText { variant: "muted"; text: "Empty state" }
+                    P.ListView {
+                        Layout.preferredWidth: 240
+                        Layout.preferredHeight: 180
+                        emptyText: "No recent files"
+                    }
+                }
+
+                ColumnLayout {
+                    Layout.preferredWidth: 240
+                    spacing: 6
+                    P.PearlText { variant: "muted"; text: "Disabled" }
+                    P.ListView {
+                        Layout.preferredWidth: 240
+                        Layout.preferredHeight: 180
+                        enabled: false
+                        model: ["Read only", "No hover", "No selection"]
+                    }
                 }
             }
         }

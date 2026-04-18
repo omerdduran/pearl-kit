@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick as QQ
 import QtQuick.Controls.Basic as QC
 import QtQuick.Templates as T
 import PearlKit 1.0
@@ -133,7 +134,7 @@ T.ComboBox {
             border.width: 1
         }
 
-        contentItem: ListView {
+        contentItem: QQ.ListView {
             id: listView
             clip: true
             implicitHeight: contentHeight
@@ -155,7 +156,7 @@ T.ComboBox {
     // ---- delegate (item | header | separator via type role)
     delegate: T.ItemDelegate {
         id: item
-        width: ListView.view ? ListView.view.width : implicitWidth
+        width: QQ.ListView.view ? QQ.ListView.view.width : implicitWidth
 
         readonly property string _type: {
             if (model && model.type !== undefined) return model.type
@@ -183,7 +184,7 @@ T.ComboBox {
         enabled: _isItem
         hoverEnabled: _isItem
 
-        readonly property bool _active: _isItem && (ListView.isCurrentItem || hovered)
+        readonly property bool _active: _isItem && (QQ.ListView.isCurrentItem || hovered)
 
         background: Rectangle {
             radius: Tokens.radius.sm

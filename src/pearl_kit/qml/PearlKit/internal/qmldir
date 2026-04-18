@@ -8,3 +8,6 @@ PearlXIcon      1.0 PearlXIcon.qml
 PearlCheckIcon  1.0 PearlCheckIcon.qml
 PearlAlertIcon  1.0 PearlAlertIcon.qml
 PearlToastIcon  1.0 PearlToastIcon.qml
+PearlDockIcon   1.0 PearlDockIcon.qml
+PearlMaximizeIcon 1.0 PearlMaximizeIcon.qml
+PearlCopyIcon   1.0 PearlCopyIcon.qml
