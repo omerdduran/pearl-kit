@@ -53,6 +53,33 @@ Column {
 
 Use `valueMono: true` for IDs, numbers, codes; `valueMono: false` for names and prose.
 
+## Eliding long values
+
+By default `elideMode` is `Text.ElideNone`, so values extend to their natural width and a long string can overflow a fixed-width parent. Set `elideMode` to `Text.ElideRight` or `Text.ElideMiddle` for values whose total length is unbounded (file paths, procedure names) — the value `Text` is anchored between the label and the right edge, so it truncates inside the row instead of pushing past it. Pair with a hover tooltip if the full value is still relevant:
+
+```qml
+P.MetaRow {
+    id: pathRow
+    width: 320
+    label: "PATH"
+    value: "/Volumes/archive/2026/.../case-0042/DICOM/IMG001.dcm"
+    elideMode: Text.ElideMiddle
+
+    ToolTip.visible: hover.containsMouse
+    ToolTip.text: pathRow.value
+    ToolTip.delay: 600
+
+    MouseArea {
+        id: hover
+        anchors.fill: parent
+        hoverEnabled: true
+        acceptedButtons: Qt.NoButton   // don't steal clicks from parent
+    }
+}
+```
+
+`valueGap` (default `12`) controls the horizontal breathing room between the label and the value — raise it if a dense row feels cramped, lower it if a narrow row needs every pixel.
+
 ## Properties
 
 | Property | Type | Default | Description |
@@ -60,6 +87,8 @@ Use `valueMono: true` for IDs, numbers, codes; `valueMono: false` for names and 
 | `label` | `string` | `""` | Left label, rendered mono-uppercase muted. |
 | `value` | `string` | `""` | Right value. |
 | `valueMono` | `bool` | `true` | `true` → mono font, `false` → sans. |
+| `elideMode` | `int` | `Text.ElideNone` | How the value `Text` truncates when it doesn't fit. `Text.ElideRight` / `Text.ElideMiddle` are the useful values for paths and long names. |
+| `valueGap` | `int` | `12` | Horizontal gap (px) between the label's right edge and the value. |
 | `labelColor` | `color` | `#8A93A0` | Override the label color. |
 | `valueColor` | `color` | `#1A202C` | Override the value color. |
 | `monoFontFamily` | `string` | `Tokens.font.mono` | Mono font override. |

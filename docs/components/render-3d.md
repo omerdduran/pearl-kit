@@ -51,13 +51,25 @@ P.Render3D {
 }
 ```
 
+## Hide the bottom-left label
+
+Set `bottomLeftLabel` to the empty string to hide the canal-hint text entirely — useful once a real CBCT render replaces the decorative mockup and the mock label no longer matches the underlying imagery.
+
+```qml
+P.Render3D {
+    imageSource: "file:///.../case-render.png"
+    bottomLeftLabel: ""       // hide the mock "◉ canal detected" glyph
+    showCanalHint: false      // also hide the yellow canal line
+}
+```
+
 ## Properties
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
 | `topLabel` | `string` | `"3D · VOLUMETRIC"` | Top-left label. |
 | `bottomRightLabel` | `string` | `"0.3mm · 512³"` | Bottom-right label. |
-| `bottomLeftLabel` | `string` | `"⊙ canal detected"` | Bottom-left label. |
+| `bottomLeftLabel` | `string` | `"⊙ canal detected"` | Bottom-left label. Set to `""` to hide the `Text` node entirely. |
 | `showImplantMarker` | `bool` | `true` | Toggle the implant marker. |
 | `showCanalHint` | `bool` | `true` | Toggle the canal-hint strip. |
 | `monoFontFamily` | `string` | `Tokens.font.mono` | Label font. |

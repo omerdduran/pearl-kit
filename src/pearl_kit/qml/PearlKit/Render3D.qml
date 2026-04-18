@@ -146,6 +146,7 @@ Item {
 
         Text {
             text: control.bottomLeftLabel
+            visible: control.bottomLeftLabel !== ""
             color: "#34D399"
             font.family: control.monoFontFamily
             font.pixelSize: 9

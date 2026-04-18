@@ -11,6 +11,8 @@ Item {
     property string sansFontFamily: Tokens.font.ui
     property color labelColor: "#8A93A0"
     property color valueColor: "#1A202C"
+    property int elideMode: Text.ElideNone
+    property int valueGap: 12
 
     implicitWidth: _label.implicitWidth + _value.implicitWidth + 24
     implicitHeight: Math.max(_label.implicitHeight, _value.implicitHeight) + 12
@@ -36,8 +38,12 @@ Item {
         color: control.valueColor
         font.family: control.valueMono ? control.monoFontFamily : control.sansFontFamily
         font.pixelSize: 12
+        elide: control.elideMode
+        horizontalAlignment: Text.AlignRight
         renderType: Text.NativeRendering
         antialiasing: true
+        anchors.left: _label.right
+        anchors.leftMargin: control.valueGap
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
     }
