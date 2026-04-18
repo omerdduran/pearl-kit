@@ -117,15 +117,14 @@ T.ComboBox {
 
     // ---- popup
     popup: T.Popup {
-        y: control.height + 4
         x: 0
+        y: control.height + 4
         width: Math.max(control.width, 128)
         implicitHeight: Math.min(
             (contentItem ? contentItem.implicitHeight : 0) + topPadding + bottomPadding,
             320
         )
         padding: 4
-        parent: T.Overlay.overlay
 
         background: Rectangle {
             color: Tokens.popover

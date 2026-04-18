@@ -28,6 +28,8 @@ T.TextField {
     font.pixelSize: Tokens.font.size.sm
     font.weight:    Tokens.font.weight.regular
 
+    verticalAlignment: TextInput.AlignVCenter
+
     // ---- text + placeholder colors (disabled-aware)
     color: control.enabled
         ? Tokens.foreground
