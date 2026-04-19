@@ -22,9 +22,7 @@ def test_rect_select_default_loads() -> None:
 
 
 def test_rect_select_active_mode_loads() -> None:
-    engine = _load(
-        b"import QtQuick\nimport PearlKit 1.0\nRectSelect { active: true }\n"
-    )
+    engine = _load(b"import QtQuick\nimport PearlKit 1.0\nRectSelect { active: true }\n")
     roots = engine.rootObjects()
     assert roots
     assert roots[0].property("active") is True

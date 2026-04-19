@@ -7,6 +7,15 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.4.0] — 2026-04-19
+
+### Fixed
+
+- fix: `DetachableTabView.tabByKey()` now also searches floating tabs. Previously, after a tab was detached and reparented into its `FloatingWindow._contentArea`, it was no longer in `_host.children` — so `tabByKey()` (and therefore `dockTabByKey()`) could not find it, and docking-by-key became a silent no-op. `tabByKey()` now falls back to scanning `_floatingMap[*].content` after exhausting docked tabs.
+- fix: `DetachableTabView._floatingMap` mutations (`map[key] = win`, `delete map[k]`) did not trigger QML property change notifications, so the `floatingCount` binding never re-evaluated after detach / dock / `closeAllFloating()`. Attach / detach / close-all now reassign `_floatingMap` to a new object so the readonly `floatingCount` binding updates correctly.
+- build: exclude `src/pearl_kit/_viewports/_vtk_viewport_item.py` from strict `pyright` because VTK is an optional runtime dependency without type stubs. Narrow `# pyright: ignore[...]` comments on two additional PySide6 stub gaps (`qmlRegisterType` accepting `str` for `qml_name`, `Property("QImage", ...)` accepting the string type name).
+- ci: format-check the four overlay / viewport source files added in the v0.3.0 → v0.4.0 tranche (`_image_viewport_item.py`, `test_angle_arc.py`, `test_rect_select.py`, `test_text_annotation.py`). Unblocks CI on `main`.
+
 ### Added — DALI planning workspace (tranche 4: measurement overlays)
 
 - feat: `RectSelect` — drag-to-select rectangle overlay. When `active: true`, a full-surface MouseArea tracks press-drag-release and renders a live rectangle with orange fill + stroke. On release emits `selected(x1, y1, x2, y2)` in image-space (axis-aligned, min/max normalised). Tiny rects (< 2 px on either axis) emit `cancelled()` instead — avoids accidental single-click triggers. No internal state persists after release.

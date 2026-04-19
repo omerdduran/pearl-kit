@@ -69,6 +69,11 @@ Item {
         for (var i = 0; i < all.length; i++) {
             if (all[i].stackKey === key) return all[i]
         }
+        for (var k in _floatingMap) {
+            var win = _floatingMap[k]
+            var tab = win ? win.content : null
+            if (tab && tab.stackKey === key) return tab
+        }
         return null
     }
 
@@ -107,7 +112,6 @@ Item {
     }
 
     function closeAllFloating() {
-        var remaining = {}
         for (var k in _floatingMap) {
             var win = _floatingMap[k]
             var tab = win ? win.content : null
@@ -121,7 +125,7 @@ Item {
                 win.destroy()
             }
         }
-        _floatingMap = remaining
+        _floatingMap = {}
         _rebuildModel()
         _syncCurrent()
     }
@@ -164,7 +168,10 @@ Item {
         win.dockRequested.connect(function () { _dockItem(tab) })
 
         var key = "__f" + (++_floatingCounter)
-        _floatingMap[key] = win
+        var nextFloating = {}
+        for (var fk in _floatingMap) nextFloating[fk] = _floatingMap[fk]
+        nextFloating[key] = win
+        _floatingMap = nextFloating
         _rebuildModel()
 
         win.show()
@@ -189,7 +196,13 @@ Item {
         for (var k in _floatingMap) {
             if (_floatingMap[k] === win) { removedKey = k; break }
         }
-        if (removedKey !== null) delete _floatingMap[removedKey]
+        if (removedKey !== null) {
+            var nextFloating = {}
+            for (var fk in _floatingMap) {
+                if (fk !== removedKey) nextFloating[fk] = _floatingMap[fk]
+            }
+            _floatingMap = nextFloating
+        }
 
         tab.parent = _host
         tab.isFloating = false

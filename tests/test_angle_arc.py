@@ -25,7 +25,7 @@ def test_angle_arc_default_loads() -> None:
 def test_angle_arc_roundtrip_points() -> None:
     engine = _load(
         b"import QtQuick\nimport PearlKit 1.0\n"
-        b'AngleArc { x1: 10; y1: 20; xv: 50; yv: 60; x2: 110; y2: 30; '
+        b"AngleArc { x1: 10; y1: 20; xv: 50; yv: 60; x2: 110; y2: 30; "
         b'angle: 47.5; label: "47.5\xc2\xb0" }\n'
     )
     roots = engine.rootObjects()

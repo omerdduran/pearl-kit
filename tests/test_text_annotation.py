@@ -33,10 +33,7 @@ def test_text_annotation_roundtrip() -> None:
 
 
 def test_text_annotation_editing_mode_loads() -> None:
-    engine = _load(
-        b"import QtQuick\nimport PearlKit 1.0\n"
-        b"TextAnnotation { editing: true }\n"
-    )
+    engine = _load(b"import QtQuick\nimport PearlKit 1.0\nTextAnnotation { editing: true }\n")
     roots = engine.rootObjects()
     assert roots
     assert roots[0].property("editing") is True

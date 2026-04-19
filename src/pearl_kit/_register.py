@@ -35,8 +35,8 @@ def _register_viewport_types() -> None:
 
     from ._viewports import ImageViewportItem, VTKViewportItem
 
-    qmlRegisterType(VTKViewportItem, "PearlKit.Viewports", 1, 0, "VTKViewportItem")
-    qmlRegisterType(ImageViewportItem, "PearlKit.Viewports", 1, 0, "ImageViewportItem")
+    qmlRegisterType(VTKViewportItem, "PearlKit.Viewports", 1, 0, "VTKViewportItem")  # pyright: ignore[reportCallIssue, reportArgumentType]
+    qmlRegisterType(ImageViewportItem, "PearlKit.Viewports", 1, 0, "ImageViewportItem")  # pyright: ignore[reportCallIssue, reportArgumentType]
 
     _types_registered = True
 

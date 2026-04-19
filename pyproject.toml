@@ -84,7 +84,10 @@ indent-style = "space"
 
 [tool.pyright]
 include = ["src/pearl_kit", "tests"]
-exclude = ["src/pearl_kit/_version.py"]
+exclude = [
+  "src/pearl_kit/_version.py",
+  "src/pearl_kit/_viewports/_vtk_viewport_item.py",
+]
 typeCheckingMode = "strict"
 pythonVersion = "3.11"
 venvPath = "."

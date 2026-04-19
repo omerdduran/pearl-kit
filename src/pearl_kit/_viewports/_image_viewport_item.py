@@ -141,7 +141,7 @@ class ImageViewportItem(QQuickPaintedItem):
     #: QML-bindable alias for :meth:`set_frame`. Enables declarative
     #: ``frame: myQImage`` bindings without the QML wrapper needing an
     #: explicit ``onFrameChanged`` handler.
-    frame = Property("QImage", _get_frame, _set_frame_property, notify=frameChanged)
+    frame = Property("QImage", _get_frame, _set_frame_property, notify=frameChanged)  # pyright: ignore[reportArgumentType]
 
     def _get_zoom(self) -> float:
         return self._zoom
@@ -207,14 +207,19 @@ class ImageViewportItem(QQuickPaintedItem):
         if self._frame is None or self._frame.isNull():
             logger.debug(
                 "ImageViewportItem[%s].paint: no frame (bounding=%.0fx%.0f)",
-                self._plane, rect.width(), rect.height(),
+                self._plane,
+                rect.width(),
+                rect.height(),
             )
             return
 
         logger.debug(
             "ImageViewportItem[%s].paint: rect=%.0fx%.0f frame=%dx%d",
-            self._plane, rect.width(), rect.height(),
-            self._frame.width(), self._frame.height(),
+            self._plane,
+            rect.width(),
+            rect.height(),
+            self._frame.width(),
+            self._frame.height(),
         )
         painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform, True)
         # ``setWorldTransform(.., combine=True)`` preserves the painter's
