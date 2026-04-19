@@ -70,6 +70,7 @@ class ImageViewportItem(QQuickPaintedItem):
     planeChanged = Signal()  # noqa: N815
     fitOnChangeChanged = Signal()  # noqa: N815
     backgroundColorChanged = Signal()  # noqa: N815
+    frameChanged = Signal()  # noqa: N815
 
     def __init__(self, parent: Any = None) -> None:
         super().__init__(parent)
@@ -131,6 +132,17 @@ class ImageViewportItem(QQuickPaintedItem):
         QColor, _get_bg_color, _set_bg_color, notify=backgroundColorChanged
     )
 
+    def _get_frame(self) -> QImage | None:
+        return self._frame
+
+    def _set_frame_property(self, image: QImage | None) -> None:
+        self.set_frame(image)
+
+    #: QML-bindable alias for :meth:`set_frame`. Enables declarative
+    #: ``frame: myQImage`` bindings without the QML wrapper needing an
+    #: explicit ``onFrameChanged`` handler.
+    frame = Property("QImage", _get_frame, _set_frame_property, notify=frameChanged)
+
     # ------------------------------------------------------------------
     # Public API — consumer drives the frame
     # ------------------------------------------------------------------
@@ -147,6 +159,7 @@ class ImageViewportItem(QQuickPaintedItem):
             self._zoom = 1.0
             self._pan = QPointF(0.0, 0.0)
             self.zoomChanged.emit(self._effective_zoom_percent())
+        self.frameChanged.emit()
         self.update()
 
     def current_frame(self) -> QImage | None:
