@@ -43,7 +43,7 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from PySide6.QtCore import Property, QPointF, Qt, Signal
+from PySide6.QtCore import Property, QPointF, Qt, Signal, Slot
 from PySide6.QtGui import QColor, QImage, QMouseEvent, QPainter, QTransform, QWheelEvent
 from PySide6.QtQuick import QQuickPaintedItem
 
@@ -134,8 +134,14 @@ class ImageViewportItem(QQuickPaintedItem):
     # ------------------------------------------------------------------
     # Public API — consumer drives the frame
     # ------------------------------------------------------------------
+    @Slot("QImage")
     def set_frame(self, image: QImage | None) -> None:
-        """Set the displayed frame. Pass None to clear."""
+        """Set the displayed frame. Pass None to clear.
+
+        Exposed as a Qt slot so QML bindings can call it directly
+        (e.g. ``onFrameChanged: _img.set_frame(control.frame)`` inside
+        the ``ImageViewport`` QML wrapper).
+        """
         self._frame = image.copy() if image is not None else None
         if self._fit_on_change:
             self._zoom = 1.0
