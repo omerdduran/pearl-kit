@@ -71,6 +71,16 @@ stable Components tab.
 | [SignaturePreview](components/signature-preview.md) | 180×54 cursive signature frame + outline REDRAW button. |
 | [AuditLogRow](components/audit-log-row.md) | 3-column audit row: time + date + severity dot + event text. |
 | [ProfileHeader](components/profile-header.md) | Compound profile header: gradient avatar + name + title + mono stats strip. |
+| [StepCircles](components/step-circles.md) | Horizontal step indicator — 24×24 numbered circles + connectors, 3 label modes (`active` / `all` / `none`). |
+| [StepRail](components/step-rail.md) | Vertical step list for the editorial-shell left rail — circle column + label/sub column with active halo. |
+| [FeatureBullet](components/feature-bullet.md) | Welcome-step row — 32×32 outlined icon square + medium title + optional description. |
+| [SignaturePad](components/signature-pad.md) | Profile-step "Tap to sign" affordance — dashed pad + side `OPEN CANVAS` / `REDRAW` button. |
+| [SampleCasePreview](components/sample-case-preview.md) | Dark hero rectangle — gradients + faux volumetric blob + N implant marker bars + mono chips. |
+| [FactGrid](components/fact-grid.md) | N-column stat grid — bordered container with 1 px hairlines, mono key + medium value + sub per cell. |
+| [SettingsToggleCard](components/settings-toggle-card.md) | Toggle row card — title + badge + description + Toggle, with `highlighted` / `locked` modifiers. |
+| [SummaryGrid](components/summary-grid.md) | Grey-surface card — mono eyebrow + N-column key-value grid with per-entry value color overrides. |
+| [SampleCaseCard](components/sample-case-card.md) | Composite case card — `SampleCasePreview` hero + meta block + N metric chips. |
+| [OnboardingNavFooter](components/onboarding-nav-footer.md) | Footer band — back / counter / skip / secondary outline / primary CTA cluster. |
 
 ## Why these are experimental
 

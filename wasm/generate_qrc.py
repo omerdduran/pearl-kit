@@ -7,6 +7,7 @@ Walks src/pearl_kit/qml/PearlKit/ and emits a Qt resource file bundling:
   - the per-component demo files under wasm/demos/, under prefix /demos/
   - bundled fonts under wasm/fonts/, under prefix /fonts/
 """
+
 from __future__ import annotations
 
 import argparse

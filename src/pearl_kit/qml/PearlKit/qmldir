@@ -101,3 +101,13 @@ PlanCard       1.0 PlanCard.qml
 SignaturePreview 1.0 SignaturePreview.qml
 AuditLogRow    1.0 AuditLogRow.qml
 ProfileHeader  1.0 ProfileHeader.qml
+StepCircles    1.0 StepCircles.qml
+StepRail       1.0 StepRail.qml
+FeatureBullet  1.0 FeatureBullet.qml
+SignaturePad   1.0 SignaturePad.qml
+SampleCasePreview 1.0 SampleCasePreview.qml
+FactGrid       1.0 FactGrid.qml
+SettingsToggleCard 1.0 SettingsToggleCard.qml
+SummaryGrid    1.0 SummaryGrid.qml
+SampleCaseCard 1.0 SampleCaseCard.qml
+OnboardingNavFooter 1.0 OnboardingNavFooter.qml

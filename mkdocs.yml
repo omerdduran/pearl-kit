@@ -120,6 +120,16 @@ nav:
       - SignaturePreview: components/signature-preview.md
       - AuditLogRow: components/audit-log-row.md
       - ProfileHeader: components/profile-header.md
+      - StepCircles: components/step-circles.md
+      - StepRail: components/step-rail.md
+      - FeatureBullet: components/feature-bullet.md
+      - SignaturePad: components/signature-pad.md
+      - SampleCasePreview: components/sample-case-preview.md
+      - FactGrid: components/fact-grid.md
+      - SettingsToggleCard: components/settings-toggle-card.md
+      - SummaryGrid: components/summary-grid.md
+      - SampleCaseCard: components/sample-case-card.md
+      - OnboardingNavFooter: components/onboarding-nav-footer.md
 
 markdown_extensions:
   - admonition

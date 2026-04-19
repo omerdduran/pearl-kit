@@ -2456,6 +2456,149 @@ ApplicationWindow {
             }
         }
 
+        // ════════════════════════════════════════════════════════
+        // EXPERIMENTAL · DALI onboarding primitives
+        // ════════════════════════════════════════════════════════
+
+        P.PearlText { variant: "title"; text: "Experimental · Onboarding — atoms" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 18
+
+            P.StepCircles {
+                Layout.preferredWidth: 560
+                currentIndex: 1
+                labelMode: "active"
+                model: [
+                    { n: "01", label: "Welcome",   sub: "Get started" },
+                    { n: "02", label: "Profile",   sub: "Who you are" },
+                    { n: "03", label: "Clinical",  sub: "Your defaults" },
+                    { n: "04", label: "AI & data", sub: "Privacy" },
+                    { n: "05", label: "Ready",     sub: "Sample case" }
+                ]
+            }
+
+            P.StepRail {
+                Layout.preferredWidth: 280
+                currentIndex: 2
+                model: [
+                    { n: "01", label: "Welcome",   sub: "Get started"   },
+                    { n: "02", label: "Profile",   sub: "Who you are"   },
+                    { n: "03", label: "Clinical",  sub: "Your defaults" },
+                    { n: "04", label: "AI & data", sub: "Privacy"       },
+                    { n: "05", label: "Ready",     sub: "Sample case"   }
+                ]
+            }
+
+            ColumnLayout {
+                Layout.preferredWidth: 480
+                spacing: 12
+
+                P.FeatureBullet {
+                    title: "AI segmentation"
+                    description: "Bones, nerves, sinuses auto-detected from CBCT volumes."
+                }
+                P.FeatureBullet {
+                    title: "Safety thresholds"
+                    description: "Per-structure clearance bands flag sub-min plans."
+                }
+                P.FeatureBullet {
+                    title: "Guide export"
+                    description: "STL surgical guides direct to milling vendors."
+                }
+            }
+
+            P.SignaturePad {
+                Layout.preferredWidth: 480
+            }
+
+            P.SignaturePad {
+                Layout.preferredWidth: 480
+                signed: true
+                signatureText: "M.Kaya"
+            }
+
+            P.SampleCasePreview {
+                Layout.preferredWidth: 480
+                topRightLabel: "142 / 512"
+            }
+        }
+
+        P.PearlText { variant: "title"; text: "Experimental · Onboarding — compositions" }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            spacing: 18
+
+            P.FactGrid {
+                Layout.preferredWidth: 540
+                model: [
+                    { key: "5 MIN",  value: "Typical setup",      sub: "Skip anything optional" },
+                    { key: "LOCAL",  value: "Data stays local",   sub: "HIPAA / KVKK default" },
+                    { key: "1,247",  value: "Clinicians onboarded", sub: "23 countries" },
+                    { key: "3.2.1",  value: "Clinical build",     sub: "License valid to 2027-04" }
+                ]
+            }
+
+            P.SettingsToggleCard {
+                Layout.preferredWidth: 540
+                title: "HIPAA / KVKK compliance mode"
+                description: "All DICOM data remains on the workstation. Only anonymized summaries leave the device for AI reasoning."
+                badgeText: "RECOMMENDED"
+                checked: true
+                highlighted: true
+            }
+
+            P.SettingsToggleCard {
+                Layout.preferredWidth: 540
+                title: "Send volumes to cloud for heavy inference"
+                description: "Disabled while compliance mode is on. All inference runs locally on your GPU."
+                checked: false
+                locked: true
+            }
+
+            P.SummaryGrid {
+                Layout.preferredWidth: 540
+                model: [
+                    { key: "NAME",       value: "Dr. Mehmet Kaya" },
+                    { key: "LICENSE",    value: "TR-DDS-21487" },
+                    { key: "BRAND",      value: "STRAUMANN BLT" },
+                    { key: "CANAL MIN",  value: "2.5 mm" },
+                    { key: "COMPLIANCE", value: "HIPAA/KVKK ON", valueColor: "#047857" },
+                    { key: "REGION",     value: "EU-CENTRAL" }
+                ]
+            }
+
+            P.SampleCaseCard {
+                Layout.preferredWidth: 540
+                title: "Demo \u00b7 Y\u0131lmaz, Ay\u015fe"
+                caseId: "#0000-00"
+                metaText: "MANDIBLE \u00b7 TOOTH 36/37 \u00b7 2 IMPLANTS \u00b7 STRAUMANN BLT"
+                previewTopRightLabel: "142 / 512"
+                metrics: [
+                    { key: "SAFETY",  value: "5 / 5 OK", valueColor: "#047857" },
+                    { key: "CANAL",   value: "3.2 mm" },
+                    { key: "AI TOUR", value: "Enabled",  valueColor: "#2563EB" }
+                ]
+            }
+
+            P.OnboardingNavFooter {
+                Layout.preferredWidth: 640
+                currentStep: 3
+                totalSteps: 5
+                canSkip: true
+            }
+
+            P.OnboardingNavFooter {
+                Layout.preferredWidth: 640
+                currentStep: 5
+                totalSteps: 5
+                secondaryText: "GO TO LIBRARY"
+                primaryText: "Open sample case \u2192"
+            }
+        }
+
         }
     }
 

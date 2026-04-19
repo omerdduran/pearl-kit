@@ -1,5 +1,14 @@
 # StorageBar
 
+<!-- pearl-demo:start -->
+<iframe class="pearl-demo"
+        src="../../wasm/pearl_kit_gallery.html?demo=storage-bar"
+        title="Live StorageBar demo"
+        loading="lazy"
+        width="100%" height="320"
+        style="border:1px solid var(--md-default-fg-color--lightest);border-radius:8px;background:transparent;margin:16px 0 24px 0;"></iframe>
+<!-- pearl-demo:end -->
+
 !!! warning "Experimental"
     This component is in the experimental tab — its API and visual design
     may change without a deprecation cycle. See [Experimental overview](../experimental.md)
