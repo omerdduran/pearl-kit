@@ -65,6 +65,7 @@ Viewport2D     1.0 Viewport2D.qml
 VTKViewport    1.0 VTKViewport.qml
 ImageViewport  1.0 ImageViewport.qml
 OrientationCube 1.0 OrientationCube.qml
+AngleArc       1.0 AngleArc.qml
 Crosshair      1.0 Crosshair.qml
 DistanceLine   1.0 DistanceLine.qml
 ImplantMarker  1.0 ImplantMarker.qml
