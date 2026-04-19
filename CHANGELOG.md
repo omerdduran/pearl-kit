@@ -7,6 +7,10 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added — DALI planning workspace (tranche 4: measurement overlays)
+
+- feat: `DistanceLine` — 2D distance measurement overlay for `ImageViewport`. Renders a line between two image-space points with an axis-aligned midpoint label chip (`"12.3 mm"`) and a 14 px circular delete button next to it. Preview mode (`preview: true`) draws a dashed rubber-band stroke without the delete affordance, suitable for the interim line shown between the first and second click. Emits `removed()` and `clicked()`. Used by DALI's planning workspace when the measure tool is active.
+
 ### Added — Experimental: DALI onboarding (tranche 1)
 
 - feat: `StepCircles` — horizontal step indicator with 24×24 numbered circles, hairline connectors, and `labelMode: "active" | "all" | "none"`. Done steps render a check, active step gets accent border + accent number, upcoming steps stay neutral. Emits `stepClicked(int)` for any reachable step. Used in the compact onboarding-card header.
