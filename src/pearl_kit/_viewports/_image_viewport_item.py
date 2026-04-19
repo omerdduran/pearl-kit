@@ -154,6 +154,15 @@ class ImageViewportItem(QQuickPaintedItem):
         (e.g. ``onFrameChanged: _img.set_frame(control.frame)`` inside
         the ``ImageViewport`` QML wrapper).
         """
+        logger.info(
+            "ImageViewportItem[%s] set_frame: image=%s size=%dx%d self_size=%.0fx%.0f",
+            self._plane,
+            type(image).__name__ if image is not None else "None",
+            image.width() if image is not None else -1,
+            image.height() if image is not None else -1,
+            self.width(),
+            self.height(),
+        )
         self._frame = image.copy() if image is not None else None
         if self._fit_on_change:
             self._zoom = 1.0
@@ -187,8 +196,17 @@ class ImageViewportItem(QQuickPaintedItem):
         painter.fillRect(rect, self._bg_color)
 
         if self._frame is None or self._frame.isNull():
+            logger.debug(
+                "ImageViewportItem[%s].paint: no frame (bounding=%.0fx%.0f)",
+                self._plane, rect.width(), rect.height(),
+            )
             return
 
+        logger.info(
+            "ImageViewportItem[%s].paint: rect=%.0fx%.0f frame=%dx%d",
+            self._plane, rect.width(), rect.height(),
+            self._frame.width(), self._frame.height(),
+        )
         painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform, True)
         transform = self._compute_transform()
         painter.setTransform(transform)

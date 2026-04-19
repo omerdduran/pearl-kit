@@ -50,7 +50,11 @@ Item {
     implicitWidth: 240
     implicitHeight: 240
 
-    onFrameChanged: if (_img && control.frame) _img.set_frame(control.frame)
+    onFrameChanged: {
+        console.log("[ImageViewport", control.plane, "] onFrameChanged:",
+                    control.frame, "_img:", _img)
+        if (_img && control.frame) _img.set_frame(control.frame)
+    }
 
     Rectangle {
         anchors.fill: parent

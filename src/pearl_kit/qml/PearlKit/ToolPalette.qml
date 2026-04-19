@@ -56,6 +56,7 @@ Rectangle {
                 model: control.tools
                 delegate: ToolButton {
                     iconSource: modelData.icon || ""
+                    iconKey: modelData.iconKey || modelData.key || ""
                     label: modelData.label || ""
                     hotkey: modelData.hotkey || ""
                     checked: control.currentTool === modelData.key

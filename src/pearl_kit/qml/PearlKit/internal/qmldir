@@ -12,3 +12,6 @@ PearlDockIcon   1.0 PearlDockIcon.qml
 PearlMaximizeIcon 1.0 PearlMaximizeIcon.qml
 PearlCopyIcon   1.0 PearlCopyIcon.qml
 PearlToothIcon  1.0 PearlToothIcon.qml
+PearlNavigateIcon 1.0 PearlNavigateIcon.qml
+PearlMeasureIcon  1.0 PearlMeasureIcon.qml
+PearlPlanIcon     1.0 PearlPlanIcon.qml
