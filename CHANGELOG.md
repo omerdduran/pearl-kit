@@ -9,6 +9,8 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ### Added — DALI planning workspace (tranche 4: measurement overlays)
 
+- feat: `Arrow` — 2-point arrow annotation overlay. Shape + PathLine shaft + filled triangular head. Preview mode drops the head and switches to dashed. Includes inline "×" delete button near the head. Emits `removed()` and `clicked()`.
+- feat: `TextAnnotation` — anchored text label at image-space `(x_pos, y_pos)`. Two modes: `editing: true` shows a focused `TextInput` (Enter → `committed(text)`, Escape → `cancelled()`); `editing: false` renders a static label with a "×" delete button. Consumer decides when to flip mode (e.g. on first click in text-tool → editing, on commit → static).
 - feat: `AngleArc` — 3-point angle measurement overlay. Two arms from a vertex to two endpoints + degree label chip + inline "×" delete. Dashed rubber-band preview mode. `angle` property is precomputed by the consumer (bridge-side `compute_angle_degrees`); component is purely presentational. Emits `removed()` and `clicked()`. Used by DALI's planning workspace when the angle measure tool is active.
 - feat: `DistanceLine` — 2D distance measurement overlay for `ImageViewport`. Renders a line between two image-space points with an axis-aligned midpoint label chip (`"12.3 mm"`) and a 14 px circular delete button next to it. Preview mode (`preview: true`) draws a dashed rubber-band stroke without the delete affordance, suitable for the interim line shown between the first and second click. Emits `removed()` and `clicked()`. Used by DALI's planning workspace when the measure tool is active.
 

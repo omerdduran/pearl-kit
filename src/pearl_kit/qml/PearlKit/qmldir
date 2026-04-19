@@ -66,8 +66,10 @@ VTKViewport    1.0 VTKViewport.qml
 ImageViewport  1.0 ImageViewport.qml
 OrientationCube 1.0 OrientationCube.qml
 AngleArc       1.0 AngleArc.qml
+Arrow          1.0 Arrow.qml
 Crosshair      1.0 Crosshair.qml
 DistanceLine   1.0 DistanceLine.qml
+TextAnnotation 1.0 TextAnnotation.qml
 ImplantMarker  1.0 ImplantMarker.qml
 WindowLevelPresets 1.0 WindowLevelPresets.qml
 SliceCounter   1.0 SliceCounter.qml
