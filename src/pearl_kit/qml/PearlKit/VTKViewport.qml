@@ -44,6 +44,7 @@ Item {
 
         VTKViewportItem {
             id: _vtk
+            objectName: "_vtkNativeItem"
             anchors.fill: parent
             onFirstRenderCompleted: control.firstRenderCompleted()
             onRenderFinished: (ms) => control.renderFinished(ms)
