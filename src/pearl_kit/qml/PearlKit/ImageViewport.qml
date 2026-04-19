@@ -51,8 +51,6 @@ Item {
     implicitHeight: 240
 
     onFrameChanged: {
-        console.log("[ImageViewport", control.plane, "] onFrameChanged:",
-                    control.frame, "_img:", _img)
         if (_img && control.frame) _img.set_frame(control.frame)
     }
 
@@ -73,6 +71,29 @@ Item {
             onPointerReleased:(x, y, b) => control.pointerReleased(x, y, b)
             onWheelScrolled:  (d, m)    => control.wheelScrolled(d, m)
             onZoomChanged:    (p)       => control.zoomChanged(p)
+        }
+
+        // QtQuick's QQuickPaintedItem doesn't receive wheelEvent unless it
+        // has focus — which means a user has to click the viewport before
+        // the wheel starts working. A WheelHandler at the wrapper level
+        // forwards wheel events independent of focus. Ctrl+wheel routes
+        // to the native item's local zoom; bare wheel goes up to the
+        // consumer as `control.wheelScrolled` so the slice-scroll contract
+        // matches the old Widget path.
+        WheelHandler {
+            target: null
+            acceptedModifiers: Qt.NoModifier | Qt.ControlModifier
+            onWheel: (event) => {
+                const d = event.angleDelta.y
+                if (d === 0) { event.accepted = true; return }
+                if (event.modifiers & Qt.ControlModifier) {
+                    const factor = d > 0 ? 1.15 : (1.0 / 1.15)
+                    _img.set_zoom(_img.zoom * factor)
+                } else {
+                    control.wheelScrolled(d, Number(event.modifiers))
+                }
+                event.accepted = true
+            }
         }
 
         // Axis crosshairs (overlay on top of the native item)

@@ -143,6 +143,14 @@ class ImageViewportItem(QQuickPaintedItem):
     #: explicit ``onFrameChanged`` handler.
     frame = Property("QImage", _get_frame, _set_frame_property, notify=frameChanged)
 
+    def _get_zoom(self) -> float:
+        return self._zoom
+
+    #: Read-only current zoom factor (1.0 = fit). Exposed so QML
+    #: wheel-handler can compute ``zoom * factor`` and push it back
+    #: through :meth:`set_zoom`.
+    zoom = Property(float, _get_zoom, notify=zoomChanged)
+
     # ------------------------------------------------------------------
     # Public API — consumer drives the frame
     # ------------------------------------------------------------------
@@ -154,7 +162,7 @@ class ImageViewportItem(QQuickPaintedItem):
         (e.g. ``onFrameChanged: _img.set_frame(control.frame)`` inside
         the ``ImageViewport`` QML wrapper).
         """
-        logger.info(
+        logger.debug(
             "ImageViewportItem[%s] set_frame: image=%s size=%dx%d self_size=%.0fx%.0f",
             self._plane,
             type(image).__name__ if image is not None else "None",
@@ -180,6 +188,7 @@ class ImageViewportItem(QQuickPaintedItem):
         self.zoomChanged.emit(self._effective_zoom_percent())
         self.update()
 
+    @Slot(float)
     def set_zoom(self, factor: float) -> None:
         factor = max(0.05, min(50.0, float(factor)))
         if abs(self._zoom - factor) < 1e-6:
@@ -202,15 +211,21 @@ class ImageViewportItem(QQuickPaintedItem):
             )
             return
 
-        logger.info(
+        logger.debug(
             "ImageViewportItem[%s].paint: rect=%.0fx%.0f frame=%dx%d",
             self._plane, rect.width(), rect.height(),
             self._frame.width(), self._frame.height(),
         )
         painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform, True)
-        transform = self._compute_transform()
-        painter.setTransform(transform)
+        # ``setWorldTransform(.., combine=True)`` preserves the painter's
+        # initial device-pixel-ratio transform that Qt sets up on HiDPI
+        # displays. Using ``setTransform(t)`` without combining would wipe
+        # out that scale(dpr, dpr), causing the image to render at half
+        # size on retina (filling only ¼ of the item's area).
+        painter.save()
+        painter.setWorldTransform(self._compute_transform(), True)
         painter.drawImage(0, 0, self._frame)
+        painter.restore()
 
     def _compute_transform(self) -> QTransform:
         """Map image-space (0..img_w, 0..img_h) → view-space (0..item_w, 0..item_h).
