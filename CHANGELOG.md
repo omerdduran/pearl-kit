@@ -7,6 +7,17 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- refactor(tokens): drop `readonly` from `Tokens.qml` palette tables (`_bg`, `_fg`, `_primary`, …) so downstream consumers can override them at runtime. Defaults unchanged — existing consumers see no visual difference. Stage 1 of the JSON-driven theming refactor.
+- refactor(tokens): convert `radius`, `space`, `font`, `shadow`, `motion` from nested `QtObject` children with readonly inner fields to plain `property var` JS objects. Existing dot-access (`Tokens.radius.md`, `Tokens.space.x4`, `Tokens.font.size.sm`) is unchanged. Reactivity contract: bindings re-evaluate when the WHOLE sub-object is reassigned, so consumers must NEVER mutate inner fields directly — go through `applyTheme()` (which always reassigns via `Object.assign`). Stage 2 of the JSON-driven theming refactor.
+
+### Added
+
+- feat(tokens): `Tokens.applyColors(palette)` — runtime palette override hook. Pass an object whose keys are palette table names (`_bg`, `_primary`, …) and values are 3-element arrays indexed by mode. Unspecified tables keep their defaults. Bound `background`/`primary`/etc. colors re-evaluate automatically. Enables DALI to override pearl-kit's shadcn-flavored defaults with values sourced from its Penpot design system.
+- feat(tokens): `Tokens.applyTheme(theme)` — full-coverage runtime override hook. Accepts `{ palette, radius, space, font, shadow, motion, anatomy, crosshair }` (any subset). Sub-objects shallow-merge with current values (deep-merge for `font.size` and `font.weight`). Always reassigns the whole sub-property to trigger QML binding refresh. Single first-class API for downstream theming.
+- feat(tokens): new `Tokens.anatomy` and `Tokens.crosshair` token slots — empty objects by default, populated by downstream consumers via `applyTheme()`. Enables domain-specific token namespaces (e.g. DALI's anatomy/crosshair colors) to live alongside role-based shadcn tokens without polluting the OSS-default state.
+
 ## [0.4.0] — 2026-04-19
 
 ### Fixed
