@@ -9,7 +9,10 @@ import PearlKit 1.0
 Item {
     id: control
 
-    // columns: [{ key, label, align?: "left"|"center"|"right", mono?: bool, width?: int }]
+    // columns: [{ key, label, align?: "left"|"center"|"right", mono?: bool, width?: int, elide?: int }]
+    // `elide` accepts Text.ElideNone / ElideLeft / ElideMiddle / ElideRight
+    // (defaults to Text.ElideRight). Cell text is constrained to its
+    // column width and elided when overflowing.
     property var columns: []
     property var rows: []
 
@@ -74,12 +77,14 @@ Item {
                                 font.weight: Font.Medium
                                 renderType: Text.NativeRendering
                                 antialiasing: true
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.left: parent._align === "left" ? parent.left : undefined
-                                anchors.right: parent._align === "right" ? parent.right : undefined
-                                anchors.horizontalCenter: parent._align === "center" ? parent.horizontalCenter : undefined
-                                anchors.leftMargin: parent._align === "left" ? 10 : 0
+                                anchors.fill: parent
+                                anchors.leftMargin: parent._align === "right" ? 0 : 10
                                 anchors.rightMargin: parent._align === "right" ? 10 : 0
+                                verticalAlignment: Text.AlignVCenter
+                                horizontalAlignment: parent._align === "right"
+                                    ? Text.AlignRight
+                                    : (parent._align === "center" ? Text.AlignHCenter : Text.AlignLeft)
+                                elide: Text.ElideRight
                             }
                         }
                     }
@@ -117,6 +122,7 @@ Item {
                                 readonly property bool _mono: _col ? (_col.mono !== false) : true
                                 readonly property string _align: (_col && _col.align) ? _col.align : "left"
                                 readonly property int _colWidth: (_col && _col.width !== undefined) ? _col.width : 0
+                                readonly property int _elide: (_col && _col.elide !== undefined) ? _col.elide : Text.ElideRight
 
                                 Layout.preferredWidth: _colWidth
                                 Layout.fillWidth: _colWidth <= 0
@@ -134,12 +140,14 @@ Item {
                                         : Font.Normal
                                     renderType: Text.NativeRendering
                                     antialiasing: true
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    anchors.left: parent._align === "left" ? parent.left : undefined
-                                    anchors.right: parent._align === "right" ? parent.right : undefined
-                                    anchors.horizontalCenter: parent._align === "center" ? parent.horizontalCenter : undefined
-                                    anchors.leftMargin: parent._align === "left" ? 10 : 0
+                                    anchors.fill: parent
+                                    anchors.leftMargin: parent._align === "right" ? 0 : 10
                                     anchors.rightMargin: parent._align === "right" ? 10 : 0
+                                    verticalAlignment: Text.AlignVCenter
+                                    horizontalAlignment: parent._align === "right"
+                                        ? Text.AlignRight
+                                        : (parent._align === "center" ? Text.AlignHCenter : Text.AlignLeft)
+                                    elide: parent._elide
                                 }
                             }
                         }

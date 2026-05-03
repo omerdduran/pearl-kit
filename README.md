@@ -119,7 +119,7 @@ Eight primitives ship in v0.1.0. Each one is built on `QtQuick.Templates.*` with
 | `Stepper`  | Numeric field with ± buttons | int + float modes, suffix, specialValueText, error state | [→](https://omerdduran.github.io/pearl-kit/components/stepper/) |
 | `PearlText` | Typography primitive | 7 variants — title, heading, body, muted, label, code, mono | [→](https://omerdduran.github.io/pearl-kit/components/pearl-text/) |
 
-Run `python examples/gallery.py` after a `uv sync` to see every variant live.
+Run `python examples/showcase/showcase.py` after a `uv sync` to launch the categorized showcase — a sidebar-driven browser of every component grouped into 21 categories (Foundations, Form Primitives, Layout, Navigation, Feedback, Data Display, Domain).
 
 ## The token system
 

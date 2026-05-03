@@ -117,3 +117,6 @@ SettingsToggleCard 1.0 SettingsToggleCard.qml
 SummaryGrid    1.0 SummaryGrid.qml
 SampleCaseCard 1.0 SampleCaseCard.qml
 OnboardingNavFooter 1.0 OnboardingNavFooter.qml
+ShowcaseTile  1.0 ShowcaseTile.qml
+ShowcasePage  1.0 ShowcasePage.qml
+CollapsibleNavGroup 1.0 CollapsibleNavGroup.qml

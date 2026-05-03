@@ -18,6 +18,22 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 - feat(tokens): `Tokens.applyTheme(theme)` — full-coverage runtime override hook. Accepts `{ palette, radius, space, font, shadow, motion, anatomy, crosshair }` (any subset). Sub-objects shallow-merge with current values (deep-merge for `font.size` and `font.weight`). Always reassigns the whole sub-property to trigger QML binding refresh. Single first-class API for downstream theming.
 - feat(tokens): new `Tokens.anatomy` and `Tokens.crosshair` token slots — empty objects by default, populated by downstream consumers via `applyTheme()`. Enables domain-specific token namespaces (e.g. DALI's anatomy/crosshair colors) to live alongside role-based shadcn tokens without polluting the OSS-default state.
 
+### Added — Categorized showcase
+
+- feat: `ShowcaseTile` — Card-based sample container exported under `PearlKit 1.0`. Properties: `label` (variant name shown in the footer), `description` (optional muted line), `sample` (default property — any QML item rendered as the demo). All chrome reads from `Tokens` (border, radius, padding, footer typography), no hard-coded hex / px. Defaults to `Layout.fillWidth: true` so it flows into a `GridLayout` without per-tile boilerplate.
+- feat: `ShowcasePage` — abstract base for showcase category pages. Properties: `title`, `subtitle` (optional), `gridPreset` (`single-col` | `two-col` | `four-col` | `flow`), and the default property routes children into a `GridLayout` whose column count is enforced by the preset. Invalid presets fall back to `single-col` with a console warning. Reserves a `codeSnippet` property in the API surface (hidden in v1) so a future v2 copy-paste-snippet feature does not break the abstract base contract.
+- feat: `CollapsibleNavGroup` — sidebar grouping primitive built on `NavItem` + `Group`. Properties: `header` (uppercase mono label), `expanded` (bool, default `true`), `persistKey` (string, optional — when non-empty mirrors expanded state to `QSettings` under category `PearlKit.CollapsibleNavGroup.<persistKey>` via `Qt.labs.settings`). Toggling animates the body's clip height; keyboard `↑`/`↓` traverses children when expanded.
+- feat: `examples/showcase/` — new categorized showcase shell replacing the monolithic `examples/gallery.py`. `Showcase.qml` is a two-pane `ApplicationWindow` (sidebar with seven `CollapsibleNavGroup`s × 21 `NavItem`s, content pane is a `Loader` that swaps in the active category's QML page). Last-selected category persists to `QSettings`. Run with `uv run python examples/showcase/showcase.py`. Twenty-one category pages live under `examples/showcase/pages/` covering every shipping component grouped by function (Foundations, Form Primitives, Layout & Structure, Navigation, Feedback, Data Display, Domain).
+
+### Removed
+
+- breaking: `examples/gallery.py` is removed. The new categorized showcase under `examples/showcase/` is the single source of truth for "what does pearl-kit look like." Anyone scripting against the old single-page gallery should adapt to the new shell.
+
+### Fixed
+
+- fix(DataTable): cell text now elides instead of overflowing onto neighboring columns when the column is narrower than the text's `implicitWidth`. Both header and body cell `Text` items are anchored with `anchors.fill: parent` and use `horizontalAlignment` / `verticalAlignment` (preserving the existing `align` semantics) plus `elide: Text.ElideRight` (default). Previously the `Text` was anchored only to one edge of the parent `Item`, leaving its width unconstrained — so long content (e.g. file paths in monospace) painted on top of the next column when the table or window shrank.
+- feat(DataTable): column definitions accept an optional `elide` field (e.g. `{ key: "path", elide: Text.ElideMiddle }`) to override the default `Text.ElideRight` per column. Useful for path-style columns where preserving head + tail (filename) is more informative than truncating the right side.
+
 ## [0.4.0] — 2026-04-19
 
 ### Fixed
