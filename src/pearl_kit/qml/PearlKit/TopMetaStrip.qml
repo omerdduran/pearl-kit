@@ -6,8 +6,10 @@ Item {
 
     property string leftText: ""
     property string rightText: ""
-    property color textColor: "#8A93A0"
-    property color borderColor: "#ECEEF2"
+    // Defaults bound to Tokens so the strip follows Dark / Light. Override
+    // from the call site to pin a specific value.
+    property color textColor: Tokens.mutedForeground
+    property color borderColor: Tokens.border
     property string monoFontFamily: Tokens.font.mono
 
     implicitHeight: 42

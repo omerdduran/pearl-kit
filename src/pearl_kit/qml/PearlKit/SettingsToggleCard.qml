@@ -17,14 +17,18 @@ Item {
     property bool highlighted: false
     property bool locked: false
 
-    property color titleColor: "#1A202C"
-    property color descriptionColor: "#4A5568"
+    // Defaults bound to Tokens so the card follows Dark / Light without
+    // per-consumer overrides. Override any of these from the call site to
+    // pin a value (existing call sites that assigned hex strings keep
+    // working unchanged).
+    property color titleColor: Tokens.foreground
+    property color descriptionColor: Tokens.mutedForeground
     property color badgeFg: "#047857"
     property color badgeBg: "#D1FAE5"
-    property color highlightedBorder: "#BFDBFE"
-    property color highlightedBackground: "#EFF6FF"
-    property color defaultBorder: "#E2E8F0"
-    property color defaultBackground: "#FFFFFF"
+    property color highlightedBorder: Qt.rgba(Tokens.primary.r, Tokens.primary.g, Tokens.primary.b, 0.32)
+    property color highlightedBackground: Qt.rgba(Tokens.primary.r, Tokens.primary.g, Tokens.primary.b, 0.10)
+    property color defaultBorder: Tokens.border
+    property color defaultBackground: Tokens.card
     property int radius: 5
     property int hPadding: 18
     property int vPadding: 16

@@ -20,19 +20,27 @@ Rectangle {
     implicitWidth: 240
     implicitHeight: 48
 
+    // Theme-driven palette: derives from pearl-kit Tokens so the surface
+    // adapts to Dark / Light without per-consumer overrides. Active-state
+    // backgrounds use a semi-transparent ``primary`` tint that reads on
+    // any base; text falls back to ``foreground`` / ``mutedForeground``
+    // for the resting / dimmed channels.
     readonly property color _bg: control.checked
-        ? "#EFF6FF"
-        : (_area.containsMouse ? "#F7FAFE" : "transparent")
-    readonly property color _border: control.checked ? "#BFDBFE" : "transparent"
-    readonly property color _indexColor: control.checked ? "#2563EB" : "#9CA3AF"
-    readonly property color _titleColor: control.checked ? "#1E3A8A" : "#1A202C"
-    readonly property color _subtitleColor: control.checked ? "#3B82F6" : "#9CA3AF"
+        ? Qt.rgba(Tokens.primary.r, Tokens.primary.g, Tokens.primary.b, 0.12)
+        : (_area.containsMouse
+            ? Qt.rgba(Tokens.foreground.r, Tokens.foreground.g, Tokens.foreground.b, 0.04)
+            : "transparent")
+    readonly property color _border: control.checked
+        ? Qt.rgba(Tokens.primary.r, Tokens.primary.g, Tokens.primary.b, 0.32)
+        : "transparent"
+    readonly property color _indexColor: control.checked ? Tokens.primary : Tokens.mutedForeground
+    readonly property color _titleColor: control.checked ? Tokens.primary : Tokens.foreground
+    readonly property color _subtitleColor: control.checked ? Tokens.primary : Tokens.mutedForeground
 
     radius: 5
     color: control._bg
     border.color: control._border
     border.width: 1
-    Behavior on color { ColorAnimation { duration: Tokens.motion.fast } }
 
     Text {
         id: _index

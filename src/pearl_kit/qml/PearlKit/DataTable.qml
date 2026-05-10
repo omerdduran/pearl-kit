@@ -24,6 +24,11 @@ Item {
     property color rowBorderColor: "#F1F5F9"
     property color headerColor: "#6B7280"
     property color cellColor: "#1A202C"
+    // Frame fill (the table's outer rectangle) and per-row body fill.
+    // Exposed so consumers can theme dark / light without forking — the
+    // hardcoded "#FFFFFF" default keeps existing call sites unchanged.
+    property color bgColor: "#FFFFFF"
+    property color rowBg: "#FFFFFF"
 
     property int headerHeight: 30
     property int rowHeight: 32
@@ -35,7 +40,7 @@ Item {
         id: _frame
         anchors.fill: parent
         radius: 4
-        color: "#FFFFFF"
+        color: control.bgColor
         border.color: control.borderColor
         border.width: 1
         clip: true
@@ -107,7 +112,7 @@ Item {
                     readonly property var _row: modelData
                     width: parent.width
                     height: control.rowHeight
-                    color: "#FFFFFF"
+                    color: control.rowBg
 
                     RowLayout {
                         anchors.fill: parent

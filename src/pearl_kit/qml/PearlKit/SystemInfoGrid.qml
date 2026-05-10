@@ -7,10 +7,12 @@ Item {
 
     property var items: []
     // [{ label: "Host", value: "MacBook Pro · M3 Max", dot: "" }, ...]
-    property color labelColor: "#8A93A0"
-    property color valueColor: "#1A202C"
-    property color borderColor: "#ECEEF2"
-    property color background: "#FFFFFF"
+    // Defaults bound to Tokens so the strip follows Dark / Light. Override
+    // any of these from the call site to pin a specific value.
+    property color labelColor: Tokens.mutedForeground
+    property color valueColor: Tokens.foreground
+    property color borderColor: Tokens.border
+    property color background: Tokens.background
     property string monoFontFamily: Tokens.font.mono
 
     implicitHeight: 62
