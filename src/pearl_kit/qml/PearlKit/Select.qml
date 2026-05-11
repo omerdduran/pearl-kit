@@ -66,8 +66,19 @@ T.ComboBox {
     }
 
     Component.onCompleted: {
-        for (let i = 0; i < count; ++i) {
-            if (_rowType(i) === "item") { _lastValidIndex = i; currentIndex = i; break }
+        // Guard: if an external binding (e.g. `currentIndex: someProperty`)
+        // already points to a valid "item" row, do NOT imperatively assign —
+        // Qt's "imperative write overrides binding" semantic would silently
+        // delete the binding and freeze currentIndex on subsequent model /
+        // data changes. Only fall back to the first valid item when
+        // currentIndex is -1 (unselected/placeholder) or sits on a non-item
+        // row (header / separator).
+        if (currentIndex < 0 || _rowType(currentIndex) !== "item") {
+            for (let i = 0; i < count; ++i) {
+                if (_rowType(i) === "item") { _lastValidIndex = i; currentIndex = i; break }
+            }
+        } else {
+            _lastValidIndex = currentIndex
         }
     }
 

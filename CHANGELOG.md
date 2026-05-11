@@ -7,6 +7,10 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+- fix(select): `Component.onCompleted` no longer clobbers an external `currentIndex` binding when it already points to a valid `"item"` row. Previously the unconditional `currentIndex = i` imperative assignment deleted bindings (Qt's "imperative write overrides binding" rule), freezing the index on the first valid item and causing caller-side bindings like `currentIndex: model.findIndex(...)` to stop tracking source-property changes. Fallback to the first valid item still runs when `currentIndex < 0` (unselected/placeholder) or sits on a header/separator row, preserving the original behavior for callers that don't supply their own `currentIndex`. Two new regression tests in `tests/test_select.py` cover both branches.
+
 ### Changed
 
 - refactor(tokens): drop `readonly` from `Tokens.qml` palette tables (`_bg`, `_fg`, `_primary`, …) so downstream consumers can override them at runtime. Defaults unchanged — existing consumers see no visual difference. Stage 1 of the JSON-driven theming refactor.
@@ -31,6 +35,7 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
+- fix(NumberedNavItem): drop the `Behavior on color` 150ms `ColorAnimation` entirely. Hover state changes re-evaluate the `_bg` binding even when the resolved value is unchanged (e.g. on the active item where `_bg` is locked to `"#EFF6FF"`); Qt treats every re-evaluation as a property assignment, so the Behavior animated `"#EFF6FF" → "#EFF6FF"` and produced a visible RGB-interpolation flicker. Hover background is now snap-on/snap-off — no animation.
 - fix(DataTable): cell text now elides instead of overflowing onto neighboring columns when the column is narrower than the text's `implicitWidth`. Both header and body cell `Text` items are anchored with `anchors.fill: parent` and use `horizontalAlignment` / `verticalAlignment` (preserving the existing `align` semantics) plus `elide: Text.ElideRight` (default). Previously the `Text` was anchored only to one edge of the parent `Item`, leaving its width unconstrained — so long content (e.g. file paths in monospace) painted on top of the next column when the table or window shrank.
 - feat(DataTable): column definitions accept an optional `elide` field (e.g. `{ key: "path", elide: Text.ElideMiddle }`) to override the default `Text.ElideRight` per column. Useful for path-style columns where preserving head + tail (filename) is more informative than truncating the right side.
 

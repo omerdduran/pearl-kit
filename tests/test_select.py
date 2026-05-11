@@ -109,3 +109,47 @@ def test_select_header_separator_model_loads() -> None:
     roots = engine.rootObjects()
     assert roots
     assert roots[0].property("count") == 6
+
+
+def test_select_preserves_external_currentindex_after_oncompleted() -> None:
+    """Regression: Component.onCompleted must NOT clobber an external
+    `currentIndex` binding that already points to a valid "item" row.
+
+    Caller-supplied bindings like ``currentIndex: model.findIndex(...)`` rely
+    on Qt's binding mechanism to re-evaluate on data changes; an imperative
+    write inside Select's own onCompleted silently deletes the binding and
+    freezes currentIndex on the imperatively-assigned value.
+    """
+    engine = _load(
+        b"import QtQuick\nimport PearlKit 1.0\n"
+        b"Select {\n"
+        b"  textRole: 'label'\n"
+        b"  valueRole: 'value'\n"
+        b"  currentIndex: 2\n"
+        b"  model: [\n"
+        b"    { value: 'a', label: 'Apple' },\n"
+        b"    { value: 'b', label: 'Banana' },\n"
+        b"    { value: 'c', label: 'Cherry' },\n"
+        b"  ]\n"
+        b"}\n",
+    )
+    roots = engine.rootObjects()
+    assert roots
+    obj = roots[0]
+    assert obj.property("currentIndex") == 2
+    assert obj.property("currentText") == "Cherry"
+
+
+def test_select_falls_back_to_first_item_when_currentindex_unset() -> None:
+    """Original behavior preserved: when no external binding sets
+    `currentIndex` (default -1), Component.onCompleted's fallback selects
+    the first valid "item" row.
+    """
+    engine = _load(
+        b'import QtQuick\nimport PearlKit 1.0\nSelect { model: ["Apple", "Banana", "Cherry"] }\n',
+    )
+    roots = engine.rootObjects()
+    assert roots
+    obj = roots[0]
+    assert obj.property("currentIndex") == 0
+    assert obj.property("currentText") == "Apple"
