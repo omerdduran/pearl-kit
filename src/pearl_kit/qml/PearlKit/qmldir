@@ -6,6 +6,7 @@ Toggle         1.0 Toggle.qml
 Select         1.0 Select.qml
 Dialog         1.0 Dialog.qml
 CheckBox       1.0 CheckBox.qml
+RadioButton    1.0 RadioButton.qml
 Stepper        1.0 Stepper.qml
 PearlText      1.0 PearlText.qml
 GroupBox       1.0 GroupBox.qml
