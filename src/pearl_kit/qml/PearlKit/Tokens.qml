@@ -145,7 +145,14 @@ QtObject {
             md:  16,
             lg:  18,
             xl:  20,
-            xxl: 24
+            xxl: 24,
+            // display / hero rungs — large titles & splash headings above the
+            // body scale (consumed by downstream apps; exact values, no rounding).
+            xxxl:      28,
+            display:   30,
+            displayLg: 36,
+            hero:      44,
+            heroLg:    48
         },
         weight: {
             regular:  Font.Normal,

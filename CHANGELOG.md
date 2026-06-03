@@ -18,6 +18,7 @@ Versioning: [SemVer](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- feat(tokens): `font.size` display/hero rungs (`xxxl` 28, `display` 30, `displayLg` 36, `hero` 44, `heroLg` 48) for large titles & splash headings above the body scale.
 - feat(radio): `RadioButton` component — 18px circular indicator with an animated filled inner dot, plus an inline label. Unlike `CheckBox` (label-less, composed externally), the radio renders its own `text` because consumers carry labels. Token-styled (border `input` / checked `primary`, dot `primaryForeground`), `error` state, and `PearlFocusRing` consistent with `CheckBox`/`Toggle`. `autoExclusive` / `ButtonGroup` inherited from `T.RadioButton`. Tests in `tests/test_radiobutton.py`.
 - feat(tokens): `Tokens.applyColors(palette)` — runtime palette override hook. Pass an object whose keys are palette table names (`_bg`, `_primary`, …) and values are 3-element arrays indexed by mode. Unspecified tables keep their defaults. Bound `background`/`primary`/etc. colors re-evaluate automatically. Enables DALI to override pearl-kit's shadcn-flavored defaults with values sourced from its Penpot design system.
 - feat(tokens): `Tokens.applyTheme(theme)` — full-coverage runtime override hook. Accepts `{ palette, radius, space, font, shadow, motion, anatomy, crosshair }` (any subset). Sub-objects shallow-merge with current values (deep-merge for `font.size` and `font.weight`). Always reassigns the whole sub-property to trigger QML binding refresh. Single first-class API for downstream theming.
